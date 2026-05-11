@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
