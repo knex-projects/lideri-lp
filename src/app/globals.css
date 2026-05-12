@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=zodiak@540,400,700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -38,13 +39,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-montserrat);
   --font-poppins: var(--font-poppins);
+  --font-zodiak: 'Zodiak', serif;
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
   }
 }
 
