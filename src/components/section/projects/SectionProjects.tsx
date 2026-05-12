@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ProjectCard } from "./components/ProjectCard";
@@ -58,20 +58,41 @@ export const SectionProjects = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onInit = useCallback((emblaApi: any) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: any) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on("reInit", onInit);
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("select", onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
   return (
-    <section className="py-16 flex flex-col gap-12  font-sans w-full">
-      <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+    <section className="py-16 flex flex-col gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full max-w-[1920px] mx-auto">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full px-[26px] md:px-[36px] lg:px-0">
         <div className="flex flex-col max-w-2xl">
           <Image
             src={airplaneIcon}
             alt="Airplane path icon"
             width={251}
             height={64}
-            className="ml-[0px] mb-[40px]"
+            className="ml-[0px] mb-[24px] md:mb-[32px] lg:mb-[40px] w-[169px] h-[43px] md:w-[210px] md:h-[53px] lg:w-[251px] lg:h-[64px]"
           />
 
-          <div className="flex flex-col w-[557px] h-[192px] gap-[8px]">
-            <h2 className="w-[517px] text-[48px] font-[540] leading-[56px] tracking-normal text-N8 font-zodiak font-bold">
+          <div className="flex flex-col w-full lg:w-[557px] h-auto lg:h-[192px] gap-[8px]">
+            <h2 className="w-full lg:w-[517px] text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] font-[540] leading-[36px] min-[360px]:leading-[44px] md:leading-[50px] lg:leading-[56px] tracking-normal text-N8 font-zodiak font-bold">
               Conheça nosso <br />
               portfólio de <span className="text-R5">projetos.</span>
             </h2>
@@ -81,19 +102,12 @@ export const SectionProjects = () => {
             </p>
           </div>
         </div>
-
-        <button className="flex items-center justify-center w-[148px] h-[52px] py-[12px] px-[24px] gap-[8px] rounded-[8px] bg-R5 text-white font-sans font-medium text-[16px] leading-[24px] tracking-normal text-center whitespace-nowrap hover:bg-R6 transition-colors self-start md:self-auto shrink-0">
-          Ver todos
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.29231 12L0 10.7077L8.86154 1.84615H0.923077V0H12V11.0769H10.1538V3.13846L1.29231 12Z" fill="white"/>
-          </svg>
-        </button>
       </div>
 
-      <div className="overflow-hidden -mx-6 px-6 -my-6 py-6" ref={emblaRef}>
-        <div className="flex -ml-[60px]">
+      <div className="overflow-hidden py-6 mr-0 min-[440px]:mr-[26px] md:mr-[36px] lg:-mx-6 lg:px-6" ref={emblaRef}>
+        <div className="flex lg:-ml-[60px]">
           {projects.map((project, index) => (
-            <div className="flex-[0_0_auto] pl-[60px]" key={index}>
+            <div className="flex-[0_0_100%] md:flex-[0_0_auto] min-w-0 px-[26px] md:px-0 md:pl-[36px] lg:pl-[60px] flex justify-start" key={index}>
               <ProjectCard
                 title={project.title}
                 description={project.description}
@@ -104,7 +118,19 @@ export const SectionProjects = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-4 mt-4">
+      <div className="flex justify-center items-center gap-[12px] mt-4 lg:hidden">
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            className={`w-[8px] h-[8px] rounded-full transition-colors duration-300 ${
+              index === selectedIndex ? "bg-R5" : "bg-R1"
+            }`}
+            onClick={() => emblaApi?.scrollTo(index)}
+          />
+        ))}
+      </div>
+
+      <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-[4px]">
         <button onClick={scrollPrev} className="flex items-center justify-center w-10 h-10 bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
             width="20"
