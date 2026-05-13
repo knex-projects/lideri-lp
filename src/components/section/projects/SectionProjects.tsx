@@ -112,6 +112,7 @@ export const SectionProjects = () => {
                 title={project.title}
                 description={project.description}
                 imageSrc={project.imageSrc}
+                priority={index === 0}
               />
             </div>
           ))}
