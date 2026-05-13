@@ -41,7 +41,7 @@ export const HeroSection = () => {
 
             <div className="absolute z-10 flex flex-col gap-4.5 items-start w-full px-6.5 pt-16.5 2xl:px-70 md:px-30">
                 <Image
-                    src="/assets/icons/barco.svg"
+                    src="/assets/icon/barco.svg"
                     width={ 251 }
                     height={ 64 }
                     alt="Ship Icon"
