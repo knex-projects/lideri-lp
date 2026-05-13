@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { HeroSection } from "../components";
 
 export default function Home() {
   return (
-    <main className="lg:px-[12.5%]"> 
-
+    <main className="bg-white"> 
+      <HeroSection />
     </main>
   );
 }
