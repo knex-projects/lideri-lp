@@ -1,9 +1,10 @@
 import Image from "next/image";
+import ProcessSection from "../componets/sections/processSection";
 
 export default function Home() {
   return (
-    <main className="lg:px-[12.5%]"> 
-
+    <main className=""> 
+      <ProcessSection/>
     </main>
   );
 }
