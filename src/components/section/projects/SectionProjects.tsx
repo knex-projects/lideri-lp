@@ -96,7 +96,7 @@ export const SectionProjects = () => {
               Conheça nosso <br />
               portfólio de <span className="text-R5">projetos.</span>
             </h2>
-            <p className="text-[16px] font-[400] leading-none tracking-normal text-N5 font-poppins">
+            <p className="text-[14px] lg:text-[16px] font-[400] leading-none tracking-normal text-N5 font-poppins">
               Conheça alguns dos projetos que desenvolvemos para conectar empresas
               ao mercado internacional com estratégia, segurança e eficiência.
             </p>
@@ -104,10 +104,10 @@ export const SectionProjects = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden py-6 mr-0 min-[440px]:mr-[26px] md:mr-[36px] lg:-mx-6 lg:px-6" ref={emblaRef}>
+      <div className="overflow-hidden py-6 mr-0 min-[440px]:mr-[26px] min-[500px]:mr-0 md:mr-[36px] lg:-mx-6 lg:px-6" ref={emblaRef}>
         <div className="flex lg:-ml-[60px]">
           {projects.map((project, index) => (
-            <div className="flex-[0_0_100%] md:flex-[0_0_auto] min-w-0 px-[26px] md:px-0 md:pl-[36px] lg:pl-[60px] flex justify-start" key={index}>
+            <div className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] md:flex-[0_0_auto] min-w-0 px-[26px] min-[500px]:px-0 min-[500px]:pl-[20px] md:px-0 md:pl-[36px] lg:pl-[60px] flex justify-start" key={index}>
               <ProjectCard
                 title={project.title}
                 description={project.description}
@@ -131,32 +131,32 @@ export const SectionProjects = () => {
       </div>
 
       <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-[4px]">
-        <button onClick={scrollPrev} className="flex items-center justify-center w-10 h-10 bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
-            width="20"
+            width="12"
             height="20"
-            viewBox="0 0 24 24"
+            viewBox="0 0 12 20"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M15 18l-6-6 6-6" />
+            <path d="M10 18l-8-8 8-8" />
           </svg>
         </button>
-        <button onClick={scrollNext} className="flex items-center justify-center w-10 h-10 bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
-            width="20"
+            width="12"
             height="20"
-            viewBox="0 0 24 24"
+            viewBox="0 0 12 20"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M9 18l6-6-6-6" />
+            <path d="M2 18l8-8-8-8" />
           </svg>
         </button>
       </div>
