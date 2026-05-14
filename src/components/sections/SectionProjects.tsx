@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import { ProjectCard } from "./components/ProjectCard";
+import { ProjectCard } from "../cards/ProjectCard";
 import {
   airplaneIcon,
   icecreamImg,
@@ -10,7 +10,7 @@ import {
   beerImg,
   lacemakerImg,
   craftsmanImg,
-} from "../../../../public/assets";
+} from "../../../public/assets";
 
 // falta botoes, alinhamento cards, hover, imagens dos cards
 
@@ -80,7 +80,7 @@ export const SectionProjects = () => {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section className="py-16 flex flex-col gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full max-w-[1920px] mx-auto">
+    <section className="py-16 flex flex-col gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto sm:px-[12.5%] px-[26px]">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full px-[26px] md:px-[36px] lg:px-0">
         <div className="flex flex-col max-w-2xl">
           <Image
@@ -123,9 +123,8 @@ export const SectionProjects = () => {
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
-            className={`w-[8px] h-[8px] rounded-full transition-colors duration-300 ${
-              index === selectedIndex ? "bg-R5" : "bg-R1"
-            }`}
+            className={`w-[8px] h-[8px] rounded-full transition-colors duration-300 ${index === selectedIndex ? "bg-R5" : "bg-R1"
+              }`}
             onClick={() => emblaApi?.scrollTo(index)}
           />
         ))}

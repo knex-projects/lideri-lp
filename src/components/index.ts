@@ -1,1 +1,1 @@
-export * from './section/projects/SectionProjects'
+export * from './sections/SectionProjects'

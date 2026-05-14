@@ -1,13 +1,14 @@
-import { SectionProjects } from "@/src/components";
+
 import Image from "next/image";
-import ProcessSection from "../componets/sections/processSection";
+import ProcessSection from "../components/sections/processSection";
+import { SectionProjects } from "../components";
 
 export default function Home() {
   return (
-   
-    <main className="">    
+
+    <main className="">
       <SectionProjects />
-      <ProcessSection/>
+      <ProcessSection />
     </main>
   );
 }
