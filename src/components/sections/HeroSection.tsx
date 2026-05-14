@@ -46,7 +46,7 @@ export const HeroSection = () => {
                     width={ 251 }
                     height={ 64 }
                     alt="Ship Icon"
-                    className="w-52.5 h-13.5 md:w-[230px] md:h-[59px] xl:w-62.75 xl:h-16"
+                    className="w-52.5 h-13.5 md:w-57.5 md:h-[59px] xl:w-62.75 xl:h-16"
                 />
                 
                 <div className="flex flex-col gap-4 sm:gap-5">
