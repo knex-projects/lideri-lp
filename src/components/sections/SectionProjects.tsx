@@ -81,7 +81,7 @@ export const SectionProjects = () => {
 
   return (
     <section className="py-16 flex flex-col gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto sm:px-[12.5%] px-[26px]">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full px-[26px] md:px-[36px] lg:px-0">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full   lg:px-0">
         <div className="flex flex-col max-w-2xl">
           <Image
             src={airplaneIcon}
@@ -104,10 +104,10 @@ export const SectionProjects = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden py-6 mr-0 min-[440px]:mr-[26px] min-[500px]:mr-0 md:mr-[36px] lg:-mx-6 lg:px-6" ref={emblaRef}>
-        <div className="flex lg:-ml-[60px]">
+      <div className="overflow-hidden py-6  " ref={emblaRef}>
+        <div className="flex ">
           {projects.map((project, index) => (
-            <div className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] md:flex-[0_0_auto] min-w-0 px-[26px] min-[500px]:px-0 min-[500px]:pl-[20px] md:px-0 md:pl-[36px] lg:pl-[60px] flex justify-start" key={index}>
+            <div className={`flex-[0_0_100%] min-[500px]:flex-[0_0_auto] md:flex-[0_0_auto] md:px-0 min-w-0 min-[500px]:px-0  flex justify-between ${index == 0 ? "pl-0" : "min-[500px]:pl-[20px]  md:pl-[36px] lg:pl-[64px]"} `} key={index}>
               <ProjectCard
                 title={project.title}
                 description={project.description}
