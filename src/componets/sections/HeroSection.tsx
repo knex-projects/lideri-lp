@@ -16,7 +16,8 @@ export const HeroSection = () => {
                 '(max-width: 767px)': { active: true }
             }
         },
-        [Autoplay({ delay: 4000 })])
+        [Autoplay({ delay: 4000 })],
+    )
 
         useEffect(() => {
             if(!emblaApi) return 
@@ -36,10 +37,10 @@ export const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             id="heroSection"
-            className="relative h-[75dvh] bg-white xl:h-dvh mb-5"
+            className="relative h-[85dvh] bg-white xl:h-dvh mb-5"
         >
 
-            <div className="absolute z-10 flex flex-col gap-4.5 items-start w-full px-6.5 pt-16.5 sm:px-[12.5%]">
+            <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 sm:px-[12.5%] sm:pt-48.25 sm:gap-10">
                 <Image
                     src="/assets/icon/barco.svg"
                     width={ 251 }
@@ -47,13 +48,18 @@ export const HeroSection = () => {
                     alt="Ship Icon"
                     className="w-52.5 h-13.5 md:w-[230px] md:h-[59px] xl:w-62.75 xl:h-16"
                 />
+                
+                <div className="flex flex-col gap-4 sm:gap-5">
+                    <div className="bg-R4 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
 
-                <h1 className="w-[320px] max-w-full font-[Zodiak] font-bold text-[40px] md:w-100 md:text-[50px] xl:w-xl xl:text-[76px]">Nossa paixão é te levar mais longe.</h1>
-                <p className="w-65 font-[Secondary] text-sm text-neutral-400 md:w-87.5 md:text-[17px] xl:w-97 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
+                    <h1 className="w-[320px] max-w-full font-[Zodiak] font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
+                    <p className="w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-97 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
+                </div>
+                
             </div>
 
             <div className="relative w-full min-h-165 max-h-231">
-                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-165 max-h-231 object-cover object-[85%_center]">
+                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-200.5 max-h-231 object-cover object-[85%_center] brightness-75 sm:brightness-100">
                     <source src="videos/navio.mp4" type="video/mp4"/>
                     Your Browser does not support the video.
                 </video>
@@ -61,7 +67,7 @@ export const HeroSection = () => {
                 <motion.div
                     initial={{ opacity: 0,y: 50 }}
                     animate={{ opacity: 1,y: 0 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.6 }}
                     className="embla absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-58 md:w-fit"
                 >
                     <div className="embla__viewport overflow-hidden md:overflow-visible" ref={ emblaRef }>
