@@ -36,10 +36,10 @@ export const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             id="heroSection"
-            className="relative h-dvh"
+            className="relative h-[75dvh] bg-white xl:h-dvh mb-5"
         >
 
-            <div className="absolute z-10 flex flex-col gap-4.5 items-start w-full px-6.5 pt-16.5 2xl:px-70 md:px-30">
+            <div className="absolute z-10 flex flex-col gap-4.5 items-start w-full px-6.5 pt-16.5 sm:px-[12.5%]">
                 <Image
                     src="/assets/icon/barco.svg"
                     width={ 251 }
