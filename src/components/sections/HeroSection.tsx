@@ -46,13 +46,13 @@ export const HeroSection = () => {
                     width={ 251 }
                     height={ 64 }
                     alt="Ship Icon"
-                    className="w-52.5 h-13.5 md:w-57.5 md:h-[59px] xl:w-62.75 xl:h-16"
+                    className="w-52.5 h-13.5 md:w-57.5 md:h-14.75 xl:w-62.75 xl:h-16"
                 />
                 
                 <div className="flex flex-col gap-4 sm:gap-5">
                     <div className="bg-R4 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
 
-                    <h1 className="w-[320px] max-w-full font-[Zodiak] font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
+                    <h1 className="w-[320px] max-w-full font-[Zodiak] text-white font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
                     <p className="w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-97 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
                 </div>
                 
@@ -68,7 +68,7 @@ export const HeroSection = () => {
                     initial={{ opacity: 0,y: 50 }}
                     animate={{ opacity: 1,y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="embla absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-58 md:w-fit"
+                    className="embla absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-58 text-white md:w-fit"
                 >
                     <div className="embla__viewport overflow-hidden md:overflow-visible" ref={ emblaRef }>
                         <div className="embla__containter flex items-center gap-5 xl:gap-10">
