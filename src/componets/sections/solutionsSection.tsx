@@ -124,8 +124,8 @@ export default function SolutionsSection() {
             className="w-full bg-transparent"
             aria-labelledby="solutions-section-title"
         >
-            <div className="mx-auto min-h-[996px] w-full max-w-[1920px] px-[24px] py-[60px] sm:px-[80px] sm:py-[90px] xl:px-[240px] xl:py-[120px]">
-                <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[50px]">
+            <div className="mx-auto min-h-[996px] w-full  px-[26px] py-[60px]  sm:py-[90px] sm:px-[12.5%] xl:py-[120px]">
+                <div className="mx-auto flex w-full  flex-col items-center gap-[50px]">
                     <div className="flex w-full max-w-[557px] flex-col items-center gap-[40px]">
                         <Image
                             src={Caminhao}
@@ -149,29 +149,29 @@ export default function SolutionsSection() {
                     </div>
 
                     <div className="flex w-full flex-col items-center gap-[64px]">
-                        <div className="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:flex xl:h-[378px] xl:items-center xl:justify-center xl:gap-[60px]">
+                        <div className=" grid w-full grid-cols-1  justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8   xl:items-center xl:justify-center xl:gap-[60px]">
                             {solutionItems.map(
                                 ({ title, description, Icon }) => (
                                     <article
                                         key={title}
-                                        className="flex h-[388px] w-full max-w-[440px] flex-col items-end gap-10 rounded-[8px] border-2 border-dashed border-[rgba(0,0,0,0.2)] bg-white px-[40px] py-[24px] shadow-[4px_2px_10px_rgba(255,255,255,0.1)] lg:w-[440px] lg:max-w-none lg:shrink-0"
+                                        className=" flex h-full flex-col justify-between rounded-[8px] border-2 border-dashed border-[rgba(0,0,0,0.2)] bg-white px-[40px] py-[24px] shadow-[4px_2px_10px_rgba(255,255,255,0.1)]  lg:max-w-none "
                                     >
-                                        <div className="flex w-full flex-1 flex-col justify-center gap-8">
+                                        <div className="flex w-full items-stretch flex-col justify-between gap-8 mb-6">
                                             <Icon
                                                 className="h-16 w-16 text-B7"
                                                 aria-hidden="true"
                                             />
                                             <div className="flex flex-col gap-3 leading-normal">
-                                                <h3 className="font-zodiak text-[24px] font-bold text-N8">
+                                                <h3 className="font-zodiak sm:text-[24px] text-[20px]  font-bold text-N8">
                                                     {title}
                                                 </h3>
-                                                <p className="font-poppins text-[18px] text-N5">
+                                                <p className="font-poppins xl:text-[18px] text-[16px] text-N5">
                                                     {description}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="flex w-full justify-end">
+                                        <div className="flex w-full justify-end ">
                                             <button
                                                 type="button"
                                                 aria-label={`Ver detalhes de ${title}`}
@@ -187,7 +187,7 @@ export default function SolutionsSection() {
 
                         <button
                             type="button"
-                            className="inline-flex h-[52px] items-center gap-2 rounded-[8px] bg-R5 px-6 py-3 font-medium text-N1 transition-all duration-200 hover:-translate-y-[1px] hover:bg-R6"
+                            className="hidden h-[52px] items-center gap-2 rounded-[8px] bg-R5 px-6 py-3 font-medium text-N1 transition-all duration-200 hover:-translate-y-[1px] hover:bg-R6"
                         >
                             <span className="font-montserrat text-[16px] leading-6">
                                 Ver todos os serviços
