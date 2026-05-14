@@ -2,17 +2,24 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 
+const zodiak = {
+  variable: "--font-zodiak",
+};
 
 const montserrat = Montserrat({
+  weight: "400",
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
 const poppins = Poppins({
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
   subsets: ["latin"],
 });
+
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={` ${montserrat.variable} ${poppins.variable} h-full antialiased`}
+      className={` ${montserrat.variable} ${poppins.variable} ${zodiak.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

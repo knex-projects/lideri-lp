@@ -1,6 +1,27 @@
 @import url('https://api.fontshare.com/v2/css?f[]=zodiak@540,400,700&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Zodiak";
+  src: url("./fonts/Zodiak-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -54,4 +75,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes erased {
+  from {
+    height: 78px;
+  }
+
+  to {
+    height: 172px;
+  }
+}
+
+.animate-altura-78-172 {
+  animation: erased 0.6s ease-out forwards;
+}
+
+@keyframes opacity-top-bottom {
+  from {
+    opacity: 0;
+    
+  }
+
+  to {
+    opacity: 1;
+   
+  }
+}
+
+.animate-opacity-top-bottom {
+  animation: opacity-top-bottom 1s ease-in forwards;
 }
