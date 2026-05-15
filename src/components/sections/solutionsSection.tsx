@@ -156,7 +156,7 @@ export default function SolutionsSection() {
                                 ({ title, description, Icon }) => (
                                     <article
                                         key={title}
-                                        className=" flex h-full flex-col hover:border-[2.5px] inset-0 transition-all duration-300 hover:border-R5/80 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] justify-between rounded-[8px] border-2  border-[rgba(0,0,0,0.2)] bg-white px-[40px] py-[24px]   lg:max-w-none "
+                                        className=" flex h-full flex-col hover:ring-[2.5px] inset-0 transition-all duration-300 hover:ring-R5/80 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] justify-between rounded-[8px] ring-2  ring-[rgba(0,0,0,0.2)] bg-white px-[40px] py-[24px]   lg:max-w-none "
                                     >
                                         <div className="flex w-full items-stretch flex-col justify-between gap-8 mb-6">
                                             <Icon
@@ -177,7 +177,7 @@ export default function SolutionsSection() {
                                             <button
                                                 type="button"
                                                 aria-label={`Ver detalhes de ${title}`}
-                                                className="inline-flex h-[52px] w-[71px] items-center justify-center rounded-[8px] border-2 border-R5 text-R5 shadow-[0px_1px_8px_0px_#87240e] transition-all duration-200 hover:-translate-y-[1px] hover:bg-R5 hover:text-N1"
+                                                className="inline-flex h-[52px] w-[71px] items-center justify-center rounded-[8px] ring-2 ring-R5 text-R5 shadow-[0px_1px_8px_0px_#87240e] transition-all duration-200 hover:-translate-y-[1px] hover:bg-R5 hover:text-N1"
                                             >
                                                 <ArrowForwardIcon />
                                             </button>
