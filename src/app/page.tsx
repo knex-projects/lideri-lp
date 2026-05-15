@@ -1,13 +1,15 @@
-import ProcessSection from "../componets/sections/processSection";
-import SolutionsSection from "../componets/sections/solutionsSection";
+
+import Image from "next/image";
+import { HeroSection, SectionProjects, ProcessSection, SolutionsSection } from "../components";
 
 export default function Home() {
   return (
-    <main className="bg-N1">
-      <div className="grid-page-bg mx-auto w-full max-w-[1920px]">
-      <ProcessSection/>
-      <SolutionsSection/>
-      </div>
+
+    <main className="">
+      <HeroSection />
+      <SectionProjects />
+      <SolutionsSection />
+      <ProcessSection />
     </main>
   );
 }
