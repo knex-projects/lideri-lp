@@ -3,8 +3,10 @@
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import { EmblaCarouselType } from "embla-carousel"
 import { motion } from "motion/react"
-import { useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
+import Fade from "embla-carousel-fade"
 
 export const HeroSection = () => {
     const [ emblaRef, emblaApi ] = useEmblaCarousel(
@@ -16,20 +18,35 @@ export const HeroSection = () => {
                 '(max-width: 767px)': { active: true }
             }
         },
-        [Autoplay({ delay: 4000 })],
+        [Autoplay({ delay: 4000 }), Fade()],
     )
 
-        useEffect(() => {
-            if(!emblaApi) return 
-                    emblaApi.on("select", () => {
-                        const lastIndex = emblaApi.scrollSnapList().length
-                        const currentIdenx = emblaApi.selectedScrollSnap()
+    const [ selectedIndex, setSelectedIndex ] = useState(0)
+    const [ scrollSnaps, setScrollSnap ] = useState<number[]>([0, 1, 2])
 
-                        if (currentIdenx === lastIndex) {
-                            emblaApi.scrollTo(0)
-                        }
-                    })
-        },[emblaApi])
+    const setupSnaps = useCallback((emblaApi: EmblaCarouselType) => { 
+        setScrollSnap(emblaApi.scrollSnapList())
+    }, [])
+
+    const onSelect = useCallback((emblaApi:EmblaCarouselType) => {
+        setSelectedIndex(emblaApi.selectedScrollSnap())
+    }, [])
+
+    useEffect(() => {
+        if(!emblaApi) return 
+                emblaApi.on("reInit", setupSnaps)
+                emblaApi.on("reInit", onSelect)
+                emblaApi.on("select", onSelect)
+
+                emblaApi.on("select", () => {
+                    const lastIndex = emblaApi.scrollSnapList().length
+                    const currentIdenx = emblaApi.selectedScrollSnap()
+
+                    if (currentIdenx === lastIndex) {
+                        emblaApi.scrollTo(0)
+                    }
+                })
+    },[emblaApi, setupSnaps, onSelect])
 
     return (
         <motion.section
@@ -68,7 +85,7 @@ export const HeroSection = () => {
                     initial={{ opacity: 0,y: 50 }}
                     animate={{ opacity: 1,y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="embla absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-58 text-white md:w-fit"
+                    className="embla flex flex-col gap-4 absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-[55%] w-58 text-white md:w-fit md:translate-y-1/2"
                 >
                     <div className="embla__viewport overflow-hidden md:overflow-visible" ref={ emblaRef }>
                         <div className="embla__containter flex items-center gap-5 xl:gap-10">
@@ -91,6 +108,12 @@ export const HeroSection = () => {
                                 </h2>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="embla__dots flex justify-center items-center gap-3 md:hidden">
+                        {scrollSnaps.map((_, index) => (
+                        <div className={ `embla__dot w-2 h-2 rounded-full ${ index === selectedIndex ? "bg-R5" : "bg-R1" }` } key={index}></div>
+                        ))}
                     </div>
                 </motion.div>
             </div>
