@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { HeroSection, SectionProjects, ProcessSection, SolutionsSection } from "../components";
+import { HeroSection, SectionProjects, ProcessSection, SolutionsSection, PartnersSection } from "../components";
 
 export default function Home() {
   return (
@@ -10,6 +10,7 @@ export default function Home() {
       <SectionProjects />
       <SolutionsSection />
       <ProcessSection />
+      <PartnersSection />
     </main>
   );
 }
