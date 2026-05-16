@@ -5,6 +5,7 @@ type Partner = {
     src: string;
     width: number;
     height: number;
+    className?: string;
 };
 
 const partners: Partner[] = [
@@ -13,30 +14,35 @@ const partners: Partner[] = [
         src: "/assets/images/partners/pb-junior.svg",
         width: 207,
         height: 105,
+        className: "order-1",
     },
     {
         name: "UFPB",
         src: "/assets/images/partners/ufpb.svg",
         width: 85,
         height: 127,
+        className: "order-3 sm:order-2",
     },
     {
         name: "Brasil Júnior",
         src: "/assets/images/partners/brasil-junior.svg",
         width: 207,
         height: 77,
+        className: "order-2 sm:order-3",
     },
     {
         name: "Proex Comex UFPB",
         src: "/assets/images/partners/proex-comex.svg",
         width: 114,
         height: 127,
+        className: "order-4",
     },
     {
         name: "ESRI",
         src: "/assets/images/partners/esri.svg",
         width: 101,
         height: 146,
+        className: "order-5",
     },
 ];
 
@@ -57,11 +63,11 @@ export default function PartnersSection() {
                 <div className="flex w-full flex-col items-stretch">
                     <div className="h-px w-full border-t-[2.5px] border-dashed border-N4" />
 
-                    <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-10 px-[26px] py-[40px] sm:gap-x-[60px] sm:px-[12.5%] sm:py-[60px] xl:gap-x-[86px]">
+                    <div className="flex max-sm:flex-col sm:flex-wrap items-center justify-center gap-x-10 gap-y-10 px-[26px] py-[40px] sm:gap-x-[60px] sm:px-[12.5%] sm:py-[60px] xl:gap-x-[86px]">
                         {partners.map((partner) => (
                             <div
                                 key={partner.name}
-                                className="flex shrink-0 items-center justify-center"
+                                className={`flex shrink-0 items-center justify-center ${partner.className ?? ""}`}
                                 style={{
                                     width: partner.width,
                                     height: partner.height,
