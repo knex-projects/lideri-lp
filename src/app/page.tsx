@@ -1,8 +1,7 @@
 
 import Image from "next/image";
-import ProcessSection from "../components/sections/processSection";
-import { SectionProjects, TestimonialsSection } from "../components";
-import { HeroSection } from "../components/sections/HeroSection";
+import { HeroSection, SectionProjects, ProcessSection, SolutionsSection,TestimonialsSection } from "../components";
+import MapWrapper from "../components/sections/mapsection/mapsection";
 
 export default function Home() {
   return (
@@ -10,8 +9,10 @@ export default function Home() {
     <main className="">
       <HeroSection />
       <SectionProjects />
+      <SolutionsSection />
       <ProcessSection />
       <TestimonialsSection />
+      <MapWrapper />
     </main>
   );
 }

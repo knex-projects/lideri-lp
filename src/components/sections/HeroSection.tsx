@@ -69,19 +69,20 @@ export const HeroSection = () => {
                 />
                 
                 <div className="flex flex-col gap-4 sm:gap-5">
-                    <div className="bg-R4 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
+                    <div className="bg-R5 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
 
-                    <h1 className="w-[320px] max-w-full font-[Zodiak] text-white font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
-                    <p className="w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-97 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
+                    <h1 className="sm:w-[320px] w-[295px] max-w-full font-[Zodiak] text-white font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
+                    <p className="w-[281px]  sm:w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-150 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
                 </div>
                 
             </div>
 
             <div className="relative w-full min-h-165 max-h-231">
-                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-200.5 max-h-231 object-cover object-[85%_center] brightness-75 sm:brightness-100">
+                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-200.5 max-h-231 object-cover object-[87%_center]  sm:brightness-100">
                     <source src="videos/navio.mp4" type="video/mp4"/>
                     Your Browser does not support the video.
                 </video>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00051B]/80 to-transparent pointer-events-none lg:hidden" />
 
                 <motion.div
                     initial={{ opacity: 0,y: 50 }}
@@ -114,7 +115,7 @@ export const HeroSection = () => {
 
                     <div className="embla__dots flex justify-center items-center gap-3 md:hidden">
                         {scrollSnaps.map((_, index) => (
-                        <div className={ `embla__dot w-2 h-2 rounded-full ${ index === selectedIndex ? "bg-R5" : "bg-R1" }` } key={index}></div>
+                        <div onClick={()=>{setSelectedIndex(index)}} className={ `embla__dot w-2 h-2 rounded-full ${ index === selectedIndex ? "bg-R5" : "bg-R1" }` } key={index}></div>
                         ))}
                     </div>
                 </motion.div>

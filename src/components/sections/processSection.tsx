@@ -44,14 +44,14 @@ export default function ProcessSection() {
             </div>
             <div className="grid absolute sm:relative sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 content-between justify-items-stretch gap-x-11  gap-y-[52px] ">
                 {processCardItem.map((item) => (
-                    <div key={item.id} className={` max-sm:hidden max-w-[330px]  h-[260px]  relative rounded-[8px] py-[48px]  px-10 text-center flex flex-col justify-between  items-center hover:border-R5 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] border-[2px] hover:border-[2.5px] duration-300  ease-out  transition-all text-black border-[rgba(0,0,0,0.2)] border-dashed ${item.id == 9 ? "2xl:col-start-2 " : " "}`}><h1 className="absolute top-1 left-5 text-[40px] font-bold font-zodiak text-N8">{item.id}</h1>
+                    <div key={item.id} className={` max-sm:hidden max-w-[330px]  h-[260px]  relative rounded-[8px] py-[48px]  px-10 text-center flex flex-col justify-between  items-center hover:ring-R5 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] ring-[2px] hover:ring-[2.5px] duration-300  ease-out  transition-all text-black ring-[rgba(0,0,0,0.2)]  ${item.id == 9 ? "2xl:col-start-2 " : " "}`}><h1 className="absolute top-1 left-5 text-[40px] font-bold font-zodiak text-N8">{item.id}</h1>
                         <Image src={item.icon} alt={item.title} className="h-[100px]" />
                         <h2 className="mt-[20px] text-[20px]">{item.title}</h2></div>
                 ))}
             </div>
             <div>
                 {processCardItem.map((item) => (
-                    <div onClick={() => (setActiveCard(item.id))} key={item.id} className={`sm:hidden w-auto  h-auto justify-between  relative rounded-[8px] py-[19px]  px-4 flex flex-col justify-between  items-center hover:border-R5 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] border-[2px] hover:border-[2.5px] duration-300  ease-out  transition-all text-black border-[rgba(0,0,0,0.2)] border-dashed ${item.id == activeCard ? "animate-altura-78-172" : " "}`}>
+                    <div onClick={() => (setActiveCard(item.id))} key={item.id} className={`sm:hidden w-auto  h-auto justify-between  relative rounded-[8px] py-[19px]  px-4 flex flex-col justify-between  items-center hover:border-R5 shadow-[2px_2px_8px_rgba(0,0,0,0.4)]  hover:shadow-[0px_1px_8px_#87240E] border-[2px] hover:ring-[2.5] duration-300  ease-out  transition-all text-black border-[rgba(0,0,0,0.2)]  ${item.id == activeCard ? "animate-altura-78-172" : " "}`}>
                         <h1 className=" w-full text-[24px] font-bold  font-zodiak text-N8  ">{item.id}.  <strong className=" text-[16px] font-poppins font-normal">{item.title}</strong></h1>
                         <Image src={item.icon} alt={item.title} className={`h-[70px]  ${item.id == activeCard ? "animate-opacity-top-bottom  relative" : "hidden absolute"} `} />
                     </div>

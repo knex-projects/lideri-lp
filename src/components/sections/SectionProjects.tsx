@@ -78,7 +78,7 @@ export const SectionProjects = () => {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section className="py-16 flex flex-col gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto sm:px-[12.5%] px-[26px]">
+    <section className="2xl:py-16 flex flex-col pt-60 gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto sm:px-[12.5%] px-[26px]">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full   lg:px-0">
         <div className="flex flex-col max-w-2xl">
           <Image
