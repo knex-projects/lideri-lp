@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=zodiak@540,400,700&display=swap');
+
 @import "tailwindcss";
 
 @font-face {
@@ -42,7 +42,7 @@
   --color-R2: #ED8068;
   --color-R3: #C55A42;
   --color-R4: #9D361F;
-  --color-R5: #87240E;
+  --color-R5: #680000;
   --color-R6: #721E0B;
   --color-R7: #5E1504;
   --color-R8: #470E01;
@@ -58,7 +58,7 @@
   --color-B9: #00081B;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-montserrat);
+  --font-zodiac: "Zodiak", serif;
   --font-poppins: var(--font-poppins);
   --font-zodiak: 'Zodiak', serif;
   --font-mono: var(--font-geist-mono);
