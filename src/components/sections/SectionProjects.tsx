@@ -12,8 +12,6 @@ import {
   craftsmanImg,
 } from "../../../public/assets";
 
-// falta botoes, alinhamento cards, hover, imagens dos cards
-
 export const SectionProjects = () => {
   const projects = [
     {
@@ -104,10 +102,13 @@ export const SectionProjects = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden py-6  " ref={emblaRef}>
-        <div className="flex ">
+      <div className="overflow-hidden py-6" ref={emblaRef}>
+        <div className="flex ml-0 min-[500px]:ml-[-36px] lg:ml-[-64px]">
           {projects.map((project, index) => (
-            <div className={`flex-[0_0_100%] min-[500px]:flex-[0_0_auto] md:flex-[0_0_auto] md:px-0 min-w-0 min-[500px]:px-0  flex justify-between ${index == 0 ? "pl-0" : "min-[500px]:pl-[20px]  md:pl-[36px] lg:pl-[64px]"} `} key={index}>
+            <div
+              className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] min-w-0 pl-0 min-[500px]:pl-[20px] md:pl-[36px] lg:pl-[64px]"
+              key={index}
+            >
               <ProjectCard
                 title={project.title}
                 description={project.description}
