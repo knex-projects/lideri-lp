@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import type { ComponentType, SVGProps } from "react";
 
@@ -124,7 +123,7 @@ export default function SolutionsSection() {
             className="w-full bg-transparent"
             aria-labelledby="solutions-section-title"
         >
-            <div className="mx-auto min-h-[996px] w-full  px-[26px] py-[60px]  sm:py-[90px] sm:px-[12.5%] xl:py-[120px]">
+            <div className="mx-auto w-full px-[26px] py-[60px] sm:py-[90px] sm:px-[12.5%] xl:min-h-[996px] xl:py-[120px]">
                 <div className="mx-auto flex w-full  flex-col items-center gap-[50px]">
                     <div className="flex w-full max-w-[557px] flex-col items-center gap-[40px]">
                         <Image
