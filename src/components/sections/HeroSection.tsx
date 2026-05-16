@@ -64,6 +64,8 @@ export const HeroSection = () => {
                     height={ 64 }
                     alt="Ship Icon"
                     className="w-52.5 h-13.5 md:w-57.5 md:h-14.75 xl:w-62.75 xl:h-16"
+                    style={{ height: "auto" }}
+                    priority
                 />
                 
                 <div className="flex flex-col gap-4 sm:gap-5">

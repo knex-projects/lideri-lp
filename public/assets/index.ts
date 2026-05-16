@@ -1,4 +1,4 @@
-export const airplaneIcon = "/assets/icons/airplane-path.png";
+export const airplaneIcon = "/assets/icon/airplane-path.png";
 
 export const acaiImg = "/assets/images/acai.png";
 export const beerImg = "/assets/images/beer.png";
