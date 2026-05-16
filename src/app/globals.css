@@ -58,7 +58,7 @@
   --color-B9: #00081B;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-montserrat);
+  --font-zodiac: "Zodiak", serif;
   --font-poppins: var(--font-poppins);
   --font-zodiak: 'Zodiak', serif;
   --font-mono: var(--font-geist-mono);
