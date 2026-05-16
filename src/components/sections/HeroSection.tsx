@@ -68,10 +68,10 @@ export const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             id="heroSection"
-            className="relative h-[85dvh] bg-white xl:h-dvh mb-5"
+            className="relative  bg-white  mb-5"
         >
 
-            <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 sm:px-[12.5%] sm:pt-48.25 sm:gap-10">
+            <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 sm:px-[12.5%] sm:pt-48.25  sm:gap-10">
                 <Image
                     src="/assets/icon/barco.svg"
                     width={251}
@@ -91,8 +91,8 @@ export const HeroSection = () => {
 
             </div>
 
-            <div className="relative w-full min-h-165 max-h-231">
-                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-200.5 max-h-231 object-cover object-[87%_center]  sm:brightness-100">
+            <div className="relative w-full min-h-165 max-h-[1014px]">
+                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-[800px] max-h-[924px] object-cover object-[87%_center]  sm:brightness-100">
                     <source src="videos/navio.mp4" type="video/mp4" />
                     Your Browser does not support the video.
                 </video>
