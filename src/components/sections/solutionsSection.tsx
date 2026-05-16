@@ -142,7 +142,7 @@ export default function SolutionsSection() {
                                 className="w-full font-zodiak text-[36px] leading-[42px] font-bold text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
                             >
                                 Para o seu problema, a Líderi tem a{" "}
-                                <span className="text-R4">solução.</span>
+                                <span className="text-R5">solução.</span>
                             </h2>
                             <p className="w-full max-w-[514px] font-poppins text-[14px] leading-[20px] text-N5 sm:text-[16px] sm:leading-[22px] xl:max-w-none xl:leading-[normal]">
                                 {subtitle}

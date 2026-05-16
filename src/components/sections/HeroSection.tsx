@@ -67,10 +67,10 @@ export const HeroSection = () => {
                 />
                 
                 <div className="flex flex-col gap-4 sm:gap-5">
-                    <div className="bg-R4 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
+                    <div className="bg-R5 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
 
                     <h1 className="sm:w-[320px] w-[295px] max-w-full font-[Zodiak] text-white font-bold text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-xl xl:text-[76px]/[82px]">Nossa paixão é te levar mais longe.</h1>
-                    <p className="w-[281px] sm:w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-97 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
+                    <p className="w-[281px]  sm:w-65 font-[Poppins] text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-150 xl:text-[20px]"> Consultoria estratégica em internacionalização e exportação.</p>
                 </div>
                 
             </div>
