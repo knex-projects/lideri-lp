@@ -1,7 +1,9 @@
 export const airplaneIcon = "/assets/icon/airplane-path.png";
+export const lideriIcon = "/assets/icon/lideriIcon.svg";
 
 export const acaiImg = "/assets/images/acai.png";
 export const beerImg = "/assets/images/beer.png";
 export const craftsmanImg = "/assets/images/craftsman.png";
 export const icecreamImg = "/assets/images/icecream.png";
 export const lacemakerImg = "/assets/images/lacemaker.png";
+
