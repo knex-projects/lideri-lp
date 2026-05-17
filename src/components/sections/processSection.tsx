@@ -36,7 +36,7 @@ export default function ProcessSection() {
     const [activeCard, setActiveCard] = useState<number>(10);
 
     return (
-        <section className="bg-N1 sm:px-[12.5%] px-[26px] w-full h-fit min-h-[1065px] sm:min-h-[1280px] flex-col  sm:grid  sm:gap-[48px] pb-[62px]">
+        <section id="processo" className="bg-N1 sm:px-[12.5%] px-[26px] w-full h-fit min-h-[1065px] sm:min-h-[1280px] flex-col  sm:grid  sm:gap-[48px] pb-[62px]">
             <Image src={Caminhao} alt="caminhao" className="w-[168px] h-[43px] sm:w-[251px] sm:h-[64px]" />
             <div className="grid gap-2 max-sm:mt-[32px] max-sm:mb-[26px]">
                 <h1 className=" font-zodiak text-4xl sm:text-5xl text-N8 font-bold  max-w-[512px]">Veja o processo e  <strong className="text-R5">como funciona.</strong></h1>

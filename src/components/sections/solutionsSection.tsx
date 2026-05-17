@@ -120,6 +120,7 @@ function ArrowOutwardIcon({ className }: { className?: string }) {
 export default function SolutionsSection() {
     return (
         <section
+            id="solucoes"
             className="w-full bg-transparent"
             aria-labelledby="solutions-section-title"
         >
