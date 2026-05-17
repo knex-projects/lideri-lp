@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import type { ComponentType, SVGProps } from "react";
 
@@ -124,7 +123,7 @@ export default function SolutionsSection() {
             className="w-full bg-transparent"
             aria-labelledby="solutions-section-title"
         >
-            <div className="mx-auto min-h-[996px] w-full  px-[26px] py-[60px]  sm:py-[90px] sm:px-[12.5%] xl:py-[120px]">
+            <div className="mx-auto w-full px-[26px] py-[60px] sm:py-[90px] sm:px-[12.5%] xl:min-h-[996px] xl:py-[120px]">
                 <div className="mx-auto flex w-full  flex-col items-center gap-[50px]">
                     <div className="flex w-full max-w-[557px] flex-col items-center gap-[40px]">
                         <Image
@@ -142,7 +141,7 @@ export default function SolutionsSection() {
                                 className="w-full font-zodiak text-[36px] leading-[42px] font-bold text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
                             >
                                 Para o seu problema, a Líderi tem a{" "}
-                                <span className="text-R4">solução.</span>
+                                <span className="text-R5">solução.</span>
                             </h2>
                             <p className="w-full max-w-[514px] font-poppins text-[14px] leading-[20px] text-N5 sm:text-[16px] sm:leading-[22px] xl:max-w-none xl:leading-[normal]">
                                 {subtitle}

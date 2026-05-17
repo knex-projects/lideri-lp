@@ -1,5 +1,5 @@
-export const airplaneIcon = "/assets/icons/airplane-path.png";
-export const lideriIcon = "/assets/icons/lideriIcon.svg";
+export const airplaneIcon = "/assets/icon/airplane-path.png";
+export const lideriIcon = "/assets/icon/lideriIcon.svg";
 
 export const acaiImg = "/assets/images/acai.png";
 export const beerImg = "/assets/images/beer.png";
