@@ -49,7 +49,7 @@ const partners: Partner[] = [
 export default function PartnersSection() {
     return (
         <section
-            className="w-full bg-transparent py-[60px] sm:py-[90px] xl:py-[120px]"
+            className="w-full bg-transparent py-[60px] sm:py-14 "
             aria-labelledby="partners-section-title"
         >
             <div className="mx-auto flex w-full flex-col items-center gap-[60px]">
