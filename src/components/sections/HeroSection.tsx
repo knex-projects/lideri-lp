@@ -90,7 +90,7 @@ export const HeroSection = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 1.5 }}
                     className="embla flex flex-col gap-4 absolute z-10 bottom-0 left-1/2 -translate-x-1/2 translate-y-[55%] w-58 text-white md:w-fit md:translate-y-1/2"
                 >
                     <div className="embla__viewport overflow-hidden md:overflow-visible" ref={emblaRef}>
