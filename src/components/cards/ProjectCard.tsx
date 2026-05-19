@@ -38,7 +38,7 @@ export const ProjectCard = ({ title, description, imageSrc, priority = false }: 
         </div>
 
         <div className="flex justify-end mt-auto">
-          <button className="flex items-center justify-center w-[54px] md:w-[60px] lg:w-auto h-[40px] md:h-[46px] lg:h-[52px] pt-[12px] pr-[19px] pb-[12px] pl-[20px] border-2 border-R5 text-R5 rounded-[8px] shadow-[0px_1px_8px_#87240E] hover:bg-R5 hover:text-white transition-colors shrink-0">
+          <button className="flex items-center hidden justify-center w-[54px] md:w-[60px] lg:w-auto h-[40px] md:h-[46px] lg:h-[52px] pt-[12px] pr-[19px] pb-[12px] pl-[20px] border-2 border-R5 text-R5 rounded-[8px] shadow-[0px_1px_8px_#87240E] hover:bg-R5 hover:text-white transition-colors shrink-0">
             <svg
               className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px] shrink-0"
               viewBox="0 0 24 24"
