@@ -10,7 +10,7 @@ export interface ProjectCardProps {
 
 export const ProjectCard = ({ title, description, imageSrc, priority = false }: ProjectCardProps) => {
   return (
-    <div className="group relative flex flex-col w-full max-w-[360px] min-[500px]:min-w-[300px] min-[500px]:max-w-[300px] min-[500px]:w-[300px] md:min-w-[400px] md:max-w-[400px] md:w-[400px] lg:min-w-[440px] lg:max-w-[440px] lg:w-[440px] min-h-[353px] h-auto min-[412px]:min-h-[317px] min-[412px]:max-h-[317px] min-[412px]:h-[317px] min-[500px]:min-h-[317px] min-[500px]:max-h-[317px] min-[500px]:h-[317px] md:min-h-[330px] md:max-h-[330px] md:h-[330px] lg:min-h-[311px] lg:max-h-[532px] lg:h-[532px] rounded-[8px] shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] transition-shadow duration-300 overflow-hidden shrink-0 bg-transparent cursor-pointer">
+    <div className="group relative flex flex-col w-full max-w-[360px] min-[500px]:min-w-[300px] min-[500px]:max-w-[300px] min-[500px]:w-[300px] md:min-w-[400px] md:max-w-[400px] md:w-[400px] lg:min-w-[440px] lg:max-w-[440px] lg:w-[440px] min-h-[580px]   rounded-[8px] shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] transition-shadow duration-300 overflow-hidden shrink-0 bg-transparent cursor-pointer">
       <div className="absolute inset-0 border-[2px] border-[#00000033] group-hover:border-[2.5px] group-hover:border-[#87240Ecc] transition-all duration-300 rounded-[8px] pointer-events-none z-10"></div>
 
       <div className="relative w-full h-[350px] shrink-0 overflow-hidden bg-black/10">
