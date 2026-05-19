@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
-import Caminhao from "@/public/assets/icon/caminhao.svg";
+import Autoplay from "embla-carousel-autoplay";
 import { TestimonialCard, type Testimonial } from "@/src/components/cards/TestimonialCard";
 
 const testimonials: Testimonial[] = [
@@ -52,57 +50,27 @@ const testimonials: Testimonial[] = [
 ];
 
 export const TestimonialsSection = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "start",
-  });
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-
-  const onInit = useCallback((api: typeof emblaApi) => {
-    if (!api) return;
-    setScrollSnaps(api.scrollSnapList());
-  }, []);
-
-  const onSelect = useCallback((api: typeof emblaApi) => {
-    if (!api) return;
-    setSelectedIndex(api.selectedScrollSnap());
-  }, []);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (!emblaApi) return;
-    const isLast = emblaApi.selectedScrollSnap() === emblaApi.scrollSnapList().length - 1;
-    if (isLast) {
-      emblaApi.scrollTo(0);
-    } else {
-      emblaApi.scrollNext();
-    }
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onInit(emblaApi);
-    onSelect(emblaApi);
-    emblaApi.on("reInit", onInit);
-    emblaApi.on("reInit", onSelect);
-    emblaApi.on("select", onSelect);
-  }, [emblaApi, onInit, onSelect]);
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      watchDrag: true,
+    },
+    [
+      Autoplay({
+        delay: 2600,
+        stopOnMouseEnter: true,
+        stopOnInteraction: false,
+        playOnInit: true,
+      }),
+    ],
+  );
 
   return (
     <section className="py-16 w-full font-sans">
       <div className="flex flex-col gap-6 px-[26px] sm:px-[12.5%] mb-10 lg:mb-12">
-        <Image
-          src={Caminhao}
-          alt="Caminhão icon"
-          className="w-[168px] h-[43px] sm:w-[210px] sm:h-[54px] lg:w-[251px] lg:h-[64px]"
-          style={{ height: "auto" }}
-        />
-
         <div className="flex flex-col gap-2 max-w-[560px]">
-          <h2 className="font-zodiak font-bold text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] leading-[1.15] text-N8">
+          <h2 className="font-zodiak font-normal text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] leading-[1.15] text-N8">
             Experiências reais em cada{" "}
             <span className="text-R5">depoimento.</span>
           </h2>
@@ -112,13 +80,15 @@ export const TestimonialsSection = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden max-[500px]:px-[26px] min-[501px]:px-[12.5%]" ref={emblaRef}>
-        <div className="flex ml-[-32px] max-[500px]:ml-[-120px]">
-          {testimonials.map((t, index) => (
-            <div key={index} className="pl-8 max-[500px]:pl-[120px]">
-              <TestimonialCard testimonial={t} />
-            </div>
-          ))}
+      <div className="overflow-hidden max-[500px]:px-[26px] min-[501px]:px-[12.5%]">
+        <div className="embla__viewport overflow-hidden" ref={emblaRef}>
+          <div className="flex ml-[-32px] max-[500px]:ml-[-120px]">
+            {testimonials.map((t, index) => (
+              <div key={index} className="flex-[0_0_auto] shrink-0 pl-8 max-[500px]:pl-[120px]">
+                <TestimonialCard testimonial={t} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

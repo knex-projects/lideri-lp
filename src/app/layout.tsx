@@ -4,14 +4,11 @@ import "./globals.css";
 import { Header } from "../components/layout/Header/Header";
 import { Footer } from "../components/layout/footer";
 
-const zodiak = {
-  variable: "--font-zodiak",
-};
-
 const montserrat = Montserrat({
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   variable: "--font-montserrat",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const poppins = Poppins({
@@ -36,12 +33,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={` ${montserrat.variable} ${poppins.variable} ${zodiak.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

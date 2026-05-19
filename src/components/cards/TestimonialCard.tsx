@@ -15,7 +15,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         max-[359px]:flex-[0_0_100%] min-[360px]:flex-[0_0_340px]
         flex flex-col justify-between
         max-[359px]:w-full min-[360px]:w-[340px]
-        h-[491px]
+        h-[424px]
         rounded-[8px]
         border-[2px] border-[#00000033]
         p-8
@@ -32,13 +32,15 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         className="w-[46px] h-[42.75px]"
         style={{ height: "auto" }}
       />
-
-      <div className="flex flex-col gap-4">
+      <div className=" grid gap-4">
         <div className="w-5 h-0.5 bg-R5 rounded-full" />
-        <p className="font-poppins font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-[276px] max-h-[144px] overflow-hidden">
+         <p className="font-poppins font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-[276px] max-h-[144px] overflow-hidden">
           {testimonial.quote}
         </p>
+      </div>
+      
 
+      <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 mt-2">
           <div className="relative w-20 h-20 shrink-0 rounded-full overflow-hidden border-2 border-R3">
             <Image
@@ -49,7 +51,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <span className="font-poppins font-semibold text-[16px] text-N8 leading-tight">
               {testimonial.name}
             </span>

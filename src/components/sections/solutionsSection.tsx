@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ComponentType, SVGProps } from "react";
 
 type SolutionItem = {
@@ -125,18 +124,9 @@ export default function SolutionsSection() {
             aria-labelledby="solutions-section-title"
         >
             <div className="mx-auto w-full px-[26px] py-[60px] sm:py-[90px] sm:px-[12.5%] xl:min-h-[996px] xl:py-[120px]">
-                <div className="mx-auto flex w-full  flex-col items-center gap-[50px]">
-                    <div className="flex w-full max-w-[557px] flex-col items-center gap-[40px]">
-                        <Image
-                            src="/assets/icon/caminhao2.svg"
-                            alt="Caminhão"
-                            height={0}
-                            width={0}
-                            className="h-[43px] w-[168px] sm:h-[64px] sm:w-[251px] xl:w-[286px]"
-                            priority
-                        />
-
-                        <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
+                <div className="mx-auto flex w-full  flex-col items-start gap-[50px]">
+                    <div className="flex w-full max-w-[557px] flex-col items-start gap-[40px]">
+                        <div className="flex w-full flex-col items-center justify-start gap-2 text-start">
                             <h2
                                 id="solutions-section-title"
                                 className="w-full font-zodiak text-[36px] leading-[42px] font-bold text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"

@@ -9,7 +9,6 @@ export default function Home() {
     <main className="">
       <HeroSection />
       <SectionProjects />
-      <SolutionsSection />
       <ProcessSection />
       <TestimonialsSection />
       <PartnersSection />

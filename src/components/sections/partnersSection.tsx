@@ -55,13 +55,13 @@ export default function PartnersSection() {
             <div className="mx-auto flex w-full flex-col items-center gap-[60px]">
                 <h2
                     id="partners-section-title"
-                    className="w-full px-[26px] sm:px-[12.5%] text-left font-zodiak text-[36px] leading-[42px] font-bold text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
+                    className="w-full px-[26px] sm:px-[12.5%] text-left font-zodiak text-[36px] leading-[42px] font-normal text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
                 >
                     Nossos <span className="text-R5">parceiros.</span>
                 </h2>
 
                 <div className="flex w-full flex-col items-stretch">
-                    <div className="h-px w-full border-t-[2.5px] border-dashed border-N4" />
+                    <div className="h-px w-full  " />
 
                     <div className="flex max-sm:flex-col sm:flex-wrap items-center justify-center gap-x-10 gap-y-10 px-[26px] py-[40px] sm:gap-x-[60px] sm:px-[12.5%] sm:py-[60px] xl:gap-x-[86px]">
                         {partners.map((partner) => (
@@ -84,7 +84,7 @@ export default function PartnersSection() {
                         ))}
                     </div>
 
-                    <div className="h-px w-full border-t-[2.5px] border-dashed border-N4" />
+                    <div className="h-px w-full " />
                 </div>
             </div>
         </section>
