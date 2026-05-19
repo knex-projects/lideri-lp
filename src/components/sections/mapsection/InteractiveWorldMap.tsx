@@ -137,6 +137,13 @@ export default function InteractiveWorldMap() {
     return (
         <div className="relative w-full overflow-hidden rounded-[1.5rem] bg-slate-50  shadow-sm shadow-slate-200/50 ">
             <div className="relative">
+                <div className=" absolute bottom-10 flex "> 
+                  <div className="bg-R5 size-5 mr-2 shadow-[0px_1px_2px_#87240E]"/>
+                    <p>Prospectados</p>  
+                </div>
+                <div className=" absolute bottom-18  flex">
+                 <div className="bg-[#ED8068] size-5 mr-2 shadow-[0px_1px_2px_#87240E]"/> <p className="col-span-2">Estudados </p>  
+                 </div>
                 <ComposableMap
                     projectionConfig={{ scale: 160 }}
                     className="mx-auto h-[500px] w-full max-w-screen-2xl "
