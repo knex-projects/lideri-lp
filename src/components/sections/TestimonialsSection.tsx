@@ -75,7 +75,7 @@ export const TestimonialsSection = () => {
             <span className="text-R5">depoimento.</span>
           </h2>
           <p className="font-montserrat text-[14px] lg:text-[16px] text-N5 leading-snug max-w-[380px]">
-            Ouça agora um pequeno relato da experiência de pós-juniores com a Lídere.
+            Ouça agora um pequeno relato da experiência de pós-juniores com a Líderi.
           </p>
         </div>
       </div>
