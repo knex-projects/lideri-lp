@@ -74,7 +74,7 @@ export const TestimonialsSection = () => {
             Experiências reais em cada{" "}
             <span className="text-R5">depoimento.</span>
           </h2>
-          <p className="font-poppins text-[14px] lg:text-[16px] text-N5 leading-snug max-w-[380px]">
+          <p className="font-montserrat text-[14px] lg:text-[16px] text-N5 leading-snug max-w-[380px]">
             Ouça agora um pequeno relato da experiência de pós-juniores com a Lídere.
           </p>
         </div>

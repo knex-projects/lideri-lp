@@ -83,7 +83,7 @@ export const SectionProjects = () => {
             <h2 className="w-full lg:w-[518px] text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] font-[540] leading-[36px] min-[360px]:leading-[44px] md:leading-[50px] lg:leading-[56px] tracking-normal text-N8 font-zodiak font-normal">
               Conheça nosso portfólio <br /> de <span className="text-R5">projetos.</span>
             </h2>
-            <p className="text-[14px] lg:text-[16px] font-[400] leading-none tracking-normal text-N5 font-poppins">
+            <p className="text-[14px] lg:text-[16px] font-[400] leading-none tracking-normal text-N5 font-montserrat">
               Conheça alguns dos projetos que desenvolvemos para conectar empresas
               ao mercado internacional com estratégia, segurança e eficiência.
             </p>

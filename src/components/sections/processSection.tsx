@@ -39,7 +39,7 @@ export default function ProcessSection() {
         <section id="processo" className="bg-N1 sm:px-[12.5%] px-[26px] w-full h-fit min-h-[1065px] sm:min-h-[1280px] flex-col  sm:grid  sm:gap-[48px] pb-[62px]">
             <div className="grid gap-2 max-sm:mt-[32px] max-sm:mb-[26px]">
                 <h1 className=" font-zodiak text-4xl sm:text-5xl text-N8 font-normal  max-w-[512px]">Para o seu problema, a Líderi tem a  <strong className="text-R5 font-normal">solução.</strong></h1>
-                <p className="text-N5 text-[14px] sm:text-[16px] font-poppins max-w-[557px]">Entenda o passo a passo de como exportar com sucesso com nossa empresa.  </p>
+                <p className="text-N5 text-[14px] sm:text-[16px] font-montserrat max-w-[557px]">Entenda o passo a passo de como exportar com sucesso com nossa empresa.  </p>
             </div>
             <div className="grid absolute sm:relative sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 items-stretch content-between justify-items-stretch gap-x-11  gap-y-[52px] ">
                 {processCardItem.map((item) => (

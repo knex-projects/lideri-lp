@@ -98,10 +98,10 @@ export const HeroSection = () => {
             <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 sm:px-[12.5%] sm:pt-[237px] sm:gap-10">
                 <div className="flex flex-col gap-4 sm:gap-5">
                     <div className="bg-R5 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
-                    <h1 className="sm:w-[320px] w-[295px] max-w-full font-impact text-white font-normal text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-[514px] xl:text-[76px]/[82px]">
+                    <h1 className="sm:w-[320px] w-[295px] max-w-full font-zodiac text-white font-normal text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-[514px] xl:text-[76px]/[82px]">
                         Nossa paixão é te levar mais longe.
                     </h1>
-                    <p className="w-[281px] sm:w-65 font-poppins text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-150 xl:text-[20px]"> 
+                    <p className="w-[281px] sm:w-65 font-montserrat  text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-150 xl:text-[20px]"> 
                         Consultoria estratégica em internacionalização e exportação.
                     </p>
                 </div>

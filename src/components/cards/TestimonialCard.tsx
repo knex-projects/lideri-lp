@@ -34,7 +34,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       />
       <div className=" grid gap-4">
         <div className="w-5 h-0.5 bg-R5 rounded-full" />
-         <p className="font-poppins font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-[276px] max-h-[144px] overflow-hidden">
+         <p className="font-montserrat font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-[276px] max-h-[144px] overflow-hidden">
           {testimonial.quote}
         </p>
       </div>
@@ -52,10 +52,10 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             />
           </div>
           <div className="flex flex-col ">
-            <span className="font-poppins font-semibold text-[16px] text-N8 leading-tight">
+            <span className="font-montserrat font-semibold text-[16px] text-N8 leading-tight">
               {testimonial.name}
             </span>
-            <span className="font-poppins text-[14px] text-N5 leading-tight">
+            <span className="font-montserrat text-[14px] text-N5 leading-tight">
               {testimonial.role}
             </span>
           </div>
