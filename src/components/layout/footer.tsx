@@ -42,7 +42,7 @@ export function Footer() {
                                 <a href="https://www.instagram.com/liderijr" target="_blank" rel="noopener noreferrer">
                                     <Image src="/assets/icon/instagram.svg" alt="Instagram" width={40} height={40} />
                                 </a>
-                                <a href=" www.linkedin.com/in/lidericonsultoria" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.linkedin.com/in/lidericonsultoria" target="_blank" rel="noopener noreferrer">
                                     <Image src="/assets/icon/linkedin.svg" alt="LinkedIn" width={40} height={40} />
                                 </a>
                             </div>
