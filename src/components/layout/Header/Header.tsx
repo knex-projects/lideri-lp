@@ -30,7 +30,8 @@ export const Header = () => {
 
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = "hidden"
+            document.body.style.overflow = "unset";
+           
         } else {
             document.body.style.overflow = ""
         }
@@ -101,19 +102,19 @@ export const Header = () => {
                         >
                             <ul className="flex flex-col max-md:pt-[128px] items-center gap-2 w-[90%] font-montserrat font-normal text-N1 text-[20px] md:flex-row md:gap-4 md:w-auto lg:gap-10 ">
                                 <li className="order-1 pl-4 max-md:w-full  border-b border-N5 text-center transition ease-in-out duration-300 md:order-1 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link href="/#heroSection">Home</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}} href="/#heroSection">Home</Link>
                                 </li>
                                 <li className="order-2 pl-4 max-md:w-full pb-1 border-b border-N5 text-center transition ease-in-out duration-300 md:order-2 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link href="/#processo">Serviços</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}}  href="/#processo">Serviços</Link>
                                 </li>
                                 <li className="order-3 pl-4 max-md:w-full pb-1 border-b border-N5 text-center transition ease-in-out duration-300 md:order-4 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link href="/#projetos">Cases</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}}  href="/#projetos">Cases</Link>
                                 </li>
                                 <li className="order-4 hidden max-md:w-full pl-4 pb-1 border-b border-N5 text-center transition ease-in-out duration-300 md:order-5 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link href="/#aboutus">Sobre nós</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}}  href="/#aboutus">Sobre nós</Link>
                                 </li>
                                 <li className="order-5 pl-4 pb-1 max-md:w-full border-b border-N5 hidden text-center transition ease-in-out duration-300 md:order-3 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link href="/blog">Blog</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}}  href="/blog">Blog</Link>
                                 </li>
                             </ul>
                         </motion.nav>
