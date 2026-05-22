@@ -76,7 +76,7 @@ export const SectionProjects = () => {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section id="projetos" className="2xl:pb-16 pb-10 flex flex-col pt-24 md:pt-36  gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto sm:px-[12.5%] px-[26px]">
+    <section id="projetos" className="2xl:pb-16 pb-10 flex flex-col pt-24 md:pt-36  gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto md:px-[12.5%] px-[26px]">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full   lg:px-0">
         <div className="flex flex-col max-w-2xl">
           <div className="flex flex-col w-full sm:pt-[104px] lg:w-[557px] h-auto lg:h-[192px] gap-[8px]">

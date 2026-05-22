@@ -36,7 +36,7 @@ export default function ProcessSection() {
     const [activeCard, setActiveCard] = useState<number>(10);
 
     return (
-        <section id="processo" className="bg-N1 sm:px-[12.5%] px-[26px] w-full h-fit min-h-[1065px] sm:min-h-[1280px] flex-col  sm:grid  sm:gap-[48px] pb-[62px]">
+        <section id="processo" className="bg-N1 md:px-[12.5%] px-[26px] w-full h-fit min-h-[1065px] sm:min-h-[1280px] flex-col  sm:grid  sm:gap-[48px] pb-[62px]">
             <div className="grid gap-2 max-sm:mt-[32px] max-sm:mb-[26px]">
                 <h1 className=" font-zodiak text-4xl sm:text-5xl text-N8 font-normal  max-w-[512px]">Para o seu problema, a Líderi tem a  <strong className="text-R5 font-normal">solução.</strong></h1>
                 <p className="text-N5 text-[14px] sm:text-[16px] font-montserrat max-w-[557px]">Entenda o passo a passo de como exportar com sucesso com nossa empresa.  </p>

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Footer() {
     return (
-        <section className="w-full flex flex-col min-h-[851px] sm:min-h-[551px] pb-[32px] px-[26px] pt-[100px] justify-between bg-R5 sm:px-[12.5%]">
+        <section className="w-full flex flex-col min-h-[851px] sm:min-h-[551px] pb-[32px] px-[26px] pt-[100px] justify-between bg-R5 md:px-[12.5%]">
             <div className="mx-auto flex w-full flex-col ">
                 <div className="flex max-sm:flex-col flex-wrap   justify-between  ">
                     <div className="flex items-center sm:justify-center max-[1161px]:w-full   py-8 sm:py-10">
@@ -16,7 +16,7 @@ export function Footer() {
                     </div>
 
                     <div className="flex flex-col   sm:gap-8 pr-[26px] py-[40px]">
-                        <h3 className="text-[30px]  sm:text-[32px] font-zodiak max-sm:pb-[22px] font-normal text-N3">Endereço</h3>
+                        <h3 className="text-[30px]  sm:text-[32px] font-zodiak max-md:pb-[22px] font-normal text-N3">Endereço</h3>
                         <p className="text-[16px] sm:text-[20px] font-montserrat leading-[1.6] text-N3 max-w-[244px]  sm:max-w-[207px]">
                             UFPB – Campus I 
                             Centro de Ciências Sociais Aplicadas 
