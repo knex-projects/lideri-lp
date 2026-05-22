@@ -27,8 +27,8 @@ export function Footer() {
                         </p>
                         <p className="text-[16px] sm:text-[20px] font-montserrat leading-[1.6] text-N3"><strong className="font-bold">CNPJ:</strong> <br /> 19.521.379/0001-03</p>
                     </div>
-                    <div className="grid max-2xl:grid-cols-1  grid-cols-2 gap-x-20">
-                        <div className="flex flex-col  pr-[26px] py-[40px]">
+                    <div className="grid max-2xl:grid-cols-1  grid-cols-2 ">
+                        <div className="flex flex-col  pr-[26px] py-[40px] justify-self-start">
                             <h3 className="text-[30px] pb-[22px] sm:text-[32px] font-zodiak font-normal text-N3">Contatos</h3>
                             <a href="mailto:contato@lidericonsultoria.com" target="_blank" rel="noopener noreferrer">
                                 <p className="text-[16px] sm:text-[20px] font-montserrat leading-[1.6] text-N3">contato@lidericonsultoria.com</p>
@@ -36,7 +36,7 @@ export function Footer() {
                             <p className="text-[16px] sm:text-[20px] font-montserrat leading-[1.6] text-N3">(83) 99999-9999</p>
                         </div>
 
-                        <div className="flex flex-col gap-[22px] sm:gap-8  pr-[26px] py-[40px]">
+                        <div className="flex flex-col gap-[22px] sm:gap-8  pr-[26px] py-[40px] 2xl:justify-self-end">
                             <h3 className="text-[30px] sm:text-[32px] font-zodiak font-normal text-N3">Redes sociais</h3>
                             <div className="flex items-center gap-3 text-N3">
                                 <a href="https://www.instagram.com/liderijr" target="_blank" rel="noopener noreferrer">
