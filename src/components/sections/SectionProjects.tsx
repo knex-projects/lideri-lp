@@ -92,7 +92,7 @@ export const SectionProjects = () => {
       </div>
 
       <div className="overflow-hidden pt-16" ref={emblaRef}>
-        <div className="flex ml-0 min-[500px]:ml-[-36px] lg:ml-[-64px]">
+        <div className="flex ml-0 min-[500px]:ml-[-20px] md:ml-[-36px] lg:ml-[-64px]">
           {projects.map((project, index) => (
             <div
               className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] min-w-0 pl-0 min-[500px]:pl-[20px] md:pl-[36px] lg:pl-[64px]"

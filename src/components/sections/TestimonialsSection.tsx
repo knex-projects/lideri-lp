@@ -68,7 +68,7 @@ export const TestimonialsSection = () => {
 
   return (
     <section className="py-16 w-full font-sans">
-      <div className="flex flex-col gap-6 px-[26px] sm:px-[12.5%] mb-10 lg:mb-12">
+      <div className="flex flex-col gap-6 px-[26px] md:px-[12.5%] mb-10 lg:mb-12">
         <div className="flex flex-col gap-2 max-w-[560px]">
           <h2 className="font-zodiak font-normal text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] leading-[1.15] text-N8">
             Experiências reais em cada{" "}
@@ -80,11 +80,11 @@ export const TestimonialsSection = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden max-[500px]:px-[26px] min-[501px]:px-[12.5%]">
+      <div className="overflow-hidden px-[26px] md:pl-[12.5%]">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-          <div className="flex ml-[-32px] max-[500px]:ml-[-120px]">
+          <div className="flex ml-0 min-[500px]:ml-[-10px] md:ml-[-34px] lg:ml-[-60px]">
             {testimonials.map((t, index) => (
-              <div key={index} className="flex-[0_0_auto] shrink-0 pl-8 max-[500px]:pl-[120px]">
+              <div key={index} className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] min-w-0 pl-1 min-[500px]:pl-[20px] md:pl-[34px] lg:pl-[60px]">
                 <TestimonialCard testimonial={t} />
               </div>
             ))}

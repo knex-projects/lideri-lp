@@ -54,7 +54,7 @@ export default function ProcessSection() {
     <div  
         key={item.id}  
         style={{ zIndex: index }} 
-        className="sm:hidden w-auto min-h-[152px] relative -mt-[10px] rounded-[8px] py-[19px] px-4 flex justify-between items-center bg-white shadow-[2px_2px_8px_rgba(0,0,0,0.4)] border-2 border-black/20 hover:border-R5 hover:shadow-[0px_1px_8px_#87240E] duration-300 ease-out transition-all text-black"
+        className="sm:hidden w-auto min-h-[152px] relative -mt-[10px] rounded-[8px] py-[19px] px-4 flex justify-between items-center bg-white shadow-[2px_2px_8px_rgba(0,0,0,0.4)] border-2 border-black/20 hover:border-R5 hover:shadow-[0px_1px_8px_rgba(135, 36, 14, 1)] transition-shadow  duration-300 ease-out  text-black"
     >
         <Image src={item.icon} alt={item.title} className="w-[34px] h-auto object-contain" />
         

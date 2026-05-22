@@ -12,9 +12,9 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div
       className="
-        max-[359px]:flex-[0_0_100%] min-[360px]:flex-[0_0_340px]
-        flex flex-col justify-between
-        max-[359px]:w-full min-[360px]:w-[340px]
+        flex flex-col w-full sm:w-[340px]  lg:min-w-[340px] lg:w-[340px] min-h-[424px]
+        justify-between
+      
         h-[424px]
         rounded-[8px]
         border-[2px] border-[#00000033]
@@ -34,7 +34,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       />
       <div className=" grid gap-4">
         <div className="w-5 h-0.5 bg-R5 rounded-full" />
-         <p className="font-montserrat font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-[276px] max-h-[144px] overflow-hidden">
+         <p className="font-montserrat font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-auto min-[500px]:w-[276px] max-h-[144px] overflow-hidden">
           {testimonial.quote}
         </p>
       </div>
