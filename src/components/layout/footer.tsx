@@ -60,18 +60,18 @@ export function Footer() {
                             </p>
                         </div>
 
-                        <div className="flex flex-col gap-[22px] sm:gap-8  pr-[26px] py-[40px] 2xl:justify-self-end">
-                            <h3 className="text-[30px] sm:text-[32px] font-zodiak font-normal text-N3">Redes sociais</h3>
-
-                            <div className="w-12 h-1 bg-[#87240E]"></div>
-
-                            <p className="font-montserrat text-N3">Acompanhe nossas redes e fique por dentro das novidades da Líderi.</p>
-                            <div className="flex items-center gap-3 text-N3">
-                                <a href="https://www.instagram.com/liderijr" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/assets/icon/instagram.svg" alt="Instagram" width={40} height={40} />
-                                </a>
-                                <a href="https://www.linkedin.com/in/lidericonsultoria" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/assets/icon/linkedin.svg" alt="LinkedIn" width={40} height={40} />
+                        <div className="flex flex-col gap-5 sm:text-lg">
+                            <div className="flex gap-5">
+                                <Phone className="shrink-0"/>
+                                <p className="leading-[1.6]">+55 (83) 9125-5249</p>
+                            </div>
+                            <div className="flex gap-5">
+                                <Mail className="shrink-0"/>
+                                <a href="mailto:contato@lidericonsultoria.com" target="_blank" rel="noopener noreferrer">
+                                    <p className="leading-[1.6]">
+                                        contato@lidericonsultoria
+                                        .com
+                                    </p>
                                 </a>
                             </div>
                             <div className="flex gap-5">
