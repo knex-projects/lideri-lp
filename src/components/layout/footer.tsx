@@ -67,7 +67,7 @@ export function Footer() {
                         <div className="flex flex-col gap-5 sm:text-lg">
                             <div className="flex gap-5">
                                 <Phone className="shrink-0"/>
-                                <p className="leading-[1.6]">(83) 99999-9999</p>
+                                <p className="leading-[1.6]">+55 (83) 9125-5249</p>
                             </div>
                             <div className="flex gap-5">
                                 <Mail className="shrink-0"/>
