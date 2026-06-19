@@ -108,7 +108,7 @@ export const HeroSection = () => {
                     </p>
                 </div>
                 <Link href = "/contato">
-                <div className="bg-R5 w-[214px] h-[52px] rounded-[8px] font-montserrat flex text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
+                <div className="bg-R5 px-3 md:px-6 h-[52px] rounded-[8px] font-montserrat flex text-[14px] md:text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
                     Entre em contato
                     <ArrowUpRight color="#FFFFFF" size={20}/>
                 </div>
