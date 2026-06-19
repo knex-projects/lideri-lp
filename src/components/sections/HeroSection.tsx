@@ -7,6 +7,8 @@ import { motion, useInView } from "framer-motion"
 import { useCallback, useEffect, useState, useRef } from "react"
 import Fade from "embla-carousel-fade"
 import Image from "next/image" // Ajuste conforme seu uso de imagens
+import { ArrowUpRight } from "lucide-react"
+import Link from "next/link"
 
 
 const CounterNumber = ({ to, duration = 2 }: { to: number; duration?: number }) => {
@@ -105,6 +107,13 @@ export const HeroSection = () => {
                         Consultoria estratégica em internacionalização e exportação.
                     </p>
                 </div>
+                <Link href = "/contato">
+                <div className="bg-R5 w-[214px] h-[52px] rounded-[8px] font-montserrat flex text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
+                    Entre em contato
+                    <ArrowUpRight color="#FFFFFF" size={20}/>
+                </div>
+                </Link>
+                
             </div>
 
             <div className="relative w-full min-h-165 max-h-[1014px]">
