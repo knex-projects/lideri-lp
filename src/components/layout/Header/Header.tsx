@@ -108,7 +108,7 @@ export const Header = () => {
                                 <li className="order-1 w-full border-y border-N5 md:border-none md:order-1">
                                     <Link
                                         onClick={()=>{setIsOpen(false)}}
-                                        href="/#heroSection"
+                                        href="/"
                                         className="block w-full max-md:w-full py-4 text-center text-nowrap transition ease-in-out duration-300 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1"
                                     >
                                         Home
@@ -117,7 +117,7 @@ export const Header = () => {
                                 <li className="order-3 w-full border-b border-N5 md:border-none md:order-2">
                                     <Link 
                                         onClick={()=>{setIsOpen(false)}}
-                                        href="/#processo"
+                                        href="/servicos"
                                         className="block w-full max-md:w-full py-4 text-center text-nowrap transition ease-in-out duration-300 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1"
                                     >
                                         Serviços
@@ -126,7 +126,7 @@ export const Header = () => {
                                 <li className="order-4 w-full border-b border-N5 md:border-none md:order-4">
                                     <Link 
                                         onClick={()=>{setIsOpen(false)}}
-                                        href="/#projetos"
+                                        href="/cases"
                                         className="block w-full max-md:w-full py-4 text-center text-nowrap transition ease-in-out duration-300 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1"
                                     >
                                         Cases
@@ -135,7 +135,7 @@ export const Header = () => {
                                 <li className="order-2 w-full border-b border-N5 md:border-none md:order-5">
                                     <Link 
                                         onClick={()=>{setIsOpen(false)}}
-                                        href="/#aboutus"
+                                        href="/sobreNos"
                                         className="block w-full max-md:w-full  py-4 text-center text-nowrap transition ease-in-out duration-300 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1"
                                     >
                                         Sobre nós
@@ -153,7 +153,7 @@ export const Header = () => {
                                 <li className="order-6 w-full md:order-6">
                                     <Link
                                         onClick={()=>{setIsOpen(false)}}
-                                        href="/Contato"
+                                        href="/contato"
                                         className="block w-full bg-[#87240E] py-4 text-center text-nowrap font-montserrat font-bold md:font-normal md:px-6 md:py-3 md:rounded-lg"
                                     >
                                         Contato
