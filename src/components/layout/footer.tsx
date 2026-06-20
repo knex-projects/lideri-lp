@@ -15,12 +15,12 @@ export function Footer() {
                                 height={91}
                                 className="h-auto w-auto"
                             />
-                            <p className="w-58 font-montserrat text-xs text-N3 md:text-sm">Consultoria especializada em soluções estratégicas  para impulsionar o crescimento da sua organização</p>
+                            <p className="max-sm:w-[256px] max-[1161px]:w-full w-58 font-montserrat text-xs text-N3 md:text-sm">Consultoria especializada em soluções estratégicas  para impulsionar o crescimento da sua organização</p>
                             <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-8 sm:gap-8 pr-6.5 py-10 text-N3">
+                    <div className="flex flex-col gap-5.5 sm:gap-8 pr-6.5 py-10 text-N3">
                         <div className="flex flex-col gap-3">
                             <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Endereço</h3>
                             <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
@@ -58,11 +58,13 @@ export function Footer() {
                         </div>
                     </div>
 
-                    <div className="grid max-2xl:grid-cols-1 grid-cols-2 text-N3">
-                        <div className="flex flex-col gap-8 pr-6.5 py-10 justify-self-start">
+                    <div className="grid max-2xl:grid-cols-1 grid-cols-2 text-N3 2xl:w-[45%]">
+                        <div className="flex flex-col gap-8  py-10 justify-self-start">
                             <div className="flex flex-col gap-3">
-                                <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Contatos</h3>
-                                <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
+                                <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Contatos
+                                      <div className="w-12 h-1 rounded-[10px] bg-[#87240E] mt-3"></div>
+                                </h3>
+                               
                             </div>
 
                             <div className="flex flex-col gap-5">
@@ -86,9 +88,11 @@ export function Footer() {
                             </div>
                         </div>
                         
-                        <div className="flex flex-col gap-5.5 sm:gap-8  pr-6.5 py-10 2xl:justify-self-end">
-                            <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Redes sociais</h3>
-                            <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
+                        <div className="flex flex-col gap-5.5 sm:gap-8  py-10 2xl:justify-self-end">
+                            <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Redes sociais
+                                 <div className="w-12 h-1 rounded-[10px] bg-[#87240E] mt-3"></div>
+                            </h3>
+                           
 
                             <p className="sm:text-lg sm:max-w-60.75">Acompanhe nossas redes e fique por dentro das novidades da Líderi.</p>
 
