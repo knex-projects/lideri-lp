@@ -1,5 +1,7 @@
 import React from 'react';
 import Image, { StaticImageData } from 'next/image';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export interface ProjectCardProps {
   title: string;
@@ -38,20 +40,14 @@ export const ProjectCard = ({ title, description, imageSrc, priority = false }: 
         </div>
 
         <div className="flex justify-end mt-auto">
-          <button className="flex items-center hidden justify-center w-[54px] md:w-[60px] lg:w-auto h-[40px] md:h-[46px] lg:h-[52px] pt-[12px] pr-[19px] pb-[12px] pl-[20px] border-2 border-R5 text-R5 rounded-[8px] shadow-[0px_1px_8px_#87240E] hover:bg-R5 hover:text-white transition-colors shrink-0">
-            <svg
-              className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px] shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5l7 7-7 7" />
-            </svg>
+          <Link href="/cases">
+           <button className="flex items-center text-[16px]  justify-center lg:w-auto  gap-2 text-R5 hover:font-semibold  hover:text-R6  transition-all shrink-0">
+           Saiba mais
+           <ArrowRight color='#680000' className='size-4'/>
           </button>
+          </Link>
+        
+        
         </div>
       </div>
     </div>
