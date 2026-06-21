@@ -9,6 +9,8 @@ import {
   lacemakerImg,
   craftsmanImg,
 } from "../../../public/assets";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export const SectionProjects = () => {
   const projects = [
@@ -90,8 +92,13 @@ export const SectionProjects = () => {
           </div>
         </div>
       </div>
-
-      <div className="overflow-hidden pt-16" ref={emblaRef}>
+       <Link href = "/cases" className="w-full flex sm:pt-16  sm:justify-end ">
+                <div className="bg-R5 px-6 sm:px-6 h-[52px] rounded-[8px] font-montserrat flex text-[14px] sm:text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
+                    Ver todos os projetos
+                    <ArrowUpRight color="#FFFFFF" className="size-4 sm:size-6"/>
+                </div>
+          </Link>
+      <div className="overflow-hidden " ref={emblaRef}>
         <div className="flex ml-0 min-[500px]:ml-[-20px] md:ml-[-36px] lg:ml-[-64px]">
           {projects.map((project, index) => (
             <div
@@ -121,7 +128,7 @@ export const SectionProjects = () => {
       </div>
 
       <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-[4px]">
-        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R8 transition-colors">
           <svg
             width="12"
             height="20"
@@ -135,7 +142,7 @@ export const SectionProjects = () => {
             <path d="M10 18l-8-8 8-8" />
           </svg>
         </button>
-        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R8 transition-colors">
           <svg
             width="12"
             height="20"
