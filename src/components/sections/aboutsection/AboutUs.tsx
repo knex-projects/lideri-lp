@@ -1,47 +1,42 @@
-import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe2, logoLideri1, logoLideri2 } from "@/public/assets"
+import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe2, logoLideri1 } from "@/public/assets"
 import Image from "next/image"
 import { AcordionMenu } from "./AcordionMenu"
 
 export const AboutUs = () => {
     return (
-        <section className="px-6.5 pt-45 md:px-[12.5%]">
-            <div className="flex flex-col items-center gap-2.5 text-center md:flex-row md:items-start md:justify-between md:gap-30 md:text-start">
-                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 md:order-2">
+        <section className="pb-25 px-6.5 pt-45 md:px-[12.5%]">
+            <div className="flex flex-col items-center gap-2.5 text-center md:justify-between lg:flex-row lg:items-start lg:gap-30 lg:text-start">
+                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 lg:order-2">
                     <Image
                         src={ equipe1 }
                         alt="Foto da Equipe da Lideri"
                         fill
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        quality={ 100 }
                         className="rounded-lg object-cover"
                     />
-                    <div className="absolute bottom-0 left-0 translate-x-[-35%] translate-y-[35%] bg-N1 rounded-full p-[clamp(10px,1.25vw,36px)]">
-                        <div className="relative w-[clamp(44px,7vw,96px)] h-[clamp(46px,7.5vw,104px)]">
-                            <Image 
-                                src={ logoLideri2 }
-                                fill
-                                alt="Logo da Lideri"
-                            />
-                        </div>
-                    </div>
                 </div>
 
-                <div className="flex flex-col justify-center items-center sm:w-142 md:order-1 md:items-start">
+                <div className="flex flex-col justify-center items-center sm:w-142 md:items-start lg:order-1">
                     <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
                         Saiba mais sobre
                         <span className="text-R5"> quem somos.</span>
                     </h2>
                     
-                    <div className="hidden w-10 h-3.5 mb-7.5 bg-R5 rounded-sm md:block"></div>
+                    <div className="hidden w-10 h-3.5 mb-7.5 bg-R5 rounded-sm lg:block"></div>
 
                     <p className="font-montserrat text-sm text-N5 md:text-xl">A Líderi Jr. Consultoria Internacional é a Empresa Júnior de Relações Internacionais da Universidade Federal da Paraíba. Formada e gerida por estudantes, somos uma consultoria especializada em transformar conhecimento acadêmico em soluções reais para negócios que navegam em um mercado cada vez mais global.</p>
                 </div>
             </div>
 
-            <div className="flex flex-col items-center gap-8 my-12 2xl:flex-row md:items-start md:mt-37.5 md:mb-50">
+            <div className="flex flex-col items-center gap-8 my-12 2xl:flex-row md:mt-37.5 md:mb-50 2xl:items-start">
                 <div className="md:relative md:shrink-0 w-[clamp(416px,40vw,540px)] h-[clamp(280px,22vw,330px)]">
-                    <div className="relative w-full h-full rounded-lg overflow-hidden md:w-full md:h-full">
+                    <div className="relative w-full h-full overflow-hidden sm:rounded-lg md:w-full md:h-full">
                         <Image
                             src={ chama1 }
                             fill
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                            quality={ 100 }
                             alt="Foto da Lideri no Chama"
                             className="object-cover"
                         />
@@ -51,6 +46,8 @@ export const AboutUs = () => {
                         <Image
                             src={ chama2 }
                             fill
+                            sizes="(max-width: 768px) 0vw, 21vw"
+                            quality={ 100 }
                             alt="Foto da Lideri no Chama"
                             className="object-cover"
                         />
@@ -67,6 +64,8 @@ export const AboutUs = () => {
                     <Image
                         src={ equipe2 }
                         fill
+                        sizes="(max-width: 768px) 100vw, 30vw"
+                        quality={ 100 }
                         alt="Foto da equipe da Lideri"
                         className="object-cover rounded-lg"
                     />
@@ -76,6 +75,7 @@ export const AboutUs = () => {
                             <Image
                                 src={ logoLideri1 }
                                 fill
+                                quality={ 100 }
                                 alt="Logo da Lideri"
                                 className="object-contain"
                             />
