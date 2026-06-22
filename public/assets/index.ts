@@ -7,10 +7,10 @@ export const craftsmanImg = "/assets/images/craftsman.png";
 export const icecreamImg = "/assets/images/icecream.png";
 export const lacemakerImg = "/assets/images/lacemaker.png";
 
-export const equipe1 = "/assets/images/equipe1.png";
-export const equipe2 = "/assets/images/equipe2.png";
-export const chama1 = "/assets/images/chama.png";
-export const chama2 = "/assets/images/chama2.png";
+export const equipe1 = "/assets/images/equipeDaLideri.svg";
+export const equipe2 = "/assets/images/equipeDaLideri2.svg";
+export const chama1 = "/assets/images/chama.svg";
+export const chama2 = "/assets/images/chama2.svg";
 export const logoLideri1 = "/logo/lideriLogo.svg";
 export const logoLideri2 = "/logo/lideriLogo2.svg";
 export const counter1 = "/assets/icon/counter1.svg";
