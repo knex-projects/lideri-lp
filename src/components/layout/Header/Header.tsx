@@ -38,7 +38,7 @@ export const Header = () => {
     }, [isOpen])
 
     return (
-        <header className="absolute top-0 z-50 h-29 md:h-22.5 w-full">
+        <header className="absolute top-0 z-50 h-25 md:h-22.5 w-full">
             <div className="flex justify-between items-center backdrop-blur-[50px] w-full h-full p-6.5 md:px-[12.5%] md:py-3.25">
                 <div  className="relative w-[144px] h-[55px] md:w-[186px] md:h-[72px]">
                     <Image
@@ -69,7 +69,7 @@ export const Header = () => {
                                     className="flex justify-center items-center absolute"
                                 >
                                     Fechar
-                                    <X size={24} strokeWidth={3} className="text-N4" />
+                                    <X size={24} strokeWidth={3} className="text-white" />
                                 </motion.span>
                             ) : (
                                 <motion.span
@@ -81,7 +81,7 @@ export const Header = () => {
                                     className="flex justify-center items-center absolute gap-3"
                                 >
                                     Menu
-                                    <TextAlignJustify size={24} strokeWidth={3} className="text-N4" />
+                                    <TextAlignJustify size={24} strokeWidth={3} className="text-white" />
                                 </motion.span>
                             )
                         }
@@ -98,7 +98,7 @@ export const Header = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4 }}
                             ref={menuRef}
-                            className="flex justify-center absolute top-29 left-0 bg-B9/55 backdrop-blur-[50px]  w-full h-dvh md:top-0 md:h-22.5 md:px-[12.5%] md:py-3.25 md:flex md:flex-row md:justify-end md:bg-R1/5 md:backdrop-blur-none"
+                            className="flex justify-center absolute top-25 left-0 bg-B9/55 backdrop-blur-[50px]  w-full h-dvh md:top-0 md:h-22.5 md:px-[12.5%] md:py-3.25 md:flex md:flex-row md:justify-end md:bg-R1/5 md:backdrop-blur-none"
                         >
                             <ul className="flex flex-col max-md:pt-[128px] items-center gap-2 w-[90%] font-montserrat font-normal text-N1 text-[20px] md:flex-row md:gap-4 md:w-auto lg:gap-10 ">
                                 <li className="order-1 max-md:w-full  border-b border-N5 text-center transition ease-in-out duration-300 md:order-1 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
@@ -108,7 +108,7 @@ export const Header = () => {
                                     <Link onClick={()=>{setIsOpen(false)}}  href="/#processo">Serviços</Link>
                                 </li>
                                 <li className="order-3  max-md:w-full pb-1 border-b border-N5 text-center transition ease-in-out duration-300 md:order-4 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
-                                    <Link onClick={()=>{setIsOpen(false)}}  href="/#projetos">Cases</Link>
+                                    <Link onClick={()=>{setIsOpen(false)}}  href="/cases">Cases</Link>
                                 </li>
                                 <li className="order-4 hidden max-md:w-full  pb-1 border-b border-N5 text-center transition ease-in-out duration-300 md:order-5 md:p-0 md:border-transparent md:hover:border-b-2 md:hover:border-N1">
                                     <Link onClick={()=>{setIsOpen(false)}}  href="/#aboutus">Sobre nós</Link>

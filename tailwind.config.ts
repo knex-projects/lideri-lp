@@ -10,6 +10,15 @@ const config: Config = {
             fontFamily: {
                 montserrat: ['Montserrat', 'sans-serif'],
             },
+            animation: {
+                rotating: 'rotating 2s linear infinite',
+            },
+            keyframes: {
+                rotating: {
+                    from: { transform: 'rotate(0deg)' },
+                    to: { transform: 'rotate(360deg)' },
+                },
+            },
         },
     },
     plugins: [],
