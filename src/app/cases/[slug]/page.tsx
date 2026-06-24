@@ -92,7 +92,7 @@ export default async function CasePage({ params }: Props) {
             </div>
             <ScrollDownIndicator className="absolute bottom-10 right-10 md:hidden" />
         </div>
-        <hr className="w-[80%] border-1 border-[rgba(0,0,0,0.2)] mx-auto hidden md:visible" />
+        <hr className="w-[80%] border-1 border-[rgba(0,0,0,0.2)] mx-auto invisible md:visible" />
         <div className="flex w-full flex-col items-center gap-[64px] px-6.5 py-16 md:px-[12.5%]">
           <div className=" grid w-full grid-cols-1  justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-2 lg:gap-8   xl:items-center xl:justify-center xl:gap-[60px]">
               {caseItems.map(
