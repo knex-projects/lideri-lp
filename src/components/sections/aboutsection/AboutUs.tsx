@@ -2,6 +2,7 @@ import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe
 
 import Image from "next/image"
 import { AcordionMenu } from "./AcordionMenu"
+import { TeamCarousel } from "./TeamCarousel"
 
 export const AboutUs = () => {
     return (
@@ -142,6 +143,8 @@ export const AboutUs = () => {
                     </div>
                 </div>
             </div>
+
+            <TeamCarousel />
         </section>
     )
 }
