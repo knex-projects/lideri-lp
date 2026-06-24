@@ -1,12 +1,22 @@
-import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe2, logoLideri1 } from "@/public/assets"
+import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe2, logoLideri1, logoLideri2 } from "@/public/assets"
+
 import Image from "next/image"
 import { AcordionMenu } from "./AcordionMenu"
 
 export const AboutUs = () => {
     return (
         <section className="pb-25 px-6.5 pt-45 md:px-[12.5%]">
-            <div className="flex flex-col items-center gap-2.5 text-center md:justify-between lg:flex-row lg:items-start lg:gap-30 lg:text-start">
-                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 lg:order-2">
+            <div className="grid  gap-y-2 md:grid-cols-2 md:grid-rows-2 justify-items-center  md:items-start 2xl:items-center text-center md:text-start ">
+                <div className="w-full xl:pr-[10%] h-auto order-2 ">
+                    <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
+                        Saiba mais sobre
+                        <span className="text-R5"> quem somos.</span>
+                    </h2>
+                    
+                    <div className="hidden w-10 h-3.5 mb-7.5 bg-R5 rounded-sm md:block"></div>
+                </div>
+
+                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 md:w-full order-1  md:order-2 xl:row-span-2  ">
                     <Image
                         src={ equipe1 }
                         alt="Foto da Equipe da Lideri"
@@ -15,22 +25,26 @@ export const AboutUs = () => {
                         quality={ 100 }
                         className="rounded-lg object-cover"
                     />
+                   <div className="hidden xl:block w-[108px] h-[111px] absolute -left-10 -bottom-10 ring-[25px] ring-N1 bg-N1 rounded-full"> 
+                     <Image
+                        src={ logoLideri2 }
+                        alt="Foto da Equipe da Lideri"
+                        fill
+                        quality={ 100 }
+                        className="rounded-lg object-cover"
+                    />
+                   </div>
+                 
                 </div>
 
-                <div className="flex flex-col justify-center items-center sm:w-142 md:items-start lg:order-1">
-                    <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
-                        Saiba mais sobre
-                        <span className="text-R5"> quem somos.</span>
-                    </h2>
-                    
-                    <div className="hidden w-10 h-3.5 mb-7.5 bg-R5 rounded-sm lg:block"></div>
+                <div className="flex flex-col justify-center  w-full xl:pr-[10%] order-3 items-center md:col-span-2  xl:col-span-1">
 
-                    <p className="font-montserrat text-sm text-N5 md:text-xl">A Líderi Jr. Consultoria Internacional é a Empresa Júnior de Relações Internacionais da Universidade Federal da Paraíba. Formada e gerida por estudantes, somos uma consultoria especializada em transformar conhecimento acadêmico em soluções reais para negócios que navegam em um mercado cada vez mais global.</p>
+                    <p className="font-montserrat w-full text-sm text-N5 md:text-xl">A Líderi Jr. Consultoria Internacional é a Empresa Júnior de Relações Internacionais da Universidade Federal da Paraíba. Formada e gerida por estudantes, somos uma consultoria especializada em transformar conhecimento acadêmico em soluções reais para negócios que navegam em um mercado cada vez mais global.</p>
                 </div>
             </div>
 
             <div className="flex flex-col items-center gap-8 my-12 2xl:flex-row md:mt-37.5 md:mb-50 2xl:items-start">
-                <div className="md:relative md:shrink-0 w-[clamp(416px,40vw,540px)] h-[clamp(280px,22vw,330px)]">
+                <div className="md:relative md:shrink-0 w-[100vw] md:w-[clamp(416px,40vw,540px)] h-[clamp(280px,22vw,330px)]">
                     <div className="relative w-full h-full overflow-hidden sm:rounded-lg md:w-full md:h-full">
                         <Image
                             src={ chama1 }
@@ -54,7 +68,7 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-end w-full mt-25 md:flex-1 2xl:mt-0">
+                <div className="flex jus  md:justify-end w-full md:mt-25 md:flex-1 2xl:mt-0">
                     <AcordionMenu />
                 </div>
             </div>
