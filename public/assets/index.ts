@@ -18,3 +18,6 @@ export const counter2 = "assets/icon/counter2.svg";
 export const counter3 = "assets/icon/counter3.svg";
 export const counter4 = "assets/icon/counter4.svg";
 export const appBadging = "/assets/icon/app_badging.svg";
+export const arrowRightBlog = "/assets/icon/arrow-right-blog.svg";
+export const arrowUpRightBlog = "/assets/icon/arrow-up-right-blog.svg";
+export const arrowUpRightBlogMobile = "/assets/icon/arrow-up-right-blog-mobile.svg";
