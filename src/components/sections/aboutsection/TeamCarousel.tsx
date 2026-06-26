@@ -58,7 +58,7 @@ export const TeamCarousel = () => {
                 </p>
             </div>
 
-            <div className="relative mt-7 md:mt-12 xl:ml-[calc(31px-12.5vw)] xl:h-[368px] xl:w-[1810px]">
+            <div className="relative mt-7 md:mt-12 xl:ml-[calc(31px-12.5vw)] xl:h-[368px] xl:w-[calc(100vw-31px)]">
                 <div className="cursor-grab overflow-hidden active:cursor-grabbing xl:h-full" ref={emblaRef}>
                     <div className="-ml-3 flex touch-pan-y select-none md:-ml-8 xl:-ml-[40px] xl:h-[368px]">
                         {carouselMembers.map((member, index) => (
@@ -80,12 +80,14 @@ export const TeamCarousel = () => {
                                         />
                                     </div>
 
-                                    <h3 className="mt-3 font-montserrat text-base font-bold leading-tight text-N8 md:mt-0 md:text-lg">
-                                        {member.name}
-                                    </h3>
-                                    <p className="mt-1 font-montserrat text-xs font-medium text-R5 md:text-sm">
-                                        {member.role}
-                                    </p>
+                                    <div className="mt-3 flex flex-col items-center gap-[8px] md:mt-0">
+                                        <h3 className="font-montserrat text-[16px] font-bold leading-tight text-N8 md:text-[28px]">
+                                            {member.name}
+                                        </h3>
+                                        <p className="font-montserrat text-[10px] font-medium text-R5 md:text-[20px]">
+                                            {member.role}
+                                        </p>
+                                    </div>
                                 </article>
                             </div>
                         ))}
