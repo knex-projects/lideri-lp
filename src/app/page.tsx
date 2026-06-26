@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { HeroSection, SectionProjects, ProcessSection, SolutionsSection, PartnersSection, TestimonialsSection } from "../components";
+import { HeroSection, SectionProjects, ProcessSection, SolutionsSection, PartnersSection, TestimonialsSection, BlogSection } from "../components";
 import MapWrapper from "../components/sections/mapsection/mapsection";
 
 
@@ -13,6 +13,7 @@ export default function Home() {
       <SectionProjects />
       <ProcessSection />
       <TestimonialsSection />
+      <BlogSection />
       <PartnersSection />
       <MapWrapper />
     </main>

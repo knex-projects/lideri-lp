@@ -2,10 +2,11 @@ import { chama1, chama2, counter1, counter2, counter3, counter4, equipe1, equipe
 
 import Image from "next/image"
 import { AcordionMenu } from "./AcordionMenu"
+import { TeamCarousel } from "./TeamCarousel"
 
 export const AboutUs = () => {
     return (
-        <section className="pb-25 px-6.5 pt-45 md:px-[12.5%]">
+        <section className="pb-25 px-6.5 pt-45 md:px-[12.5%] overflow-x-hidden">
             <div className="grid  gap-y-2 md:grid-cols-2 md:grid-rows-2 justify-items-center  md:items-start 2xl:items-center text-center md:text-start ">
                 <div className="w-full xl:pr-[10%] h-auto order-2 ">
                     <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
@@ -142,6 +143,8 @@ export const AboutUs = () => {
                     </div>
                 </div>
             </div>
+
+            <TeamCarousel />
         </section>
     )
 }
