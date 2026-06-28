@@ -48,12 +48,12 @@ export default async function CasePage({ params }: Props) {
     return (
         <main className="flex flex-col gap-[64px] font-montserrat">
             <div className="h-29 md:h-22.5 w-full bg-[#0D1122]"/>
-            <div className="md:max-w-[75%] w-full mx-auto justify-center items-center min-[1260px]:flex gap-[96px]">
-                <div className="w-full md:w-[640px] md:min-w-[512px] h-[357px] md:h-[512px] mb-[34px] mx-auto  min-[1260px]::mb-0">
+            <div className="md:max-w-[75%] w-full mx-auto justify-center items-center xl:flex gap-[96px]">
+                <div className="w-full md:w-[640px] md:min-w-[512px] h-[357px] md:h-[512px] mb-[34px] mx-auto  xl::mb-0">
                     <img src={caseItem.imageSrc} alt={caseItem.title} className="absolute top-29 h-[357px] md:relative md:top-0 w-full md:h-full object-cover object-top md:rounded-[8px]" />
                     <div className="absolute inset-x-0 top-29 h-[357px] bg-gradient-to-t from-white via-transparent to-transparent md:hidden" />
                 </div>
-                <div className="flex flex-col max-w-[85%] mx-auto md:max-w-full md:mx-0 md:items-center gap-[16px]">
+                <div className="flex flex-col max-w-[85%] mx-auto md:max-w-full md:mx-0 md:items-center xl:items-start gap-[16px]">
                     <h1 className="font-impact text-[36px] leading-[100%] md:text-[76px] max-w-[672px] md:leading-[82px]">
                         {caseItem.title.split(' ').slice(0, -1).join(' ')} <span className="text-[#87240E]">{caseItem.title.split(' ').pop()}</span>
                     </h1>
@@ -62,8 +62,8 @@ export default async function CasePage({ params }: Props) {
                     </p>
                 </div>
             </div>
-            <hr className="w-[85%] min-[1260px]:w-[75%] mx-auto border-[1px] border-[#B1AFAF]"/>
-            <div className="grid justify-items-center  min-[1260px]:grid-cols-2 w-[85%] min-[1260px]:w-[75%] mx-auto mb-[142px] gap-[64px]">
+            <hr className="w-[85%] xl:w-[75%] mx-auto border-[1px] border-[#B1AFAF]"/>
+            <div className="grid justify-items-center  xl:grid-cols-2 w-[85%] xl:w-[75%] mx-auto mb-[142px] gap-[64px]">
                 <article className="flex flex-col w-full border-[1px] gap-[24px] md:gap-[32px] md:last:col-span-full border-[#6C6C6C] rounded-[8px] px-[24px] md:px-[64px] py-[48px]">
                     <div className="flex gap-[16px] items-center">
                         <div className="w-[48px] h-[48px]"><IconMountain/></div>
