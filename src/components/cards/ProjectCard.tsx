@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export interface ProjectCardProps {
   title: string;
   description: string;
   imageSrc: string | StaticImageData;
+  slug: string;
   priority?: boolean;
 }
 
-export const ProjectCard = ({ title, description, imageSrc, priority = false }: ProjectCardProps) => {
+function IconLink(props: SVGProps<SVGSVGElement>) {
+    return (
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.13125 6.75H0V5.25H9.13125L4.93125 1.05L6 0L12 6L6 12L4.93125 10.95L9.13125 6.75Z" fill="#680000"/>
+      </svg>
+    )
+}
+
+export const ProjectCard = ({ title, description, imageSrc, slug, priority = false }: ProjectCardProps) => {
   return (
     <div className="group relative flex flex-col w-full max-w-[360px] min-[500px]:min-w-[400px] min-[500px]:max-w-[400px] min-[500px]:w-[400px] md:min-w-[400px] md:max-w-[400px] md:w-[400px] lg:min-w-[440px] lg:max-w-[440px] lg:w-[440px] min-h-[520px]   rounded-[8px] shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] transition-shadow duration-300 overflow-hidden shrink-0 bg-transparent cursor-pointer mb-4">
       <div className="absolute inset-0 border-[2px] border-[#00000033] group-hover:border-[2.5px] group-hover:border-[#87240Ecc] transition-all duration-300 rounded-[8px] pointer-events-none z-10"></div>
@@ -39,16 +47,9 @@ export const ProjectCard = ({ title, description, imageSrc, priority = false }: 
           </p>
         </div>
 
-        <div className="flex justify-end mt-auto">
-          <Link href="/cases">
-           <button className="flex items-center text-[16px]  justify-center lg:w-auto  gap-2 text-R5 hover:font-semibold  hover:text-R6  transition-all shrink-0">
-           Saiba mais
-           <ArrowRight color='#680000' className='size-4'/>
-          </button>
+          <Link href={`/cases/${slug}`} className="mt-auto flex justify-end items-center gap-[8px] text-R5 text-[14px] min-[500px]:text-[15px] md:text-[17px] lg:text-[18px] leading-[22px] min-[500px]:leading-[23px] md:leading-[26px] lg:leading-[28px]">
+              Saiba mais <div className="ml-[8px] h-[12px] w-[12px]"><IconLink/></div>
           </Link>
-        
-        
-        </div>
       </div>
     </div>
   );
