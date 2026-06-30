@@ -21,3 +21,7 @@ export const appBadging = "/assets/icon/app_badging.svg";
 export const arrowRightBlog = "/assets/icon/arrow-right-blog.svg";
 export const arrowUpRightBlog = "/assets/icon/arrow-up-right-blog.svg";
 export const arrowUpRightBlogMobile = "/assets/icon/arrow-up-right-blog-mobile.svg";
+
+export const callLog = "/assets/icon/callLog.svg";
+export const chat = "/assets/icon/chat.svg";
+export const exploreNearby = "/assets/icon/exploreNearby.svg";
