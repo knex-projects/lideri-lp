@@ -1,50 +1,25 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { SVGProps, useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ProjectCard } from "../cards/ProjectCard";
-import {
-  icecreamImg,
-  acaiImg,
-  beerImg,
-  lacemakerImg,
-  craftsmanImg,
-} from "../../../public/assets";
+import cases from "../../data/cases";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 export const SectionProjects = () => {
-  const projects = [
-    {
-      title: "Internacionalização de Sorvetes",
-      description:
-        "Estudo estratégico e plano burocrático para internacionalizar marca de sorvetes, estruturando de forma sólida a base de futuras exportações.",
-      imageSrc: icecreamImg,
-    },
-    {
-      title: "Internacionalização de Açaí",
-      description:
-        "Análise de mercado global e conjuntura para empresa cearense de açaí, focando em identificar países promissores para as futuras exportações.",
-      imageSrc: acaiImg,
-    },
-    {
-      title: "Cervejaria Freya",
-      description:
-        "Preparação para exportar a cerveja artesanal por meio de estudos de mercado, planejamento e prospecção de parceiros para o mercado exterior.",
-      imageSrc: beerImg,
-    },
-    {
-      title: "Projeto Rendeiras",
-      description:
-        "Assessoria na internacionalização do artesanato das rendeiras do Cariri, promovendo impacto social e novas oportunidades globais de mercado.",
-      imageSrc: lacemakerImg,
-    },
-    {
-      title: "Projeto Artesão Empreendedor",
-      description:
-        "Apoio na exportação do artesanato da Paraíba, com foco em plano burocrático e logístico, levando toda a arte local ao mercado internacional.",
-      imageSrc: craftsmanImg,
-    },
-  ];
+  const projects = cases.map(({ title, description, imageSrc, slug }) => ({
+    title,
+    description,
+    imageSrc,
+    slug
+  }));
+
+  function IconLink(props: SVGProps<SVGSVGElement>) {
+      return (
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.29231 12L0 10.7077L8.86154 1.84615H0.923077V0H12V11.0769H10.1538V3.13846L1.29231 12Z" fill="white"/>
+          </svg>
+      )
+  }
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
 
@@ -91,14 +66,14 @@ export const SectionProjects = () => {
             </p>
           </div>
         </div>
+        <Link href="/cases/" className="mt-auto flex justify-end">
+          <button className="flex w-[240px] items-center justify-center h-[46px] rounded-[8px] border-2 border-R5 bg-R5 px-[20px] text-white shadow-[0px_1px_8px_#87240E] transition-colors duration-300 hover:bg-white hover:text-R5">
+            Explorar resultados <div className="ml-[8px] h-[12px] w-[12px]"><IconLink/></div>
+          </button>
+        </Link>
       </div>
-       <Link href = "/cases" className="w-full flex sm:pt-16  sm:justify-end ">
-                <div className="bg-R5 px-6 sm:px-6 h-[52px] rounded-[8px] font-montserrat flex text-[14px] sm:text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
-                    Ver todos os projetos
-                    <ArrowUpRight color="#FFFFFF" className="size-4 sm:size-6"/>
-                </div>
-          </Link>
-      <div className="overflow-hidden " ref={emblaRef}>
+
+      <div className="overflow-hidden pt-16" ref={emblaRef}>
         <div className="flex ml-0 min-[500px]:ml-[-20px] md:ml-[-36px] lg:ml-[-64px]">
           {projects.map((project, index) => (
             <div
@@ -109,6 +84,7 @@ export const SectionProjects = () => {
                 title={project.title}
                 description={project.description}
                 imageSrc={project.imageSrc}
+                slug={project.slug}
                 priority={index === 0}
               />
             </div>
@@ -128,7 +104,7 @@ export const SectionProjects = () => {
       </div>
 
       <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-[4px]">
-        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R8 transition-colors">
+        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
             width="12"
             height="20"
@@ -142,7 +118,7 @@ export const SectionProjects = () => {
             <path d="M10 18l-8-8 8-8" />
           </svg>
         </button>
-        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R8 transition-colors">
+        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
             width="12"
             height="20"
