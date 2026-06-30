@@ -6,3 +6,4 @@ export { default as ProcessSection } from './sections/processSection'
 export { default as SolutionsSection } from './sections/solutionsSection'
 export { default as PartnersSection } from './sections/partnersSection'
 export { BlogSection } from './sections/BlogSection'
+export { ContactSection } from './sections/contactsection/ContactSection';
