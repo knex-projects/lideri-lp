@@ -23,13 +23,13 @@ export const CaseCard = ({
   slug,
 }: CaseCardProps) => {
     return(
-        <article className='flex flex-col gap-[16px] group w-[360px] md:w-[450px] h-[563px] mb-[34px] font-montserrat'>
-            <Image src={imageSrc} alt={""} width={672} height={512} className="w-360px w-[453px] h-[362px] object-cover object-top rounded-[8px] shadow-[0px_4px_4px_0px_#08166D40]"/>
+        <article className='group mb-[34px] flex h-[612px] w-full flex-col gap-[16px] font-montserrat md:basis-[calc(50%-15px)] md:max-w-[calc(50%-15px)] xl:basis-[calc(33.333%-20px)] xl:max-w-[calc(33.333%-20px)]'>
+            <Image src={imageSrc} alt={""} width={672} height={512} className="min-h-[362px] max-h-[362px] w-full object-cover object-[100%_25%] rounded-[8px] shadow-[0px_4px_4px_0px_#08166D40]"/>
             <h3 className='flex text-[18px] md:text-[24px] items-center gap-[8px] font-semibold mt-[5px]'>
                 <span className="h-[4px] w-[6px] rounded-[1px] bg-[#0A266B]"/>
                 {title}
             </h3>
-            <p className='text-[14px] md:text-[16px] h-[96px] text-[#2D2D2D]'>
+            <p className='text-[14px] md:text-[16px] overflow-y-auto text-[#2D2D2D]'>
                 {description}
             </p>
             <Link href={`/cases/${slug}`} className="mt-auto flex justify-end">
