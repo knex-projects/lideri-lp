@@ -48,11 +48,11 @@ export const ServiceCard = ({
                             <Icon/>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-[20px] md:text-[24px] lg:text-[28px] font-bold leading-tight">
+                            <h3 className="text-[24px] md:text-[26px] lg:text-[28px] font-bold leading-tight">
                                 {title.split(' ').slice(0, -1).join(' ')}{' '}
                                 <span className="text-[#87240E]">{title.split(' ').pop()}</span>
                             </h3>
-                            <p className="text-[14px] md:text-[16px] lg:text-[20px] text-[#333]">{description}</p>
+                            <p className="text-[16px] md:text-[17px] lg:text-[18px] text-[#333]">{description}</p>
                         </div>
                     </div>
                     <button className='lg:hidden ml-[16px] min-w-[24px] md:min-w-[32px] min-h-[24px] md:min-h-[32px] max-w-[24px] md:max-w-[32px] max-h-[24px] md:max-h-[32px]'
