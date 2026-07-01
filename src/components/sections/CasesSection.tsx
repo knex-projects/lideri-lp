@@ -13,25 +13,25 @@ const CasesSection = () => {
     return (
         <section id="cases" className="font-montserrat">
             <div className="max-w-[85%] md:max-w-[75%] mx-auto mt-[90px]">
-                <div className="flex flex-col gap-[8px] md:gap-[2px] w-[577px] h-[190px]">
-                    <p className="text-[16px] md:text-[20px] tracking-[25%] leading-[100%]">
+                <div className="flex flex-col gap-[8px] md:gap-[2px] max-w-[500px] lg:max-w-[800px] h-[190px]">
+                    <p className="text-[16px] md:text-[18px] lg:text-[20px] tracking-[25%] leading-[100%]">
                         • Portfolio e Resultados
                     </p>
                     <div className="flex items-center">
-                        <div className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] mr-[16px]">
-                            <IconFolder />
+                        <div className="w-[32px] h-[32px]  md:w-[48px] lg:w-[64px] md:h-[48px] lg:h-[64px] mr-[16px]">
+                            <IconFolder/>
                         </div>
-                        <h1 className="font-impact font-bold text-[40px] md:text-[76px] leading-[100%] md:leading-[82px]">
+                        <h1 className="font-impact text-[40px] md:text-[58px] lg:text-[76px] leading-[100%] lg:leading-[82px]">
                             Nossos <span className="text-[#87240E]">cases</span>
                         </h1>
                     </div>
-                    <p className="text-[18px] md:text-[20px] max-w-[360px] md:max-w-auto">
+                    <p className="text-[18px] md:text-[19px] lg:text-[20px] max-w-[80%] md:max-w-auto">
                         Inspire-se com as histórias de quem já confiou no nosso trabalho.
                     </p>
                 </div>
             </div>
            
-            <div className="flex flex-wrap justify-center grid-cols-1 w-[85%] md:w-[75%] mx-auto md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-items-center">
+            <div className="mx-auto mt-[40px] flex w-[85%] max-w-[85%] flex-wrap justify-center gap-[30px] md:w-[75%]">
                 {cases.map((caseItem, index) => (
                     <CaseCard
                         key={index}
