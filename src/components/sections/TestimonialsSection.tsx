@@ -6,46 +6,25 @@ import { TestimonialCard, type Testimonial } from "@/src/components/cards/Testim
 
 const testimonials: Testimonial[] = [
   {
-    name: "Marta Bezerra",
-    role: "Gerente de projetos 2024.1 e 2025.1",
+    name: "Ulenice Casado",
+    role: "Bodega de Sabores",
     quote:
-      "Participar da Líderi foi o início da minha trajetória profissional e uma das experiências mais transformadoras que vivi.",
-    avatarUrl: "/assets/images/marta_bezerra.jpg",
+      "A consultoria da Lideri fortaleceu a presença digital da Bodega de Sabores por meio das redes sociais e da implementação do site, ampliando a visibilidade da marca e das feiras. A parceria contribuiu para atrair novos clientes, fortalecer o empreendedorismo feminino e impulsionar as vendas.",
+    avatarUrl: "/assets/images/testimonials/ulenice_casado.jpg",
   },
   {
-    name: "Victoria Rodrigues",
-    role: "Diretora de projetos 2023",
+    name: "Alessandra Ribeiro",
+    role: "Eu Caramelo",
     quote:
-      "A Líderi foi essencial para me abrir portas no mercado sênior, pois me proporcionou vivências e responsabilidades que aceleraram meu desenvolvimento.",
-    avatarUrl: "/assets/images/victoria_rodrigues.jpg",
+      "A Lideri conduziu o projeto da Eu Caramelo com profissionalismo, dedicação e atenção em todas as etapas do atendimento. A parceria foi marcada pelo comprometimento da equipe, resultando em uma experiência muito positiva e recomendável.",
+    avatarUrl: "/assets/images/testimonials/alessandra_ribeiro.png",
   },
   {
-    name: "Júlia Almeida",
-    role: "Diretora de Gestão de Pessoas 2024.2 e 2025",
+    name: "Pedro Costa",
+    role: "Tachão de Ubatuba",
     quote:
-      "Minha experiência na Líderi foi transformadora. Vivi momentos de alegria, conquistas e aquele sentimento genuíno de dever cumprido.",
-    avatarUrl: "/assets/images/julia_almeida.jpg",
-  },
-  {
-    name: "Rebeca Paiva",
-    role: "Diretoria de projetos 2025",
-    quote:
-      "Passei dois anos e poucos meses na empresa júnior, período em que tive a oportunidade de crescer constantemente através dos desafios, aprendizados e conexões que vivi no Movimento Empresa Júnior.",
-    avatarUrl: "/assets/images/rebeca_paiva.jpg",
-  },
-  {
-    name: "Lóis Queirós",
-    role: "Diretor de Vendas 2023",
-    quote:
-      "A Líderi foi um passo essencial na minha trajetória profissional, e eu tenho muita satisfação em ter contribuído para a empresa e muito orgulho do que construí durante meu período como membro.",
-    avatarUrl: "/assets/images/lois_queiros.jpg",
-  },
-  {
-    name: "Lúcio Filho",
-    role: "Vice-Presidente 2023",
-    quote:
-      "Em mais de um ano na empresa cresci e desenvolvi habilidades que me ajudaram tanto na vida profissional, como acadêmica e pessoal, com mais conhecimento e certeza sobre quem sou, onde posso chegar.",
-    avatarUrl: "/assets/images/lucio_filho.jpg",
+      "A consultoria de negócios internacionais da Lideri forneceu dados estratégicos e bem estruturados, contribuindo para uma tomada de decisão mais segura. O trabalho destacou-se pela qualidade, profissionalismo e comprometimento da equipe. Recomendo!",
+    avatarUrl: "/assets/images/testimonials/pedro_costa.jpg",
   },
 ];
 
@@ -53,12 +32,12 @@ export const TestimonialsSection = () => {
   const [emblaRef] = useEmblaCarousel(
     {
       loop: true,
-      align: "start",
+      align: "center",
       watchDrag: true,
     },
     [
       Autoplay({
-        delay: 2600,
+        delay: 3000,
         stopOnMouseEnter: true,
         stopOnInteraction: false,
         playOnInit: true,
@@ -67,24 +46,34 @@ export const TestimonialsSection = () => {
   );
 
   return (
-    <section className="py-16 w-full font-sans">
+    <section className="py-16 w-full font-sans overflow-hidden">
       <div className="flex flex-col gap-6 px-[26px] md:px-[12.5%] mb-10 lg:mb-12">
         <div className="flex flex-col gap-2 max-w-[560px]">
           <h2 className="font-zodiak font-normal text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] leading-[1.15] text-N8">
             Experiências reais em cada{" "}
             <span className="text-R5">depoimento.</span>
           </h2>
-          <p className="font-montserrat text-[14px] lg:text-[16px] text-N5 leading-snug max-w-[380px]">
-            Ouça agora um pequeno relato da experiência de pós-juniores com a Líderi.
+          <p className="font-montserrat text-[14px] lg:text-[16px] text-N5 leading-snug max-w-[557px]">
+            Ouça agora um pequeno relato da experiência de clientes com a Líderi.
           </p>
         </div>
       </div>
 
-      <div className="overflow-hidden px-[26px] md:pl-[12.5%]">
+      {/* Desktop Layout */}
+      <div className="hidden min-[1100px]:block px-[26px] md:px-[12.5%]">
+        <div className="flex flex-wrap justify-center gap-20">
+          {testimonials.map((t, index) => (
+            <TestimonialCard key={index} testimonial={t} />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Layout (Carousel) */}
+      <div className="block min-[1100px]:hidden w-full">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-          <div className="flex ml-0 min-[500px]:ml-[-10px] md:ml-[-34px] lg:ml-[-60px]">
+          <div className="flex">
             {testimonials.map((t, index) => (
-              <div key={index} className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] min-w-0 pl-1 min-[500px]:pl-[20px] md:pl-[34px] lg:pl-[60px]">
+              <div key={index} className="flex-[0_0_100%] min-w-0 flex justify-center px-[26px] py-4">
                 <TestimonialCard testimonial={t} />
               </div>
             ))}
@@ -94,4 +83,3 @@ export const TestimonialsSection = () => {
     </section>
   );
 };
-
