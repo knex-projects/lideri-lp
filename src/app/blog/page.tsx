@@ -169,7 +169,7 @@ export default function Blog() {
                                     </div>
                                 </div>
                             </Link>
-                            <span className="font-montserrat font-normal text-[14px] leading-none text-[#2D2D2D]">
+                            <span className="font-montserrat font-normal text-[14px] leading-none text-[#2D2D2D] md:hidden">
                                 {post.date}
                             </span>
                         </div>
