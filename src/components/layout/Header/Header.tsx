@@ -14,8 +14,8 @@ export const Header = () => {
 
     const menuRef = useRef<HTMLDivElement>(null)
     
-    const glassRoutes = ["/", "/blog", "login"]
-    const isGlass = glassRoutes.includes(usePathname())
+    const pathname = usePathname()
+    const isGlass = pathname === '/' || pathname.startsWith('/blog') || pathname.startsWith('/login')
     
     useEffect(() => {
         const handleResize = () => {
