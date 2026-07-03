@@ -33,8 +33,8 @@ export const ContactSection = () => {
                 <h1 className="mb-4 font-[impact] text-[36px] text-center md:text-5xl">Para onde podemos te levar?</h1>
                 <p className="font-Montserrat text-sm text-center md:text-[28px]">Vamos entender e encontrar o melhor plano para escalar seu negócio</p>
                 
-                <div className="flex flex-col md:items-center md:mt-15 xl:flex-row xl:gap-30">
-                    <div className="mt-10 mb-15 bg-N3 rounded-lg -mx-4 p-4 w-full min-w-98 max-w-180 sm:mx-0 md:px-8 md:py-12 xl:mb-0 xl:mt-0">
+                <div className="flex flex-col md:items-center md:mt-15 xl:flex-row xl:gap-30 3xl:gap-[15vw]">
+                    <div className="mt-10 mb-15 bg-N3 rounded-lg p-4 w-full max-w-180 sm:mx-0 md:px-8 md:py-12 xl:mb-0 xl:mt-0">
                         <form ref={ form } onSubmit={ sendEmail } className="flex flex-col gap-6 text-N9">
                             <div className="grid grid-cols-2 grid-rows-1 gap-x-3">
                                 <div className="flex flex-col gap-2">
@@ -92,7 +92,7 @@ export const ContactSection = () => {
                                 ></textarea>
                             </div>
 
-                            <div className="flex gap-2.5">
+                            <div className="flex gap-1 sm:gap-2.5">
                                 <div className="flex-1">
                                     <input
                                         type="checkbox"
