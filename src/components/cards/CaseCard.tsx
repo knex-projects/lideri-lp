@@ -33,7 +33,7 @@ export const CaseCard = ({
                 {description}
             </p>
             <Link href={`/cases/${slug}`} className="mt-auto flex justify-end">
-                <button className="flex w-full items-center justify-center h-[52px] rounded-[8px] border-2 border-[#87240E] bg-[#87240E] px-[20px] text-white shadow-[0px_1px_8px_#87240E] transition-colors duration-300 hover:bg-white hover:text-R5">
+                <button className="flex w-full items-center justify-center h-[52px] rounded-[8px] border-2 border-[#87240E] bg-[#87240E] px-[20px] text-white shadow-[0px_1px_8px_#87240E] transition-colors duration-300 hover:bg-R4">
                     Explorar resultados <div className="ml-[8px] h-[15px] w-[14px]"><IconLink/></div>
                 </button>
             </Link>
