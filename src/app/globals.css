@@ -17,6 +17,10 @@
   --font-snas: var(--font-Impact);
 }
 
+@theme {
+  --breakpoint-3xl: 121rem;
+}
+
 @theme inline {
   --color-N1: #ffffff;
   --color-N2: #F0F0F0;
