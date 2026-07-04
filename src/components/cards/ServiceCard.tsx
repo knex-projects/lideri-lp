@@ -48,11 +48,11 @@ export const ServiceCard = ({
                             <Icon/>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-[24px] md:text-[26px] lg:text-[28px] font-bold leading-tight">
+                            <h3 className="text-[20px] md:text-[26px] lg:text-[28px] font-bold leading-tight">
                                 {title.split(' ').slice(0, -1).join(' ')}{' '}
                                 <span className="text-[#87240E]">{title.split(' ').pop()}</span>
                             </h3>
-                            <p className="text-[16px] md:text-[17px] lg:text-[18px] text-[#333]">{description}</p>
+                            <p className="text-[14px] md:text-[17px] lg:text-[18px] text-[#333]">{description}</p>
                         </div>
                     </div>
                     <button className='lg:hidden ml-[16px] min-w-[24px] md:min-w-[32px] min-h-[24px] md:min-h-[32px] max-w-[24px] md:max-w-[32px] max-h-[24px] md:max-h-[32px]'
@@ -66,14 +66,14 @@ export const ServiceCard = ({
                 </div>
                 <hr className="w-full mx-auto border-[1px] border-[#680000]"/>
                 <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-0' : 'max-h-0 opacity-0'}`}>
-                    <p className="w-full text-[16px] md:text-[17px] lg:text-[18px] text-justify leading-7 text-[#444]">
+                    <p className="w-full text-[14px] md:text-[17px] lg:text-[18px] text-justify leading-7 text-[#444]">
                         {expandedDescription}
                     </p>
                     <div className="mt-6">
                         <h3 className="text-[20px] md:text-[22px] text-[24px] font-bold leading-tight">
                             Como esse serviço pode <span className="text-[#87240E]">beneficiar</span> sua empresa?
                         </h3>
-                        <ul className="mt-4 list-disc space-y-2 pl-6 text-[16px] md:text-[17px] lg:text-[18px]  text-[#444]">
+                        <ul className="mt-4 list-disc space-y-2 pl-6 text-[14px] md:text-[17px] lg:text-[18px]  text-[#444]">
                             {benefits.map((benefit) => (
                                 <li key={benefit}>{benefit}</li>
                             ))}
