@@ -71,6 +71,9 @@ body {
 }
 
 @layer utilities {
+  .bg-loginImage {
+    background-image: url('/assets/images/loginBG.svg');
+  }
   .font-montserrat {
     font-family: var(--font-montserrat);
   }
