@@ -12,10 +12,9 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div
       className="
-        flex flex-col w-full sm:w-[340px]  lg:min-w-[340px] lg:w-[340px] min-h-[424px]
-        justify-between
-      
-        h-[424px]
+        flex flex-col w-full sm:w-[340px] lg:min-w-[340px] lg:w-[340px] min-h-[424px]
+        h-auto
+        gap-6
         rounded-[8px]
         border-[2px] border-[#00000033]
         p-8
@@ -29,18 +28,19 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         alt="Aspas"
         width={46}
         height={42.75}
-        className="w-[46px] h-[42.75px]"
+        className="w-[46px] h-[42.75px] shrink-0"
         style={{ height: "auto" }}
       />
-      <div className=" grid gap-4">
-        <div className="w-5 h-0.5 bg-R5 rounded-full" />
-         <p className="font-montserrat font-normal text-[16px] leading-[1] tracking-[0] text-N6 w-auto min-[500px]:w-[276px] max-h-[144px] overflow-hidden">
+      
+      <div className="flex flex-col gap-4">
+        <div className="w-[24px] h-[4px] bg-R5 rounded-full shrink-0" />
+         <p className="font-montserrat font-normal text-[16px] leading-[1.5] tracking-[0] text-N6 w-auto min-[500px]:w-[276px]">
           {testimonial.quote}
         </p>
       </div>
       
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mt-auto">
         <div className="flex items-center gap-3 mt-2">
           <div className="relative w-20 h-20 shrink-0 rounded-full overflow-hidden border-2 border-R3">
             <Image
