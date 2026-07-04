@@ -27,7 +27,6 @@ type LoginFormData = z.infer<typeof loginSchema>;
 export default function PaginaLogin() {
   const [loginError, setLoginError] = useState<string | null>(null);
 
-
   const {
     register,
     handleSubmit,
@@ -35,7 +34,6 @@ export default function PaginaLogin() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
-
 
   const handleCredentialsLogin = async (data: LoginFormData) => {
     setLoginError(null);
@@ -50,7 +48,6 @@ export default function PaginaLogin() {
     if (result?.error) {
       setLoginError("E-mail ou senha incorretos.");
     } else if (result?.url) {
-
       window.location.href = result.url;
     }
   };
@@ -77,7 +74,6 @@ export default function PaginaLogin() {
             {loginError}
           </div>
         )}
-
 
         <form onSubmit={handleSubmit(handleCredentialsLogin)} className="space-y-4 text-left mb-6">
           <div className=" relative w-full">
@@ -128,7 +124,6 @@ export default function PaginaLogin() {
           <span className="flex-shrink mx-4 text-gray-400 text-sm">ou</span>
           <div className="flex-grow border-t border-gray-300"></div>
         </div>
-
 
         <button
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })}

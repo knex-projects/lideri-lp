@@ -1,63 +1,26 @@
 "use client";
 
+import type { AdminPost, DashboardPostMetric, DashboardMetrics } from '@/src/types';
 import React, { useEffect, useState } from 'react';
 import PostCardCMS from '@/src/components/cards/postCard';
-import { client } from '@/src/sanity/lib/client';
+import { api } from '@/src/services/api';
+import { cms } from '@/src/services/cms';
 import toast from 'react-hot-toast';
 import { AlertTriangle, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { LoadingScreen } from '@/src/components/layout/loading';
 
 
-interface SanityPost {
-  _id: string;
-  titulo: string;
-  categoria?: string;
-  autor?: string;
-  data: string;
-  imageSrc?: string;
-  status: 'posted' | 'scheduled' | 'draft';
-}
 
-interface DashboardPostMetric {
-  publishedAt?: string;
-  view?: number;
-  shared?: number;
-  viewsThisMonth?: number;
-  sharesThisMonth?: number;
-  metricsMonth?: string;
-}
 
-interface DashboardMetrics {
-  totalPublicacoes: number;
-  publicacoesNoMes: number;
-  totalVisualizacoes: number;
-  visualizacoesNoMes: number;
-  totalCompartilhamentos: number;
-  compartilhamentosNoMes: number;
-}
 
-const post_query = `*[_type == "post"] | order(_createdAt desc)[0...5]{
-  "_id": _id,
-  "titulo": title,
-  "categoria": categories[]->title,
-  "autor": coalesce(authorRaw, author->name, "Anônimo"),             
-  "data": _createdAt,
-  "status": coalesce(status, "posted"),
-  "imageSrc": coalesce(imagemDaGaleria->arquivo.asset->url, mainImage.asset->url, null)
-}`
 
-const metricsQuery = `*[_type == "post"]{
-  publishedAt,
-  "view": coalesce(view, 0),
-  "shared": coalesce(shared, 0),
-  "viewsThisMonth": coalesce(viewsThisMonth, 0),
-  "sharesThisMonth": coalesce(sharesThisMonth, 0),
-  metricsMonth
-}`;
+
 
 export default function Dashboard() {
   const router = useRouter();
-  const [postsRecentes, setPostsRecentes] = useState<SanityPost[]>([]);
+    const [loading, setLoading] = useState(true);
+  const [postsRecentes, setPostsRecentes] = useState<AdminPost[]>([]);
   const [totalPublicacoes, setTotalPublicacoes] = useState(0);
   const [metrics, setMetrics] = useState<DashboardMetrics>({
     totalPublicacoes: 0,
@@ -74,18 +37,14 @@ export default function Dashboard() {
   useEffect(() => {
     async function carregarDados() {
       try {
-        const [posts, total, metricPosts] = await Promise.all([
-          client.fetch(post_query, {}, { useCdn: false }),
-          client.fetch(`count(*[_type == "post"])`, {}, { useCdn: false }),
-          client.fetch<DashboardPostMetric[]>(metricsQuery, {}, { useCdn: false }),
-        ]);
-
+        const [posts, total, metricPosts] = await cms.getDashboardData();
+        setLoading(true)
         setPostsRecentes(posts || []);
         setTotalPublicacoes(total || 0);
         const now = new Date();
         const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
         const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-        const metricTotals = (metricPosts || []).reduce<DashboardMetrics>((acc, post) => {
+        const metricTotals = (metricPosts || []).reduce((acc:DashboardMetrics, post:DashboardPostMetric) => {
           acc.totalPublicacoes += 1;
           acc.totalVisualizacoes += post.view || 0;
           acc.totalCompartilhamentos += post.shared || 0;
@@ -102,11 +61,14 @@ export default function Dashboard() {
           visualizacoesNoMes: 0,
           totalCompartilhamentos: 0,
           compartilhamentosNoMes: 0,
-        });
+        } as DashboardMetrics);
         setMetrics(metricTotals);
       } catch (error) {
         console.error('Erro ao carregar dados do dashboard:', error);
         toast.error('Não foi possível carregar os dados do dashboard.');
+      }
+      finally{
+        setLoading(false)
       }
     }
 
@@ -130,15 +92,7 @@ export default function Dashboard() {
     try {
       setDeletingId(idDoPost);
 
-      const resposta = await fetch(`/api/posts?id=${idDoPost}`, {
-        method: 'DELETE',
-      });
-
-      const dados = await resposta.json();
-
-      if (!resposta.ok) {
-        throw new Error(dados.error || 'Erro ao deletar post.');
-      }
+      await api.deletePost(idDoPost);
 
       toast.success('Publicação excluída com sucesso!', { id: toastId });
       setPostsRecentes((prev) => prev.filter((post) => post._id !== idDoPost));
@@ -152,72 +106,77 @@ export default function Dashboard() {
     }
   };
 
+  if (loading) {
+        return <LoadingScreen />;
+      }
+  
+
   return (
     <div className="min-h-screen w-full bg-[rgb(255,255,255)] font-sans flex flex-col items-start justify-start">
 
-      <main className="w-full min-h-[calc(100vh-98px)] bg-[rgb(240,240,240)] p-4 md:p-8 flex flex-col gap-8">
+      <main className="w-full min-h-[calc(100vh-6.125rem)] bg-[rgb(240,240,240)] p-4 md:p-8 flex flex-col gap-8">
 
 
-        <section className="w-full grid grid-cols-2 xl:grid-cols-3 gap-[8px]   md:gap-[34px] items-stretch">
+        <section className="w-full grid grid-cols-2 xl:grid-cols-3 gap-2   md:gap-8.5 items-stretch">
 
           { }
-          <div className="w-full min-h-[172px] md:min-h-[217px] h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-5 md:p-8 flex flex-col justify-between gap-4">
-            <h3 className="font-['Montserrat'] text-[clamp(1.25rem,2.5vw,2rem)] font-normal text-black ">
+          <div className="w-full min-h-43 md:min-h-54.25 h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-4 md:p-8 flex flex-col justify-between gap-4">
+            <h3 className=" w-full font-['Montserrat'] text-[clamp(1.25rem,2.5vw,2rem)] font-normal wrap-break-word   text-black ">
               Total de
               Comparti
               lhamentos
             </h3>
-            <div className="flex flex-wrap items-start gap-4 md:gap-8">
-              <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)] flex leading-none font-normal text-[rgb(135,36,14)]">
+            <div className="flex flex-wrap items-start  gap-4 md:gap-8">
+              <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)]   flex leading-none font-normal text-[rgb(135,36,14)]">
                 {metrics.totalCompartilhamentos}
               </span>
-              <div className="flex flex-col justify-center">
-                <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-black leading-tight">Compartilhamentos</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)]">+{metrics.compartilhamentosNoMes} no mês</span>
+              <div className="w-full flex flex-col justify-center">
+                <span className="font-['Montserrat'] sm:text-[clamp(1rem,1.8vw,1.5rem)] text-[0.625rem] w-full font-normal text-black  wrap-break-word">Compartilhamentos</span>
+                <span className="font-['Montserrat'] sm:text-[clamp(0.875rem,1.5vw,1.25rem)] text-[0.625rem] font-normal text-[rgb(28,0,0)]">+{metrics.compartilhamentosNoMes} no mês</span>
               </div>
             </div>
           </div>
 
 
-          <div className="w-full min-h-[172px] md:min-h-[217px] h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-4 md:p-8 flex flex-col justify-between gap-4">
-            <h3 className="font-['Montserrat'] text-[clamp(1.25rem,2.5vw,2rem)] font-normal text-black break-words">
+          <div className="w-full min-h-43 md:min-h-54.25 h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-4 md:p-8 flex flex-col justify-between gap-4">
+            <h3 className="font-['Montserrat']  text-[clamp(1.25rem,2.5vw,2rem)] font-normal text-black break-words">
               Total de publicações
             </h3>
-            <div className="flex  flex-wrap items-start gap-4 md:gap-8">
+            <div className="flex flex-col items-start  gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)] leading-none font-normal text-[rgb(135,36,14)]">
                 {metrics.totalPublicacoes || totalPublicacoes}
               </span>
               <div className="flex flex-col justify-center">
-                <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-[rgb(28,0,0)] leading-none">Publicações</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+{metrics.publicacoesNoMes} no mês</span>
+                <span className="font-['Montserrat'] sm:text-[clamp(1rem,1.8vw,1.5rem)] text-[0.625rem] font-normal text-[rgb(28,0,0)] leading-none">Publicações</span>
+                <span className="font-['Montserrat'] sm:text-[clamp(0.875rem,1.5vw,1.25rem)] text-[0.625rem] font-normal text-[rgb(28,0,0)] mt-1">+{metrics.publicacoesNoMes} no mês</span>
               </div>
             </div>
           </div>
 
-          <div className="w-full min-h-[172px] md:min-h-[217px] max-lg:col-span-2  h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-5 md:p-8 flex flex-col justify-between gap-4">
+          <div className="w-full min-h-43 md:min-h-54.25 max-xl:col-span-2  h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-5 md:p-8 flex flex-col justify-between gap-4">
             <h3 className="font-['Montserrat'] text-[clamp(1.25rem,2.5vw,2rem)] font-normal text-black break-words">
               Total de visualizações
             </h3>
-            <div className="flex flex-wrap items-start gap-4 md:gap-8">
+            <div className="flex xl:flex-col flex-wrap items-start gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,6vw,5.5rem)] leading-none font-normal text-[rgb(135,36,14)]">
                 {metrics.totalVisualizacoes}
               </span>
               <div className="flex flex-col justify-center">
-                <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-black leading-none">Visualizações</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+{metrics.visualizacoesNoMes} no mês</span>
+                <span className="font-['Montserrat'] sm:text-[clamp(1rem,1.8vw,1.5rem)] text-[0.625rem] font-normal text-black leading-none">Visualizações</span>
+                <span className="font-['Montserrat'] sm:text-[clamp(0.875rem,1.5vw,1.25rem)] text-[0.625rem] font-normal text-[rgb(28,0,0)] ">+{metrics.visualizacoesNoMes} no mês</span>
               </div>
             </div>
           </div>
 
         </section>
         <section className="w-full bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-5 md:p-8 flex flex-col gap-8">
-          <h2 className="font-['Impact'] text-[32px] md:text-[48px] font-normal text-black">
+          <h2 className="font-['Impact'] text-[2rem] md:text-[3rem] font-normal text-black">
             Postagens <span className='text-R5'>recentes</span>
           </h2>
 
           <div className="w-full flex flex-col gap-6">
             {postsRecentes && postsRecentes.length > 0 ? (
-              postsRecentes.map((post: SanityPost) => (
+              postsRecentes.map((post: AdminPost) => (
                 <PostCardCMS
                   key={post._id}
                   titulo={post.titulo}
@@ -243,7 +202,7 @@ export default function Dashboard() {
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setIsModalAberto(false)} />
 
-          <div className="relative bg-white w-full max-w-[440px] rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
+          <div className="relative bg-white w-full max-w-110 rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2 text-[#87240E]">
                 <AlertTriangle className="w-6 h-6" />
