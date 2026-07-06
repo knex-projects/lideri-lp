@@ -16,6 +16,7 @@ export const Header = () => {
     
     const pathname = usePathname()
     const isGlass = pathname === '/' || pathname.startsWith('/blog') || pathname.startsWith('/login')
+    const isInternalBlog = pathname.startsWith('/blog/') && pathname !== '/blog'
     
     useEffect(() => {
         const handleResize = () => {
@@ -43,7 +44,7 @@ export const Header = () => {
 
     return (
         <header className="absolute top-0 z-50 h-29 md:h-22.5 w-full">
-            <div className={ `flex justify-between items-center w-full h-full p-6.5 md:py-3.25 xl:px-[12.5%]  ${ isGlass ? "backdrop-blur-[50px]" : "bg-[#0D1122]" }` }>
+            <div className={ `flex justify-between items-center w-full h-full p-6.5 md:py-3.25 xl:px-[12.5%]  ${ isGlass ? (isInternalBlog ? "backdrop-blur-sm" : "backdrop-blur-[50px]") : "bg-[#0D1122]" }` }>
                 <div  className="relative w-36 h-13.75 md:w-46.5 md:h-18">
                     <Image
                     src={lideriIcon}

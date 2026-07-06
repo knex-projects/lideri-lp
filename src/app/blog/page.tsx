@@ -19,42 +19,42 @@ const blogPosts = [
         id: 1,
         title: "O 'Tarifaço' estadunidense: Quais seus impactos no mercado brasileiro e como contorná-lo?",
         image: "/assets/images/blog/materia1.png",
-        link: "#",
+        link: "/blog/tarifaco-estadunidense",
         date: "24/04/2023",
     },
     {
         id: 2,
         title: "Incoterms: Tudo o que você precisa saber para levar o seu negócio além",
         image: "/assets/images/blog/materia2.png",
-        link: "#",
+        link: "/blog/incoterms",
         date: "23/04/2023",
     },
     {
         id: 3,
         title: "Conheça os Casos de Sucesso da Líderi Consultoria",
         image: "/assets/images/blog/materia3.jpg",
-        link: "#",
+        link: "/blog/casos-de-sucesso",
         date: "22/04/2023",
     },
     {
         id: 4,
         title: "Das Praias Brasileiras para o Mundo: Estratégias que Levaram a Havaianas a Conquistar o Mercado Global",
         image: "/assets/images/blog/materia4.jpg",
-        link: "#",
+        link: "/blog/havaianas-mercado-global",
         date: "21/04/2023",
     },
     {
         id: 5,
         title: "Diferenças culturais que podem virar oportunidades de negócio",
         image: "/assets/images/blog/materia5.jpg",
-        link: "#",
+        link: "/blog/diferencas-culturais",
         date: "20/04/2023",
     },
     {
         id: 6,
         title: "Como Preparar sua Empresa para a Internacionalização: Passos essenciais antes de entrar em mercados estrangeiros",
         image: "/assets/images/blog/materia6.jpg",
-        link: "#",
+        link: "/blog/preparar-empresa-internacionalizacao",
         date: "19/04/2023",
     },
 ];
@@ -107,7 +107,7 @@ export default function Blog() {
                         <h1 className="font-[impact] text-[24px] md:text-[40px] text-white leading-[100%] md:leading-tight max-w-[1100px]">
                             Além das Fronteiras: Como a Líderi Destrava a Exportação para Empresas Brasileiras
                         </h1>
-                        <Link href="#" className="hidden md:flex flex-shrink-0 items-center justify-center w-[52px] 2xl:w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[24px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
+                        <Link href="/blog/tarifaco-estadunidense" className="hidden md:flex flex-shrink-0 items-center justify-center w-[52px] 2xl:w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[24px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
                             <span className="hidden 2xl:inline">Ver mais</span>
                             <ArrowRight className="2xl:hidden" size={30} color="#87240E" />
                         </Link>
