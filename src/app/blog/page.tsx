@@ -65,6 +65,11 @@ export default function Blog() {
         [Autoplay({ delay: 4000 }), Fade()]
     );
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredPosts = blogPosts.filter(post => 
+        post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
@@ -102,8 +107,9 @@ export default function Blog() {
                         <h1 className="font-[impact] text-[24px] md:text-[40px] text-white leading-[100%] md:leading-tight max-w-[1100px]">
                             Além das Fronteiras: Como a Líderi Destrava a Exportação para Empresas Brasileiras
                         </h1>
-                        <Link href="#" className="hidden md:flex items-center justify-center w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[24px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
-                            Ver mais
+                        <Link href="#" className="hidden md:flex flex-shrink-0 items-center justify-center w-[52px] 2xl:w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[24px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
+                            <span className="hidden 2xl:inline">Ver mais</span>
+                            <ArrowRight className="2xl:hidden" size={30} color="#87240E" />
                         </Link>
                     </div>
                     
@@ -138,42 +144,50 @@ export default function Blog() {
                             type="text" 
                             placeholder="Buscar postagens?" 
                             className="outline-none flex-1 font-montserrat font-normal text-[16px] md:text-[20px] leading-[24px] md:leading-none text-[#000000] bg-transparent" 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <Search size={24} className="text-[#2D2D2D] ml-2 cursor-pointer hover:text-R5 transition-colors flex-shrink-0 w-[24px] h-[24px]" />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[24px] md:gap-x-[48px] gap-y-[24px] md:gap-y-[64px] w-full">
-                    {blogPosts.map((post) => (
-                        <div key={post.id} className="flex flex-col gap-4">
-                            <Link href={post.link} className="group relative flex flex-col justify-end w-full h-[202px] md:h-[256px] rounded-[8px] overflow-hidden shadow-[0px_4px_4px_0px_#08166D40]">
-                                <Image
-                                    src={post.image}
-                                    alt={post.title}
-                                    fill
-                                    quality={100}
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#000E31]/90 via-[#000E31]/40 to-transparent"></div>
-                                
-                                <div className="relative z-10 w-full px-[24px] py-[32px] md:p-4 flex flex-col justify-end h-full">
-                                    <div className="flex items-center justify-between gap-[16px] w-full">
-                                        <div className="flex items-center flex-1 h-[72px]">
-                                            <h3 className="font-montserrat font-semibold text-[16px] leading-[24px] text-[#FFFFFF] line-clamp-3">
-                                                {post.title}
-                                            </h3>
-                                        </div>
-                                        <div className="hidden md:flex flex-shrink-0 items-center justify-center w-[29px] h-[27px] bg-[#9D361F] border-2 border-[#87240E] rounded-[8px] transition-transform group-hover:scale-110">
-                                            <img src="/assets/icon/arrow-card.svg" alt="Arrow" className="w-[12px] h-[12px]" />
+                    {filteredPosts.length > 0 ? (
+                        filteredPosts.map((post) => (
+                            <div key={post.id} className="flex flex-col gap-4">
+                                <Link href={post.link} className="group relative flex flex-col justify-end w-full h-[202px] md:h-[256px] rounded-[8px] overflow-hidden shadow-[0px_4px_4px_0px_#08166D40]">
+                                    <Image
+                                        src={post.image}
+                                        alt={post.title}
+                                        fill
+                                        quality={100}
+                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#000E31]/90 via-[#000E31]/40 to-transparent"></div>
+                                    
+                                    <div className="relative z-10 w-full px-[24px] py-[32px] md:p-4 flex flex-col justify-end h-full">
+                                        <div className="flex items-center justify-between gap-[16px] w-full">
+                                            <div className="flex items-center flex-1 h-[72px]">
+                                                <h3 className="font-montserrat font-semibold text-[16px] leading-[24px] text-[#FFFFFF] line-clamp-3">
+                                                    {post.title}
+                                                </h3>
+                                            </div>
+                                            <div className="hidden md:flex flex-shrink-0 items-center justify-center w-[29px] h-[27px] bg-[#9D361F] border-2 border-[#87240E] rounded-[8px] transition-transform group-hover:scale-110">
+                                                <img src="/assets/icon/arrow-card.svg" alt="Arrow" className="w-[12px] h-[12px]" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
-                            <span className="font-montserrat font-normal text-[14px] leading-none text-[#2D2D2D] md:hidden">
-                                {post.date}
-                            </span>
+                                </Link>
+                                <span className="font-montserrat font-normal text-[14px] leading-none text-[#2D2D2D] md:hidden">
+                                    {post.date}
+                                </span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="col-span-full flex justify-center items-center py-12">
+                            <p className="font-montserrat text-[#2D2D2D] text-[18px]">Nenhuma postagem encontrada com "{searchQuery}".</p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </section>
         </main>
