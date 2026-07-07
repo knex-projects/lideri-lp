@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Share } from "lucide-react";
+import { Share, CirclePlay, CircleStop } from "lucide-react";
 
 const relatedPosts = [
     {
@@ -30,12 +30,91 @@ const relatedPosts = [
 ];
 
 export default function BlogPost() {
+    const [isSpeaking, setIsSpeaking] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+        };
+    }, []);
+
+    const handleListen = () => {
+        if (!("speechSynthesis" in window)) {
+            alert("Seu navegador não suporta a leitura de texto em voz alta.");
+            return;
+        }
+
+        if (isSpeaking) {
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false);
+        } else {
+            const articleElement = document.getElementById("article-content");
+            if (articleElement) {
+                const text = articleElement.innerText;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = "pt-BR";
+                
+                utterance.onend = () => setIsSpeaking(false);
+                utterance.onerror = () => setIsSpeaking(false);
+                
+                window.speechSynthesis.speak(utterance);
+                setIsSpeaking(true);
+            }
+        }
+    };
+
+    const handleShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: "O 'Tarifaço' estadunidense: Quais seus impactos no mercado brasileiro e como contorná-lo?",
+                    url: window.location.href
+                });
+            } catch (err) {
+                console.error("Erro ao compartilhar", err);
+            }
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Link copiado para a área de transferência!");
+        }
+    };
+
     return (
         <main className="w-full bg-transparent relative min-h-screen">
+            <style>{`
+                @media (min-width: 768px) {
+                    @keyframes sticky-parallax-header-move-and-size {
+                        to {
+                            background-position: 50% 100%;
+                            height: 10vh;
+                        }
+                    }
+                    @keyframes sticky-parallax-color-fade {
+                        to {
+                            background-color: rgba(13, 17, 34, 0.9);
+                        }
+                    }
+                    #sticky-parallax-header {
+                        position: fixed !important;
+                        top: 0;
+                        z-index: 40 !important;
+                        animation: sticky-parallax-header-move-and-size linear forwards;
+                        animation-timeline: scroll();
+                        animation-range: 0vh 85vh;
+                    }
+                    #sticky-parallax-overlay {
+                        animation: sticky-parallax-color-fade linear forwards;
+                        animation-timeline: scroll();
+                        animation-range: 0vh 85vh;
+                    }
+                }
+            `}</style>
             
-            <div className="fixed top-0 left-0 w-full h-[116px] bg-[#0D1122] md:hidden -z-10"></div>
+            <div className="absolute top-0 left-0 w-full h-[116px] bg-[#0D1122] md:hidden -z-10"></div>
 
-            <div className="fixed top-[116px] md:top-0 left-0 w-full h-[240px] md:h-screen -z-10 bg-black">
+            <div id="sticky-parallax-header" className="absolute md:fixed top-[116px] md:top-0 left-0 w-full h-[240px] md:h-[85vh] -z-10 bg-black">
                 <Image
                     src="/assets/images/blog/materia1.png"
                     alt="O 'Tarifaço' estadunidense: Quais seus impactos no mercado brasileiro e como contorná-lo?"
@@ -43,10 +122,10 @@ export default function BlogPost() {
                     className="object-cover opacity-80 md:opacity-100"
                     priority
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div id="sticky-parallax-overlay" className="absolute inset-0 bg-black/40"></div>
             </div>
 
-            <div className="w-full mt-[356px] md:mt-[100vh] bg-white shadow-[0px_-10px_30px_rgba(0,0,0,0.1)] relative z-10 pt-10 md:pt-16 pb-24 px-6.5 xl:px-[12.5%]">
+            <div className="w-full mt-[356px] md:mt-[85vh] bg-white shadow-[0px_-10px_30px_rgba(0,0,0,0.1)] relative z-10 pt-10 md:pt-16 pb-24 px-6.5 xl:px-[12.5%]">
                 
                 <nav className="font-montserrat text-[14px] md:text-[16px] text-[#B1AFAF] font-normal mb-6 flex justify-center md:justify-start gap-2">
                     <Link href="/" className="hover:underline">Home</Link> <span className="text-[#6C6C6C]">&gt;</span> <Link href="/blog" className="hover:underline">Blog</Link> <span className="text-[#6C6C6C]">&gt;</span> <span className="text-[#2D2D2D]">Postagem</span>
@@ -59,20 +138,37 @@ export default function BlogPost() {
                 <div className="flex flex-row justify-between md:justify-start pt-6 border-t border-[#6C6C6C] mb-8 font-montserrat w-full md:gap-20">
                     <div className="flex flex-col gap-1">
                         <span className="text-[14px] md:text-[20px] text-[#2D2D2D]">Escrito por:</span>
-                        <span className="text-[18px] md:text-[24px] font-bold text-[#680000] leading-none">Redator chave</span>
+                        <span className="text-[16px] md:text-[24px] font-bold text-[#680000] leading-none">Redator chave</span>
                     </div>
-                    <div className="flex items-center gap-4 md:gap-20">
-                        <div className="flex flex-col gap-1 text-left">
+                    <div className="flex items-center gap-4 md:gap-8">
+                        <div className="flex flex-col gap-1 text-left hidden md:flex">
                             <span className="text-[14px] md:text-[20px] text-[#2D2D2D]">Ultima alteração em:</span>
-                            <span className="text-[18px] md:text-[24px] font-bold text-[#680000] leading-none">24/02/2026</span>
+                            <span className="text-[16px] md:text-[24px] font-bold text-[#680000] leading-none">24/02/2026</span>
                         </div>
-                        <button className="flex items-center hover:scale-110 transition-transform group flex-shrink-0" aria-label="Compartilhar">
-                            <Share size={32} className="text-[#680000]" strokeWidth={1.5} />
-                        </button>
+                        <div className="flex flex-col gap-1 text-left md:hidden">
+                            <span className="text-[14px] text-[#2D2D2D]">Alterado em:</span>
+                            <span className="text-[16px] font-bold text-[#680000] leading-none">24/02/2026</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-4 md:gap-6 ml-auto md:ml-0">
+                            <button onClick={handleShare} className="flex items-center hover:scale-110 transition-transform group flex-shrink-0" aria-label="Compartilhar">
+                                <Share size={32} className="text-[#680000]" strokeWidth={1.5} />
+                            </button>
+                            <button onClick={handleListen} className="flex items-center gap-2 hover:scale-105 transition-transform">
+                                {isSpeaking ? (
+                                    <CircleStop size={40} className="text-[#680000]" strokeWidth={1.5} />
+                                ) : (
+                                    <CirclePlay size={40} className="text-[#680000]" strokeWidth={1.5} />
+                                )}
+                                <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[16px] font-medium hidden md:inline">
+                                    {isSpeaking ? "Parar de escutar" : "Escutar essa matéria"}
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <article className="font-montserrat font-normal text-[24px] leading-relaxed text-[#2D2D2D] mb-16 space-y-6 md:space-y-8">
+                <article id="article-content" className="font-montserrat font-normal text-[18px] md:text-[24px] leading-relaxed text-[#2D2D2D] mb-16 space-y-6 md:space-y-8">
                     <p className="mb-6">
                         Recentemente, assistimos a uma mudança significativa no cenário global: a aprovação de uma nova estratégia de tarifas por parte do governo dos Estados Unidos. A iniciativa do governo, anunciada em janeiro de 2026, tem o potencial de afetar substancialmente as dinâmicas da economia estadunidense, aplicando tarifas sobre produtos importados que vão de 10% a 20%, e no Brasil falou-se em tarifas de até 50%.
                     </p>

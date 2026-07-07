@@ -85,8 +85,9 @@ export default function Blog() {
 
     return (
         <main className="w-full pt-[116px] md:pt-0 bg-[#0D1122] md:bg-transparent">
-            <section className="w-full flex flex-col items-center bg-black">
-                <div className="relative w-full min-h-[282px] h-[282px] md:h-[700px] xl:h-[924px] overflow-hidden bg-black" ref={emblaRef}>
+            <section className="w-full flex flex-col items-center relative">
+                <div className="hidden md:block w-full h-[700px] xl:h-[924px] pointer-events-none"></div>
+                <div className="relative md:fixed md:top-0 md:left-0 md:-z-10 w-full h-[282px] md:h-[700px] xl:h-[924px] overflow-hidden bg-black" ref={emblaRef}>
                     <div className="flex h-full">
                         {heroImages.map((src, index) => (
                             <div className="relative flex-[0_0_100%] h-full" key={index}>
