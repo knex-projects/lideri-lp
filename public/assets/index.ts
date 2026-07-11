@@ -25,3 +25,5 @@ export const arrowUpRightBlogMobile = "/assets/icon/arrow-up-right-blog-mobile.s
 export const callLog = "/assets/icon/callLog.svg";
 export const chat = "/assets/icon/chat.svg";
 export const exploreNearby = "/assets/icon/exploreNearby.svg";
+
+export const imagemDoCard = "/assets/images/imagemDoCard.png";
