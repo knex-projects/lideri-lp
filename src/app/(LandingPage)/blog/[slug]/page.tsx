@@ -275,7 +275,6 @@ useEffect(() => {
                     }
                 }
             `}</style>
-
             <div className="absolute top-0 left-0 w-full h-[116px] bg-[#0D1122] md:hidden -z-10"></div>
 
             <div id="sticky-parallax-header" className="absolute md:fixed top-[116px] md:top-0 left-0 w-full h-[240px] md:h-[85vh] -z-10 bg-black">
@@ -290,7 +289,6 @@ useEffect(() => {
             </div>
 
             <div className="w-full mt-[356px] md:mt-[85vh] bg-white shadow-[0px_-10px_30px_rgba(0,0,0,0.1)] relative z-10 pt-10 md:pt-16 pb-24 px-6.5 xl:px-[12.5%]">
-
                 <nav className="font-montserrat text-[14px] md:text-[16px] text-[#B1AFAF] font-normal mb-6 flex justify-center md:justify-start gap-2">
                     <Link href="/" className="hover:underline">Home</Link> <span className="text-[#6C6C6C]">&gt;</span> <Link href="/blog" className="hover:underline">Blog</Link> <span className="text-[#6C6C6C]">&gt;</span> <span className="text-[#2D2D2D]">Postagem</span>
                 </nav>
@@ -370,7 +368,6 @@ useEffect(() => {
                                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#000E31]/90 via-[#000E31]/40 to-transparent"></div>
-
                                     <div className="relative z-10 w-full px-[24px] py-[32px] md:p-4 flex flex-col justify-end h-full">
                                         <div className="flex items-center justify-between gap-[16px] w-full">
                                             <div className="flex items-center flex-1 h-[72px]">
