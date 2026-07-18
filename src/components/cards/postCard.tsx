@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Pencil } from 'lucide-react';
-import Image from 'next/image';
+import { Pencil, Trash2 } from 'lucide-react';
 
 
 interface PostCardProps {
@@ -11,32 +10,42 @@ interface PostCardProps {
   autor: string;
   data: string;
   imageSrc: string;
+  onDelete?: () => void;
+  onEdit?: () => void;
+  isDeleting?: boolean;
 }
 
-export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc }: PostCardProps) {
+export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, onDelete, onEdit, isDeleting = false }: PostCardProps) {
   return (
-    <div className=" relative
-      w-full h-auto min-h-[10px] lg:min-h-[80px] bg-white border-b border-gray-100 max-lg:pr-14 last:border-0 last:pb-0
-      flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 lg:gap-[386px]
+    <div className="group relative
+      w-full h-auto h-[10px] lg:min-h-[80px] bg-white border-b border-gray-100 max-lg:pr-14 last:border-0 last:pb-0
+      flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 
     ">
 
 
       <div className="flex items-center gap-2 lg:gap-6 w-full lg:max-w-[789px]">
 
-        <Image
-          src={imageSrc}
-          alt={titulo}
-          sizes="(max-width: 1024px) 77px, 142px"
-          className="object-cover  bg-gray-200 rounded-lg   w-[77px] h-[44px] lg:w-[142px] lg:h-[80px] "
-        />
+
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt={titulo}
+            className="w-full max-w-[142px] h-[80px] object-cover rounded-[8px]"
+          />
+        ) : (
+
+          <div className="w-full max-w-[142px] h-[80px] object-cover rounded-[8px] bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
+            Sem imagem
+          </div>
+        )}
 
 
 
         <div className="flex flex-col gap-1 lg:gap-3 w-full min-w-0">
 
           <h4 className="
-            font-['Montserrat'] font-medium text-black text-left break-words leading-tight
-            text-[14px] lg:text-[32px]
+            font-['Montserrat'] font-medium text-black text-left  leading-tight
+            text-[14px] lg:text-[32px] line-clamp-1
           ">
             {titulo}
           </h4>
@@ -72,13 +81,35 @@ export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc }
           {data}
         </span>
 
-        <button className="
-          w-8 h-8 bg-[rgb(135,36,14)] border border-[rgb(94,21,4)] rounded-lg 
-          flex max-lg:absolute right-0 top-5  justify-center p-2 transition-all duration-200 
-          hover:bg-[rgb(94,21,4)] active:scale-95
-        ">
-          <Pencil className="w-4 h-4 text-white flex-shrink-0" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-label={`Excluir ${titulo}`}
+            onClick={onDelete}
+            disabled={isDeleting}
+            className="
+              w-8 h-8 bg-N1 border-R5 border-2 rounded-lg 
+              flex max-lg:absolute right-0 top-5 justify-center p-2 transition-all duration-200 
+              opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 max-lg:opacity-100 max-lg:translate-y-0
+              group-hover:bg-R5 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed
+            "
+          >
+            <Trash2 className="w-4 h-4 text-R5 group-hover:text-N1 flex-shrink-0" />
+          </button>
+
+          <button
+            type="button"
+            aria-label={`Editar ${titulo}`}
+            onClick={onEdit}
+            className="
+              w-8 h-8 bg-[rgb(135,36,14)] border border-[rgb(94,21,4)] rounded-lg 
+              flex max-lg:absolute right-0 top-5 justify-center p-2 transition-all duration-200 
+              hover:bg-[rgb(94,21,4)] active:scale-95
+            "
+          >
+            <Pencil className="w-4 h-4 text-white flex-shrink-0" />
+          </button>
+        </div>
       </div>
 
     </div>

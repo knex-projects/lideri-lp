@@ -12,7 +12,7 @@ export const authOptions = {
 
         CredentialsProvider({
       name: "Credentials",
-      credentials: {
+      credentials: {  
         email: { type: "text" },
         password: { type: "password" }
       },
@@ -25,7 +25,7 @@ export const authOptions = {
           credentials?.email === emailCorreto &&
           credentials?.password === senhaCorreta
         ) {
-          // Se estiver tudo certo, retorna um objeto de usuário para criar a sessão
+          
           return { id: "1", name: "Admin", email: emailCorreto };
         }
 
@@ -34,6 +34,10 @@ export const authOptions = {
       }
     })
     ],
+
+    pages: {
+    signIn: "/login", 
+  },
     callbacks: {
         async signIn({ user }:{user:BlogUser|any}) {
             const emailDoAdmin = "roseane.knex@gmail.com";
@@ -46,6 +50,8 @@ export const authOptions = {
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
+    section:{
+      estrategi: "jtw" as const,}
 };
 const handler = NextAuth(authOptions);
 

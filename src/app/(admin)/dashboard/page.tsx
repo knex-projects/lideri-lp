@@ -1,56 +1,105 @@
-import React from 'react';
-import { Pencil } from 'lucide-react';
-import { Stoke } from 'next/font/google';
-import PostCardCMS from '@/src/components/cards/postCard';
+"use client";
 
-const postsRecentes = [
-  {
-    titulo: "Como exportar produtos para o japão?",
-    categoria: "Vendas",
-    autor: "Belcrano",
-    data: "23/05/2040",
-    imageSrc: ""
-  },
-  {
-    titulo: "Como exportar produtos para a jamaica?",
-    categoria: "Vendas",
-    autor: "Belcrano",
-    data: "23/05/2040",
-    imageSrc: ""
-  },
-  {
-    titulo: "Como exportar produtos para o Qatar?",
-    categoria: "Vendas",
-    autor: "Belcrano",
-    data: "23/05/2040",
-    imageSrc: ""
-  },
-  {
-    titulo: "Quais são os requisitos legais para importar alimentos?",
-    categoria: "Logística",
-    autor: "Ciclano",
-    data: "12/11/2039",
-    imageSrc: ""
-  },
-  {
-    titulo: "Estratégias para aumentar vendas no mercado europeu",
-    categoria: "Marketing",
-    autor: "Fulano",
-    data: "05/02/2041",
-    imageSrc: ""
-  }
-];
+import React, { useEffect, useState } from 'react';
+import PostCardCMS from '@/src/components/cards/postCard';
+import { client } from '@/src/sanity/lib/client';
+import toast, { Toaster } from 'react-hot-toast';
+import { AlertTriangle, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+
+interface SanityPost {
+  _id: string;
+  titulo: string;
+  categoria?: string;
+  autor?: string;
+  data: string;
+  imageSrc?: string;
+}
+
+const post_query = `*[_type == "post"] | order(_createdAt desc)[0...5]{
+  "_id": _id,
+  "titulo": title,
+  "categoria": coalesce(categoryRaw, categories[0]->title, categoria->title, "Geral"), 
+  "autor": coalesce(authorRaw, author->name, "Anônimo"),             
+  "data": _createdAt,
+  "imageSrc": coalesce(imagemDaGaleria->arquivo.asset->url, mainImage.asset->url, null)
+}`
 
 export default function Dashboard() {
+  const router = useRouter();
+  const [postsRecentes, setPostsRecentes] = useState<SanityPost[]>([]);
+  const [totalPublicacoes, setTotalPublicacoes] = useState(0);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [isModalAberto, setIsModalAberto] = useState(false);
+  const [postParaDeletar, setPostParaDeletar] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function carregarDados() {
+      try {
+        const [posts, total] = await Promise.all([
+          client.fetch(post_query, {}, { useCdn: false }),
+          client.fetch(`count(*[_type == "post"])`, {}, { useCdn: false }),
+        ]);
+
+        setPostsRecentes(posts || []);
+        setTotalPublicacoes(total || 0);
+      } catch (error) {
+        console.error('Erro ao carregar dados do dashboard:', error);
+      }
+    }
+
+    carregarDados();
+  }, []);
+
+  const iniciarDelecao = (postId: string) => {
+    setPostParaDeletar(postId);
+    setIsModalAberto(true);
+  };
+
+  const confirmarDelecaoPost = async () => {
+    if (!postParaDeletar) return;
+
+    const idDoPost = postParaDeletar;
+    setIsModalAberto(false);
+    setPostParaDeletar(null);
+
+    const toastId = toast.loading('Removendo publicação...');
+
+    try {
+      setDeletingId(idDoPost);
+
+      const resposta = await fetch(`/api/posts?id=${idDoPost}`, {
+        method: 'DELETE',
+      });
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(dados.error || 'Erro ao deletar post.');
+      }
+
+      toast.success('Publicação excluída com sucesso!', { id: toastId });
+      setPostsRecentes((prev) => prev.filter((post) => post._id !== idDoPost));
+      setTotalPublicacoes((prev) => Math.max(prev - 1, 0));
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro ao excluir post.';
+      console.error(error);
+      toast.error(`Erro ao excluir post: ${message}`, { id: toastId });
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full bg-[rgb(255,255,255)] font-sans flex flex-col items-start justify-start">
 
       <main className="w-full min-h-[calc(100vh-98px)] bg-[rgb(240,240,240)] p-4 md:p-8 flex flex-col gap-8">
 
-     
+
         <section className="w-full grid grid-cols-2 xl:grid-cols-3 gap-[8px]   md:gap-[34px] items-stretch">
 
-          {/* Card 1 */}
+          { }
           <div className="w-full min-h-[172px] md:min-h-[217px] h-auto bg-white border-2 border-[rgb(218,218,218)] rounded-lg p-5 md:p-8 flex flex-col justify-between gap-4">
             <h3 className="font-['Montserrat'] text-[clamp(1.25rem,2.5vw,2rem)] font-normal text-black ">
               Total de
@@ -75,7 +124,7 @@ export default function Dashboard() {
             </h3>
             <div className="flex  flex-wrap items-start gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)] leading-none font-normal text-[rgb(135,36,14)]">
-                150
+                {totalPublicacoes}
               </span>
               <div className="flex flex-col justify-center">
                 <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-[rgb(28,0,0)] leading-none">Publicações</span>
@@ -106,13 +155,88 @@ export default function Dashboard() {
           </h2>
 
           <div className="w-full flex flex-col gap-6">
-            {postsRecentes.map((post, idx) => (
-              <PostCardCMS key={idx} {...post} />
-            ))}
+            {postsRecentes && postsRecentes.length > 0 ? (
+              postsRecentes.map((post: SanityPost) => (
+                <PostCardCMS
+                  key={post._id}
+                  titulo={post.titulo}
+                  categoria={post.categoria || "Geral"}
+                  autor={post.autor || "Anônimo"}
+                  data={new Date(post.data).toLocaleDateString('pt-BR')}
+                  imageSrc={post.imageSrc || ""}
+                  onDelete={() => iniciarDelecao(post._id)}
+                  isDeleting={deletingId === post._id}
+                  onEdit={() => router.push(`/editor/${post._id}`)}
+                />
+              ))
+            ) : (
+              <p className="text-gray-500 font-sans">Nenhum post encontrado no Sanity.</p>
+            )}
           </div>
 
-        </section>xx
+        </section>
       </main>
+
+      <Toaster position="bottom-right" reverseOrder={false} />
+
+      {isModalAberto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setIsModalAberto(false)} />
+
+          <div className="relative bg-white w-full max-w-[440px] rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2 text-[#87240E]">
+                <AlertTriangle className="w-6 h-6" />
+                <h3 className="font-semibold text-lg">Excluir Postagem?</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsModalAberto(false)}
+                className="p-1 hover:bg-gray-100 rounded-full text-gray-500 hover:text-black transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p className="text-gray-800 font-medium text-base">Deseja mesmo remover este artigo?</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Ao confirmar, o post será deletado permanentemente do blog e não poderá ser restaurado pelos leitores.
+              </p>
+            </div>
+
+            <div className="flex gap-3 justify-end mt-2">
+              <button
+                type="button"
+                onClick={() => setIsModalAberto(false)}
+                className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={confirmarDelecaoPost}
+                className="px-4 py-2.5 bg-[#87240E] hover:bg-[#87240E]/90 text-white text-sm font-semibold rounded-lg shadow-sm hover:shadow transition-all"
+              >
+                Confirmar exclusão
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes scaleUp {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
