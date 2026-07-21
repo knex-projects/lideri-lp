@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import PostCardCMS from '@/src/components/cards/postCard';
 import { client } from '@/src/sanity/lib/client';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { AlertTriangle, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -15,21 +15,58 @@ interface SanityPost {
   autor?: string;
   data: string;
   imageSrc?: string;
+  status: 'posted' | 'scheduled' | 'draft';
+}
+
+interface DashboardPostMetric {
+  publishedAt?: string;
+  view?: number;
+  shared?: number;
+  viewsThisMonth?: number;
+  sharesThisMonth?: number;
+  metricsMonth?: string;
+}
+
+interface DashboardMetrics {
+  totalPublicacoes: number;
+  publicacoesNoMes: number;
+  totalVisualizacoes: number;
+  visualizacoesNoMes: number;
+  totalCompartilhamentos: number;
+  compartilhamentosNoMes: number;
 }
 
 const post_query = `*[_type == "post"] | order(_createdAt desc)[0...5]{
   "_id": _id,
   "titulo": title,
-  "categoria": coalesce(categoryRaw, categories[0]->title, categoria->title, "Geral"), 
+  "categoria": categories[]->title,
   "autor": coalesce(authorRaw, author->name, "Anônimo"),             
   "data": _createdAt,
+  "status": coalesce(status, "posted"),
   "imageSrc": coalesce(imagemDaGaleria->arquivo.asset->url, mainImage.asset->url, null)
 }`
+
+const metricsQuery = `*[_type == "post"]{
+  publishedAt,
+  "view": coalesce(view, 0),
+  "shared": coalesce(shared, 0),
+  "viewsThisMonth": coalesce(viewsThisMonth, 0),
+  "sharesThisMonth": coalesce(sharesThisMonth, 0),
+  metricsMonth
+}`;
 
 export default function Dashboard() {
   const router = useRouter();
   const [postsRecentes, setPostsRecentes] = useState<SanityPost[]>([]);
   const [totalPublicacoes, setTotalPublicacoes] = useState(0);
+  const [metrics, setMetrics] = useState<DashboardMetrics>({
+    totalPublicacoes: 0,
+    publicacoesNoMes: 0,
+    totalVisualizacoes: 0,
+    visualizacoesNoMes: 0,
+    totalCompartilhamentos: 0,
+    compartilhamentosNoMes: 0,
+  });
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [isModalAberto, setIsModalAberto] = useState(false);
   const [postParaDeletar, setPostParaDeletar] = useState<string | null>(null);
@@ -37,15 +74,39 @@ export default function Dashboard() {
   useEffect(() => {
     async function carregarDados() {
       try {
-        const [posts, total] = await Promise.all([
+        const [posts, total, metricPosts] = await Promise.all([
           client.fetch(post_query, {}, { useCdn: false }),
           client.fetch(`count(*[_type == "post"])`, {}, { useCdn: false }),
+          client.fetch<DashboardPostMetric[]>(metricsQuery, {}, { useCdn: false }),
         ]);
 
         setPostsRecentes(posts || []);
         setTotalPublicacoes(total || 0);
+        const now = new Date();
+        const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const metricTotals = (metricPosts || []).reduce<DashboardMetrics>((acc, post) => {
+          acc.totalPublicacoes += 1;
+          acc.totalVisualizacoes += post.view || 0;
+          acc.totalCompartilhamentos += post.shared || 0;
+          acc.publicacoesNoMes += post.publishedAt && new Date(post.publishedAt) >= monthStart ? 1 : 0;
+          if (post.metricsMonth === monthKey) {
+            acc.visualizacoesNoMes += post.viewsThisMonth || 0;
+            acc.compartilhamentosNoMes += post.sharesThisMonth || 0;
+          }
+          return acc;
+        }, {
+          totalPublicacoes: 0,
+          publicacoesNoMes: 0,
+          totalVisualizacoes: 0,
+          visualizacoesNoMes: 0,
+          totalCompartilhamentos: 0,
+          compartilhamentosNoMes: 0,
+        });
+        setMetrics(metricTotals);
       } catch (error) {
         console.error('Erro ao carregar dados do dashboard:', error);
+        toast.error('Não foi possível carregar os dados do dashboard.');
       }
     }
 
@@ -108,11 +169,11 @@ export default function Dashboard() {
             </h3>
             <div className="flex flex-wrap items-start gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)] flex leading-none font-normal text-[rgb(135,36,14)]">
-                20
+                {metrics.totalCompartilhamentos}
               </span>
               <div className="flex flex-col justify-center">
                 <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-black leading-tight">Compartilhamentos</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)]">+2 Compartilhados</span>
+                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)]">+{metrics.compartilhamentosNoMes} no mês</span>
               </div>
             </div>
           </div>
@@ -124,11 +185,11 @@ export default function Dashboard() {
             </h3>
             <div className="flex  flex-wrap items-start gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,7vw,5.5rem)] leading-none font-normal text-[rgb(135,36,14)]">
-                {totalPublicacoes}
+                {metrics.totalPublicacoes || totalPublicacoes}
               </span>
               <div className="flex flex-col justify-center">
                 <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-[rgb(28,0,0)] leading-none">Publicações</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+15 publicações</span>
+                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+{metrics.publicacoesNoMes} no mês</span>
               </div>
             </div>
           </div>
@@ -139,11 +200,11 @@ export default function Dashboard() {
             </h3>
             <div className="flex flex-wrap items-start gap-4 md:gap-8">
               <span className="font-['Impact'] text-[clamp(2.5rem,6vw,5.5rem)] leading-none font-normal text-[rgb(135,36,14)]">
-                3K
+                {metrics.totalVisualizacoes}
               </span>
               <div className="flex flex-col justify-center">
                 <span className="font-['Montserrat'] text-[clamp(1rem,1.8vw,1.5rem)] font-normal text-black leading-none">Visualizações</span>
-                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+30 visualizações</span>
+                <span className="font-['Montserrat'] text-[clamp(0.875rem,1.5vw,1.25rem)] font-normal text-[rgb(28,0,0)] mt-1">+{metrics.visualizacoesNoMes} no mês</span>
               </div>
             </div>
           </div>
@@ -164,6 +225,7 @@ export default function Dashboard() {
                   autor={post.autor || "Anônimo"}
                   data={new Date(post.data).toLocaleDateString('pt-BR')}
                   imageSrc={post.imageSrc || ""}
+                  status={post.status}
                   onDelete={() => iniciarDelecao(post._id)}
                   isDeleting={deletingId === post._id}
                   onEdit={() => router.push(`/editor/${post._id}`)}
@@ -176,8 +238,6 @@ export default function Dashboard() {
 
         </section>
       </main>
-
-      <Toaster position="bottom-right" reverseOrder={false} />
 
       {isModalAberto && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
