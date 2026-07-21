@@ -59,7 +59,6 @@ export const TestimonialsSection = () => {
         </div>
       </div>
 
-      {/* Desktop Layout */}
       <div className="hidden min-[1100px]:block px-[26px] md:px-[12.5%]">
         <div className="flex flex-wrap justify-center gap-20">
           {testimonials.map((t, index) => (
@@ -68,7 +67,6 @@ export const TestimonialsSection = () => {
         </div>
       </div>
 
-      {/* Mobile Layout (Carousel) */}
       <div className="block min-[1100px]:hidden w-full">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
           <div className="flex">

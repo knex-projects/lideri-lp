@@ -226,7 +226,6 @@ export default function InteractiveWorldMap() {
                             }
                         </Geographies>
 
-                        {/* Brazilian states overlay (renders on top of countries) */}
                         <Geographies geography={brazilStatesGeoUrl}>
                             {({ geographies }) =>
                                 geographies.map((geo) => {

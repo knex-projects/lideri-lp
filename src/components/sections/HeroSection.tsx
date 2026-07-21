@@ -6,7 +6,7 @@ import { EmblaCarouselType } from "embla-carousel"
 import { motion, useInView } from "framer-motion"
 import { useCallback, useEffect, useState, useRef } from "react"
 import Fade from "embla-carousel-fade"
-import Image from "next/image" // Ajuste conforme seu uso de imagens
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
