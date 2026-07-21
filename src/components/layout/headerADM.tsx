@@ -3,7 +3,9 @@ import { lideriIcon } from "@/public/assets";
 import { Pencil, TextAlignJustify, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 interface HeaderProps {
     isOpen: boolean;
@@ -12,6 +14,9 @@ interface HeaderProps {
 
 export function Header({ isOpen, setIsOpen }: HeaderProps) {
     const [isDesktop, setIsDesktop] = useState(false)
+    const pathname = usePathname();
+    const router = useRouter();
+    const isEditor = pathname.startsWith("/editor");
 
     useEffect(() => {
         const handleResize = () => {
@@ -81,14 +86,23 @@ export function Header({ isOpen, setIsOpen }: HeaderProps) {
             </button>
 
           
-            {isDesktop && (
+            {isEditor && isDesktop ? (
+                <div className="hidden lg:flex items-center gap-4">
+                    <button type="button" onClick={() => window.dispatchEvent(new Event('editor:save-draft'))} className="h-[52px] px-5 rounded-lg border border-white/50 bg-transparent font-['Montserrat'] text-base font-medium text-white hover:bg-white/10 transition-colors">
+                        Salvar rascunho
+                    </button>
+                    <button type="button" onClick={() => router.push('/dashboard')} className="h-[52px] px-5 rounded-lg border border-white/50 bg-transparent font-['Montserrat'] text-base font-medium text-white hover:bg-white/10 transition-colors">
+                        Sair
+                    </button>
+                </div>
+            ) : !isEditor && isDesktop && (
                 <div className="hidden lg:flex lg:flex-row lg:justify-end">
-                    <button className="w-[146px] h-[52px] bg-white border-2 border-[rgb(135,36,14)] rounded-lg flex items-center justify-center gap-[5px] transition hover:bg-[rgb(240,240,240)]">
+                    <Link href="/editor"   className="w-[146px] h-[52px] bg-white border-2 border-[rgb(135,36,14)] rounded-lg flex items-center justify-center gap-[5px] transition hover:bg-[rgb(240,240,240)]">
                         <h1 className="font-['Montserrat'] text-[16px] font-medium text-[rgb(135,36,14)]">
                             Novo Post
                         </h1>
                         <Pencil className="w-4 h-4 text-[rgb(135,36,14)]" />
-                    </button>
+                    </Link>
                 </div>
             )}
         </section>
