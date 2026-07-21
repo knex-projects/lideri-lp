@@ -4,5 +4,5 @@ export interface BlogUser {
   name: string;
   email: string;
   image?: string;
-  role: 'admin' | 'reader'; // Ótimo para restringir os papéis permitidos
+  role: 'admin' | 'reader';
 }

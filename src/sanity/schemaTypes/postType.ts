@@ -48,16 +48,51 @@ export const postType = defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'status',
+      title: 'Tipo de publicação',
+      type: 'string',
+      initialValue: 'draft',
+      options: {
+        list: [
+          { title: 'Postado', value: 'posted' },
+          { title: 'Agendado', value: 'scheduled' },
+          { title: 'Rascunho', value: 'draft' },
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'view',
       title: 'Visualização',
       type: 'number',
       initialValue: 0,
     }),
     defineField({
+      name: 'viewsThisMonth',
+      title: 'Visualizações no mês',
+      type: 'number',
+      initialValue: 0,
+      readOnly: true,
+    }),
+    defineField({
       name: 'shared',
       title: 'Compartilhamentos',
       type: 'number',
       initialValue: 0,
+    }),
+    defineField({
+      name: 'sharesThisMonth',
+      title: 'Compartilhamentos no mês',
+      type: 'number',
+      initialValue: 0,
+      readOnly: true,
+    }),
+    defineField({
+      name: 'metricsMonth',
+      title: 'Mês dos indicadores',
+      type: 'string',
+      readOnly: true,
     }),
     defineField({
       name: 'body',
