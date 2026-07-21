@@ -10,12 +10,25 @@ interface PostCardProps {
   autor: string;
   data: string;
   imageSrc: string;
+  status?: 'posted' | 'scheduled' | 'draft';
   onDelete?: () => void;
   onEdit?: () => void;
   isDeleting?: boolean;
 }
 
-export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, onDelete, onEdit, isDeleting = false }: PostCardProps) {
+const statusLabels = {
+  posted: 'Postado',
+  scheduled: 'Agendado',
+  draft: 'Rascunho',
+};
+
+const statusStyles = {
+  posted: 'bg-green-100 text-green-800',
+  scheduled: 'bg-amber-100 text-amber-800',
+  draft: 'bg-gray-200 text-gray-700',
+};
+
+export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, status = 'posted', onDelete, onEdit, isDeleting = false }: PostCardProps) {
   return (
     <div className="group relative
       w-full h-auto h-[10px] lg:min-h-[80px] bg-white border-b border-gray-100 max-lg:pr-14 last:border-0 last:pb-0
@@ -63,6 +76,9 @@ export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, 
               text-[8px] lg:text-[24px]
             ">
               Autor: {autor}
+            </span>
+            <span className={`rounded-full px-2 py-1 font-['Montserrat'] text-[8px] lg:text-xs font-semibold ${statusStyles[status]}`}>
+              {statusLabels[status]}
             </span>
           </div>
         </div>

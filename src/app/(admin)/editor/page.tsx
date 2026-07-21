@@ -2,9 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createClient } from '@sanity/client';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import ImageUpload from '@/src/app/(admin)/editor/components/uploadImageCard';
-import CategoryInput from '@/src/app/(admin)/editor/components/categoryImput';
 import RichTextEditor from './components/textEditor';
+import Painel from './components/painel';
+import toast from 'react-hot-toast';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ID_DE_BACKUP',
@@ -32,6 +32,7 @@ interface SanityBlock {
 }
 
 type SanityBlockContent = SanityBlock[];
+type PostStatus = 'posted' | 'scheduled' | 'draft';
 
 
 export default function EditorPostagem() {
@@ -45,6 +46,9 @@ export default function EditorPostagem() {
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
+  const [scheduledAt, setScheduledAt] = useState('');
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [postStatus, setPostStatus] = useState<PostStatus>('posted');
 
 
   const [audioLoading, setAudioLoading] = useState(false);
@@ -60,6 +64,16 @@ export default function EditorPostagem() {
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const [categoriasIds, setCategoriasIds] = useState<string[]>([]);
+
+  const toDateTimeLocal = (value?: string | null) => {
+    if (!value) return '';
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+
+    const offset = date.getTimezoneOffset() * 60_000;
+    return new Date(date.getTime() - offset).toISOString().slice(0, 16);
+  };
 
 
 
@@ -96,33 +110,6 @@ export default function EditorPostagem() {
 
 
 
-
-
-
-  const handleAudioUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const arquivo = event.target.files?.[0];
-    if (!arquivo) return;
-
-    if (!arquivo.type.startsWith('audio/')) {
-      alert('Por favor, selecione apenas arquivos de áudio válidos.');
-      return;
-    }
-
-    try {
-      setAudioLoading(true);
-      const audioAsset = await sanityClient.assets.upload('file', arquivo, {
-        filename: arquivo.name,
-        contentType: arquivo.type,
-      });
-      setAudioAssetRef(audioAsset._id);
-      alert(`Áudio "${arquivo.name}" carregado com sucesso!`);
-    } catch (error) {
-      console.error('Erro ao subir áudio:', error);
-      alert('Falha no upload do áudio.');
-    } finally {
-      setAudioLoading(false);
-    }
-  };
 
 
   const [listaGaleria, setListaGaleria] = useState<{ _id: string; tituloImagem: string; url: string }[]>([]);
@@ -172,7 +159,9 @@ export default function EditorPostagem() {
           "autoria": coalesce(authorRaw, "Anônimo"),
           "categoriasIds": categories[]->_id,
           "audioFileId": coalesce(audioDescricao.asset->_id, null),
-          "imagemDocId": coalesce(imagemDaGaleria._ref, null)
+          "imagemDocId": coalesce(imagemDaGaleria._ref, null),
+          publishedAt,
+          "status": coalesce(status, "posted")
         }`;
         const post = await sanityClient.fetch(query, { postId });
 
@@ -188,9 +177,11 @@ export default function EditorPostagem() {
         setCategoriasIds(post.categoriasIds || []);
         setAudioAssetRef(post.audioFileId || null);
         setImageAssetRef(post.imagemDocId || null);
-      } catch (error: any) {
-        console.error('Erro ao carregar post para edição:', error);
-        alert('Não foi possível carregar a publicação para edição.');
+        setScheduledAt(toDateTimeLocal(post.publishedAt));
+        setPostStatus(post.status);
+    } catch (error: any) {
+      console.error('Erro ao carregar post para edição:', error);
+      toast.error('Não foi possível carregar a publicação para edição.');
       } finally {
         setLoading(false);
       }
@@ -199,29 +190,55 @@ export default function EditorPostagem() {
     carregarPostParaEdicao();
   }, [params.id, searchParams]);
 
-  const handleSavePost = async () => {
-    if (!title.trim()) {
-      alert('O campo "Título da publicação" é obrigatório.');
+  const handleSavePost = async (mode: 'now' | 'schedule' | 'keep' | 'draft' = 'now') => {
+    const isDraft = mode === 'draft';
+
+    if (!isDraft && !title.trim()) {
+      toast.error('O campo "Título da publicação" é obrigatório.');
       return;
     }
 
-    if (!editorHtml.trim() || editorHtml === '<p><br></p>') {
-      alert('O corpo da publicação é obrigatório. Digite o conteúdo do seu post antes de enviar.');
+    if (!isDraft && (!editorHtml.trim() || editorHtml === '<p><br></p>')) {
+      toast.error('O corpo da publicação é obrigatório. Digite o conteúdo antes de enviar.');
       return;
+    }
+
+    let publishedAt: string | undefined;
+    if (mode === 'schedule') {
+      if (!scheduledAt) {
+        toast.error('Escolha a data e o horário do agendamento.');
+        return;
+      }
+
+      const scheduledDate = new Date(scheduledAt);
+      if (Number.isNaN(scheduledDate.getTime()) || scheduledDate.getTime() <= Date.now()) {
+        toast.error('A data de agendamento deve estar no futuro.');
+        return;
+      }
+
+      publishedAt = scheduledDate.toISOString();
+    } else if ((mode === 'keep' || mode === 'draft') && scheduledAt) {
+      const currentPublishedDate = new Date(scheduledAt);
+      if (!Number.isNaN(currentPublishedDate.getTime())) {
+        publishedAt = currentPublishedDate.toISOString();
+      }
     }
 
     setLoading(true);
+    const toastId = toast.loading(isDraft ? 'Salvando rascunho...' : (editingPostId ? 'Atualizando publicação...' : 'Publicando...'));
 
     try {
       const postPayload = {
         ...(editingPostId ? { postId: editingPostId } : {}),
-        title,
-        slug: generateSlug(title),
-        body: editorHtml,
+        title: title.trim() || 'Rascunho sem título',
+        slug: generateSlug(title.trim() || 'rascunho'),
+        body: editorHtml || '',
         autorTeste: autoria,
         categoriasIds,
         audioFileId: audioAssetRef,
         imagemDocId: imageAssetRef,
+        publishedAt,
+        status: mode === 'draft' ? 'draft' : (mode === 'keep' ? postStatus : undefined),
       };
 
       const resposta = await fetch('/api/posts', {
@@ -235,118 +252,80 @@ export default function EditorPostagem() {
       if (!resposta.ok) throw new Error(dados.error || 'Falha ao salvar postagem');
 
       if (editingPostId) {
-        alert('Postagem atualizada com sucesso através do servidor!');
-        router.push('/posts');
+        toast.success(isDraft ? 'Rascunho salvo com sucesso!' : 'Publicação atualizada com sucesso!', { id: toastId });
+        if (!isDraft) router.push('/posts');
         return;
       }
 
-      alert('Postagem criada com sucesso através do servidor!');
+      if (isDraft) {
+        toast.success('Rascunho salvo com sucesso!', { id: toastId });
+        setEditingPostId(dados.postId);
+        setIsEditing(true);
+        setPostStatus('draft');
+        router.replace(`/editor/${dados.postId}`);
+        return;
+      }
+
+      toast.success(mode === 'schedule' ? 'Publicação agendada com sucesso!' : 'Publicação criada com sucesso!', { id: toastId });
+      setIsPanelOpen(false);
     } catch (error: any) {
       console.error(error);
-      alert(`Erro ao salvar postagem: ${error.message}`);
+      toast.error(`Erro ao salvar publicação: ${error.message}`, { id: toastId });
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    const saveDraft = () => {
+      void handleSavePost('draft');
+    };
+
+    window.addEventListener('editor:save-draft', saveDraft);
+    return () => window.removeEventListener('editor:save-draft', saveDraft);
+  });
+
   return (
     <div className="min-h-screen w-full bg-white text-black font-['Montserrat'] antialiased">
-      <main className="w-full h-full flex flex-col md:flex-row-reverse">
-
-        { }
-        <aside className="hidden md:flex w-full h-full md:w-[480px] bg-[#F0F0F0] border-l border-[#2D2D2D] p-6 md:p-8 flex-col items-center">
-          <div className="w-full max-w-[416px] bg-white border border-[#2D2D2D] rounded-lg p-6 flex flex-col gap-6 shadow-sm">
-
-            { }
-            <div className="flex flex-col gap-2">
-              <label className="text-black font-medium text-lg md:text-xl">Titulo</label>
-              <div className="w-full border border-[#6C6C6C] rounded-lg px-4 py-3 bg-white flex items-center">
-                <input
-                  type="text"
-                  value={title}
-                  placeholder='Digite o título da publicação'
-                  onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-transparent text-[#111111] font-normal text-base focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-black font-medium text-lg md:text-xl">Autoria</label>
-              <div className="w-full border border-[#6C6C6C] rounded-lg px-4 py-3 bg-white flex items-center">
-                <input
-                  type="text"
-                  value={autoria}
-                  placeholder='Digite o nome do autor'
-                  onChange={(e) => setAutoria(e.target.value)}
-                  className="w-full bg-transparent text-[#111111] font-normal text-base focus:outline-none"
-                />
-              </div>
-            </div>
-
-            { }
-            <CategoryInput
-              categoriasSelecionadas={categoriasIds}
-              onChangeCategorias={setCategoriasIds}
-            />
-
-            { }
-            <ImageUpload onImageSelect={handleGaleriaVinculo} initialPreviewUrl={imagePreviewUrl} />
-            { }
-            <div className="w-full">
-              <input
-                type="file"
-                ref={fileInputRef}
-                accept="audio/*"
-                className="hidden"
-                onChange={handleAudioUpload}
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={audioLoading}
-                className={`w-full h-12 border-2 rounded-lg flex items-center justify-center gap-2 font-medium text-sm transition-all duration-200
-                  ${audioAssetRef
-                    ? 'bg-green-50 border-green-600 text-green-600'
-                    : 'bg-white border-[#87240E] text-[#87240E] hover:bg-[#87240E]/5'
-                  } disabled:opacity-50`}
-              >
-                {audioLoading ? (
-                  <span>Carregando áudio...</span>
-                ) : audioAssetRef ? (
-                  <span>✓ Áudio Vinculado</span>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5 text-[#87240E]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
-                    </svg>
-                    <span>Adicionar Áudio</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            <hr className="border-[#2D2D2D] my-1" />
-
-            <div className="flex gap-4 w-full">
-              <button onClick={handleSavePost}
-                disabled={loading || audioLoading || imageLoading} className="flex-1 h-12 bg-R5 rounded-[8px] text-N1 font-medium text-sm hover:text-black transition-colors hidden md:block">
-                {loading ? (isEditing ? 'Atualizando...' : 'Enviando...') : (isEditing ? 'Salvar alterações' : 'Publicar')}
-              </button>
-              <button
-                onClick={isEditing ? () => router.push('/posts') : handleSavePost}
-                disabled={loading || audioLoading || imageLoading}
-                className="flex-1 h-12 bg-white border-2 border-[#87240E] rounded-lg text-[#87240E] font-medium text-sm hover:bg-[#87240E] hover:text-white transition-all disabled:opacity-50"
-              >
-                {loading ? (isEditing ? 'Atualizando...' : 'Enviando...') : (isEditing ? 'Cancelar' : 'Agendar')}
-              </button>
-            </div>
-
-          </div>
+      <main className="w-full h-full flex flex-col lg:flex-row-reverse">
+        <aside className="hidden 2xl:flex w-full h-full lg:w-[480px] bg-[#F0F0F0] border-l border-[#2D2D2D] p-8 flex-col items-center">
+          <Painel
+            autoria={autoria}
+            title={title}
+            categoriasIds={categoriasIds}
+            imagePreviewUrl={imagePreviewUrl}
+            audioAssetRef={audioAssetRef}
+            audioLoading={audioLoading}
+            imageLoading={imageLoading}
+            loading={loading}
+            isEditing={isEditing}
+            postStatus={postStatus}
+            scheduledAt={scheduledAt}
+            onAutoriaChange={setAutoria}
+            onTitleChange={setTitle}
+            onCategoriasChange={setCategoriasIds}
+            onImageSelect={handleGaleriaVinculo}
+            onAudioUploaded={setAudioAssetRef}
+            setAudioLoading={setAudioLoading}
+            onScheduledAtChange={setScheduledAt}
+            onPublish={() => handleSavePost('now')}
+            onSchedule={() => handleSavePost(isEditing ? 'keep' : 'schedule')}
+            onCancel={() => router.push('/posts')}
+          />
         </aside>
 
         { }
-        <section className="flex-1 relative bg-white p-6 md:py-8 px-5 flex flex-col  mx-auto max-w-full w-full">
+        <section className="flex-1 relative bg-white p-6 md:py-8 px-5 flex flex-col mx-auto max-w-full w-full">
+          <header className="flex items-center justify-between gap-4 mb-6 xl:hidden">
+            <h1 className="text-xl font-semibold">Editor de publicação</h1>
+            <button
+              type="button"
+              onClick={() => setIsPanelOpen(true)}
+              className="h-11 px-5 rounded-lg bg-[#87240E] text-white font-medium hover:bg-[#6d1d0b] transition-colors"
+            >
+              Avançar
+            </button>
+          </header>
 
           <RichTextEditor
             content={editorHtml}
@@ -354,6 +333,38 @@ export default function EditorPostagem() {
 
           />
         </section>
+
+        {isPanelOpen && (
+          <div className="2xl:hidden fixed inset-0 z-50  overflow-y-auto flex justify-end bg-black/45" role="dialog" aria-modal="true" aria-label="Detalhes da publicação">
+            <div className="w-full max-w-[480px] h-[115vh] overflow-y-auto bg-[#F0F0F0] p-5 sm:p-8 flex justify-center">
+              <Painel
+                autoria={autoria}
+                title={title}
+                categoriasIds={categoriasIds}
+                imagePreviewUrl={imagePreviewUrl}
+                audioAssetRef={audioAssetRef}
+                audioLoading={audioLoading}
+                imageLoading={imageLoading}
+                loading={loading}
+                isEditing={isEditing}
+                postStatus={postStatus}
+                scheduledAt={scheduledAt}
+                onAutoriaChange={setAutoria}
+                onTitleChange={setTitle}
+                onCategoriasChange={setCategoriasIds}
+                onImageSelect={handleGaleriaVinculo}
+                onAudioUploaded={setAudioAssetRef}
+                setAudioLoading={setAudioLoading}
+                onScheduledAtChange={setScheduledAt}
+                onPublish={() => handleSavePost('now')}
+                onSchedule={() => handleSavePost(isEditing ? 'keep' : 'schedule')}
+                onCancel={() => router.push('/posts')}
+                onClose={() => setIsPanelOpen(false)}
+                popup
+              />
+            </div>
+          </div>
+        )}
 
       </main>
     </div>
