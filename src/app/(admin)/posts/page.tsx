@@ -5,7 +5,7 @@ import PostCardCMS from "@/src/components/cards/postCard";
 import { ChevronDown, ChevronLeft, ChevronRight, Search, AlertTriangle, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 interface SanityPost {
@@ -15,6 +15,7 @@ interface SanityPost {
     autor?: string;
     data: string;
     imageSrc?: string;
+    status: 'posted' | 'scheduled' | 'draft';
 }
 
 interface SanityCategoria {
@@ -29,6 +30,7 @@ const post_query = `*[_type == "post"] | order(_createdAt desc){
   "categoria": coalesce(categoryRaw, categories[0]->title, categoria->title, "Geral"), 
   "autor": coalesce(authorRaw, author->name, "Anônimo"),             
   "data": _createdAt,
+  "status": coalesce(status, "posted"),
   "imageSrc": coalesce(imagemDaGaleria->arquivo.asset->url, mainImage.asset->url, null)
 }`;
 
@@ -51,6 +53,7 @@ export default function Posts() {
     const [postParaDeletar, setPostParaDeletar] = useState<string | null>(null);
 
     const [categoriaAtiva, setCategoriaAtiva] = useState<string>("Todos");
+    const [tipoAtivo, setTipoAtivo] = useState<'Todos' | 'posted' | 'scheduled' | 'draft'>('Todos');
     const [paginaAtual, setPaginaAtual] = useState(1);
     const [termoBusca, setTermoBusca] = useState("");
 
@@ -67,6 +70,7 @@ export default function Posts() {
                 setCategorias(resultadoCategorias || []);
             } catch (error) {
                 console.error("Erro ao carregar dados do Sanity:", error);
+                toast.error('Não foi possível carregar as publicações.');
             } finally {
                 setLoading(false);
             }
@@ -76,6 +80,11 @@ export default function Posts() {
 
     const alterarCategoria = (nomeCategoria: string) => {
         setCategoriaAtiva(nomeCategoria);
+        setPaginaAtual(1);
+    };
+
+    const alterarTipo = (tipo: 'Todos' | 'posted' | 'scheduled' | 'draft') => {
+        setTipoAtivo(tipo);
         setPaginaAtual(1);
     };
 
@@ -123,12 +132,15 @@ export default function Posts() {
 
     const postsFiltrados = posts.filter(post => {
         const passaCategoria = categoriaAtiva === "Todos" || post.categoria === categoriaAtiva;
+        const passaTipo = tipoAtivo === 'Todos' || post.status === tipoAtivo;
         const termo = termoBusca.toLowerCase().trim();
         const passaPesquisa = !termo ||
             post.titulo.toLowerCase().includes(termo) ||
-            (post.autor && post.autor.toLowerCase().includes(termo));
+            (post.autor && post.autor.toLowerCase().includes(termo)) ||
+            post.status.toLowerCase().includes(termo) ||
+            ({ posted: 'postado', scheduled: 'agendado', draft: 'rascunho' }[post.status]).includes(termo);
 
-        return passaCategoria && passaPesquisa;
+        return passaCategoria && passaTipo && passaPesquisa;
     });
 
 
@@ -141,8 +153,6 @@ export default function Posts() {
         <main className="flex flex-col gap-6 w-dvw px-4 py-4 mb-6 sm:px-8 2xl:px-30 lg:py-10 md:bg-N2">
 
             { }
-            <Toaster position="bottom-right" reverseOrder={false} />
-
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4 sm:flex-row sm:justify-between md:px-8 md:py-4 md:bg-N1 md:border md:border-B9 md:rounded-2xl">
                 { }
                 <div className="relative xl:hidden max-w-35.5">
@@ -158,6 +168,21 @@ export default function Posts() {
                                 {cat.title}
                             </option>
                         ))}
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-3 inset-y-1/2 -translate-y-1/2" />
+                </div>
+
+                <div className="relative max-w-40">
+                    <select
+                        name="tipo"
+                        value={tipoAtivo}
+                        onChange={(e) => alterarTipo(e.target.value as 'Todos' | 'posted' | 'scheduled' | 'draft')}
+                        className="appearance-none w-full px-4 py-3 pr-8 border border-N5 rounded-lg font-montserrat text-N8 bg-white"
+                    >
+                        <option value="Todos">Todos os tipos</option>
+                        <option value="posted">Postado</option>
+                        <option value="scheduled">Agendado</option>
+                        <option value="draft">Rascunho</option>
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-3 inset-y-1/2 -translate-y-1/2" />
                 </div>
@@ -226,6 +251,7 @@ export default function Posts() {
                                     autor={post.autor || "Anônimo"}
                                     data={new Date(post.data).toLocaleDateString('pt-BR')}
                                     imageSrc={post.imageSrc || ""}
+                                    status={post.status}
                                     onDelete={() => iniciarDelecao(post._id)}
                                     onEdit={() => router.push(`/editor/${post._id}`)}
                                     isDeleting={deletingId === post._id}

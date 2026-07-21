@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { createClient } from '@sanity/client';
+import toast from 'react-hot-toast';
 
 
 const readClient = createClient({
@@ -40,6 +41,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
       setUltimasImagens(resultado || []);
     } catch (error) {
       console.error("Erro ao carregar miniaturas da galeria:", error);
+      toast.error('Não foi possível carregar as imagens da galeria.');
     }
   };
 
@@ -53,10 +55,11 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
     if (!arquivo) return;
 
     if (!arquivo.type.startsWith('image/')) {
-      alert('Por favor, selecione apenas arquivos de imagem válidos (PNG, JPG, WEBP).');
+      toast.error('Selecione apenas arquivos de imagem válidos (PNG, JPG ou WEBP).');
       return;
     }
 
+    const toastId = toast.loading('Enviando imagem...');
     try {
       setImageLoading(true);
 
@@ -67,7 +70,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
       formData.append('file', arquivo);
       formData.append('titulo', arquivo.name.split('.')[0]);
 
-      const resposta = await fetch('/api/upload', {
+      const resposta = await fetch('/api/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -79,14 +82,14 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
       }
 
       onImageSelect(dados.docId, localUrl);
-      alert('Imagem adicionada à galeria com sucesso!');
+      toast.success('Imagem adicionada à galeria com sucesso!', { id: toastId });
       
       
       carregarUltimosPreviews();
 
     } catch (error: any) {
       console.error('Erro ao subir imagem:', error);
-      alert(`Falha no upload: ${error.message}`);
+      toast.error(`Falha no upload da imagem: ${error.message}`, { id: toastId });
       setImagePreviewUrl(null);
     } finally {
       setImageLoading(false);
@@ -94,7 +97,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full relative">
       <label className="text-black font-medium text-lg md:text-xl">Mídia</label>
       <div className="flex gap-2 w-full">
         
@@ -112,7 +115,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
           type="button"
           onClick={() => imageInputRef.current?.click()}
           disabled={imageLoading}
-          className="w-[117px] h-[66px] bg-[#F0F0F0] border-2 border-dashed border-[#5E1504] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden relative group disabled:opacity-50 flex-shrink-0"
+          className="w-full max-w-[117px] h-[66px] bg-[#F0F0F0] border-2 border-dashed border-[#5E1504] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden relative group disabled:opacity-50 flex-shrink-0"
         >
           {imageLoading ? (
             <span className="text-[10px] text-gray-500 animate-pulse">Subindo...</span>
@@ -137,7 +140,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
           return (
             <div 
               key={index}
-              className="w-[117px] h-[66px] bg-gray-100 border border-gray-300 rounded-md overflow-hidden relative group flex-shrink-0"
+              className="w-full max-w-[117px] h-[66px] bg-gray-100 border border-gray-300 rounded-md overflow-hidden relative group"
             >
               {imagemExistente ? (
                 <>

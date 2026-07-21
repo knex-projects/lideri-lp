@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { client as sanityClient } from '@/src/sanity/lib/client';
 import { Upload, Loader2, Trash2, AlertTriangle, X } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface ImagemGaleria {
   _id: string;
@@ -32,6 +32,7 @@ export default function GaleriaMidiaResponsiva() {
       setImagens(resultado || []);
     } catch (error) {
       console.error("Erro ao rodar GROQ:", error);
+      toast.error('Não foi possível carregar as mídias.');
     } finally {
       setLoadingLista(false);
     }
@@ -54,7 +55,7 @@ export default function GaleriaMidiaResponsiva() {
       formData.append('file', arquivo);
       formData.append('titulo', arquivo.name.split('.')[0]);
 
-      const resposta = await fetch('/api/upload', {
+      const resposta = await fetch('/api/upload/image', {
         method: 'POST',
         body: formData,
       });
@@ -94,7 +95,7 @@ export default function GaleriaMidiaResponsiva() {
     try {
       setDeletingId(docId);
 
-      const resposta = await fetch(`/api/upload?id=${docId}`, {
+      const resposta = await fetch(`/api/upload/image?id=${docId}`, {
         method: 'DELETE',
       });
 
@@ -134,8 +135,6 @@ export default function GaleriaMidiaResponsiva() {
     <div className="min-h-screen w-full bg-[#F0F0F0] px-4 py-10 md:px-8 md:py-10 antialiased font-['Montserrat'] text-black">
 
       { }
-      <Toaster position="bottom-right" reverseOrder={false} />
-
       <div className="max-w-[1444px] mx-auto flex flex-col gap-8">
 
         { }

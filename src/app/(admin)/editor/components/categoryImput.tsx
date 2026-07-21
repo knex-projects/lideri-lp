@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { createClient } from '@sanity/client';
+import toast from 'react-hot-toast';
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -33,6 +34,7 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
         setTodasCategorias(dados || []);
       } catch (error) {
         console.error("Erro ao carregar categorias:", error);
+        toast.error('Não foi possível carregar as categorias.');
       }
     };
     buscarCategorias();
@@ -53,6 +55,7 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
     e.stopPropagation();
     if (!novaCategoriaTexto.trim()) return;
 
+    const toastId = toast.loading('Criando categoria...');
     try {
       setCriandoCategoria(true);
       const resposta = await fetch('/api/categories', {
@@ -68,8 +71,9 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
       setTodasCategorias((prev) => [...prev, novaCat]);
       onChangeCategorias([...categoriasSelecionadas, dados.categoryId]);
       setNovaCategoriaTexto('');
+      toast.success('Categoria criada com sucesso!', { id: toastId });
     } catch (error: any) {
-      alert(`Erro ao criar categoria: ${error.message}`);
+      toast.error(`Erro ao criar categoria: ${error.message}`, { id: toastId });
     } finally {
       setCriandoCategoria(false);
     }
@@ -81,6 +85,7 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
 
     if (!confirm('Tem certeza de que deseja deletar permanentemente esta categoria?')) return;
 
+    const toastId = toast.loading('Excluindo categoria...');
     try {
       const resposta = await fetch('/api/categories', {
         method: 'DELETE',
@@ -96,9 +101,10 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
       
       
       onChangeCategorias(categoriasSelecionadas.filter((catId) => catId !== id));
+      toast.success('Categoria excluída com sucesso!', { id: toastId });
       
     } catch (error: any) {
-      alert(`Erro ao deletar categoria: ${error.message}`);
+      toast.error(`Erro ao excluir categoria: ${error.message}`, { id: toastId });
     }
   };
 
@@ -118,13 +124,13 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
   };
 
   return (
-    <div ref={dropdownRef} className="relative w-[368px] font-['Montserrat']">
+    <div ref={dropdownRef} className="relative w-full max-w-[368px] font-['Montserrat']">
       <label className="text-black font-medium text-sm mb-2 block">Categorias</label>
 
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-[368px] min-h-[52px] bg-white border border-[rgb(108,108,108)] rounded-[8px] pt-[12px] pb-[12px] px-[16px] flex items-center justify-between gap-[8px] text-left transition-colors hover:bg-gray-50 focus:outline-none"
+        className="w-full max-w-[368px] min-h-[52px] bg-white border border-[rgb(108,108,108)] rounded-[8px] pt-[12px] pb-[12px] px-[16px] flex items-center justify-between gap-[8px] text-left transition-colors hover:bg-gray-50 focus:outline-none"
       >
         <span className="text-[20px] font-normal text-[rgb(17,17,17)] truncate max-w-[280px]">
           {obterTextoBotao()}
