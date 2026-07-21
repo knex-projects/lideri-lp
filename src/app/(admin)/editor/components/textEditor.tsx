@@ -72,7 +72,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
     }
 
     return (
-        <div className="w-full max-w-full min-w-0 flex flex-col font-sans text-black">
+        <div className="w-full max-w-[] min-w-0 flex flex-col font-sans text-black">
 
             <div className="quill-wrapper w-full min-w-0 overflow-hidden">
                 <ReactQuill
