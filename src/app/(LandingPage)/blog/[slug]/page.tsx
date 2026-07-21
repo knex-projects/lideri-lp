@@ -1,41 +1,16 @@
 "use client";
 
+import type { BlogPost } from '@/src/types';
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Share, CirclePlay, CircleStop } from "lucide-react";
 import { useParams } from "next/navigation";
-import { client } from "@/src/sanity/lib/client";
+import { api } from "@/src/services/api";
+import { cms } from "@/src/services/cms";
+import { LoadingScreen } from "@/src/components/layout/loading";
 
-interface SanityPost {
-    _id: string;
-    title: string;
-    body: string;
-    publishedAt: string;
-    authorName: string;
-    imageUrl: string | null;
-    audioUrl: string | null;
-    categories: string[];
-}
 
-const postDetailQuery = `*[_type == "post" && slug.current == $slug && (!defined(publishedAt) || publishedAt <= now())][0]{
-  _id,
-  title,
-  body,
-  publishedAt,
-  "authorName": coalesce(authorRaw, "Anônimo"),
-  "imageUrl": coalesce(imagemDaGaleria->arquivo.asset->url, null),
-  "audioUrl": coalesce(audioDescricao.asset->url, null),
-  "categories": categories[]->title
-}`;
-
-const relatedPostsQuery = `*[_type == "post" && slug.current != $slug && (!defined(publishedAt) || publishedAt <= now())] | order(publishedAt desc)[0...3]{
-  _id,
-  title,
-  "slug": slug.current,
-  publishedAt,
-  "imageUrl": coalesce(imagemDaGaleria->arquivo.asset->url, null)
-}`;
 
 const formatDate = (value?: string | null) => {
     if (!value) return "Sem data";
@@ -54,7 +29,7 @@ export default function BlogPost() {
     const analyserRef = useRef<AnalyserNode | null>(null);
     const animationRef = useRef<number | null>(null);
 
-    const [post, setPost] = useState<SanityPost | null>(null);
+    const [post, setPost] = useState<BlogPost | null>(null);
     const [relatedPosts, setRelatedPosts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -67,8 +42,7 @@ export default function BlogPost() {
         const fetchPostData = async () => {
             try {
                 setLoading(true);
-                const postData = await client.fetch<SanityPost>(postDetailQuery, { slug }, { useCdn: false });
-                const relatedData = await client.fetch<any[]>(relatedPostsQuery, { slug }, { useCdn: false });
+                const [postData, relatedData] = await cms.getPostPage(slug);
 
                 setPost(postData);
                 setRelatedPosts(relatedData || []);
@@ -85,12 +59,7 @@ export default function BlogPost() {
     const trackMetric = (metric: 'view' | 'share') => {
         if (!post?._id) return;
 
-        void fetch(`/api/posts/${post._id}/metrics`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ metric }),
-            keepalive: true,
-        });
+        void api.trackPostMetric(post._id, metric);
     };
 
     useEffect(() => {
@@ -245,10 +214,15 @@ useEffect(() => {
         }
     };
 
+    if (loading) {
+        return <LoadingScreen />;
+      }
+    
+
     return (
-        <main className="w-full bg-transparent relative min-h-screen">
+        <main className="w-full pt-29 bg-transparent relative min-h-screen">
             <style>{`
-                @media (min-width: 768px) {
+                @media (min-width: 48rem) {
                     @keyframes sticky-parallax-header-move-and-size {
                         to {
                             background-position: 50% 100%;
@@ -275,12 +249,13 @@ useEffect(() => {
                     }
                 }
             `}</style>
-            <div className="absolute top-0 left-0 w-full h-[116px] bg-[#0D1122] md:hidden -z-10"></div>
 
-            <div id="sticky-parallax-header" className="absolute md:fixed top-[116px] md:top-0 left-0 w-full h-[240px] md:h-[85vh] -z-10 bg-black">
+            <div className="absolute top-0 left-0 w-full h-29 bg-[#0D1122] md:hidden -z-10"></div>
+
+            <div id="sticky-parallax-header" className="relative md:fixed  md:top-0 left-0 w-full h-60 sm:h-[60vh] md:h-[85vh] -z-10 bg-black">
                 <Image
-                    src={post?.imageUrl || "/assets/images/blog/materia1.png"}
-                    alt={post?.title || "sem imagem"}
+                    src={post?.imageUrl ||"/assets/images/blog/materia1.png"}
+                    alt={post?.title || ""}
                     fill
                     className="object-cover opacity-80 md:opacity-100"
                     priority
@@ -288,28 +263,29 @@ useEffect(() => {
                 <div id="sticky-parallax-overlay" className="absolute inset-0 bg-black/40"></div>
             </div>
 
-            <div className="w-full mt-[356px] md:mt-[85vh] bg-white shadow-[0px_-10px_30px_rgba(0,0,0,0.1)] relative z-10 pt-10 md:pt-16 pb-24 px-6.5 xl:px-[12.5%]">
-                <nav className="font-montserrat text-[14px] md:text-[16px] text-[#B1AFAF] font-normal mb-6 flex justify-center md:justify-start gap-2">
+            <div className="w-full  md:mt-[85vh] bg-white shadow-[0rem_-0.625rem_1.875rem_rgba(0,0,0,0.1)] relative z-10 pt-10 md:pt-16 pb-24 px-6.5 xl:px-[12.5%]">
+
+                <nav className="font-montserrat text-[0.875rem] md:text-[1rem] text-[#B1AFAF] font-normal mb-6 flex justify-center md:justify-start gap-2">
                     <Link href="/" className="hover:underline">Home</Link> <span className="text-[#6C6C6C]">&gt;</span> <Link href="/blog" className="hover:underline">Blog</Link> <span className="text-[#6C6C6C]">&gt;</span> <span className="text-[#2D2D2D]">Postagem</span>
                 </nav>
 
-                <h1 className="font-[impact] text-[32px] md:text-[64px] leading-[100%] md:leading-[1.1] text-N8 mb-8 tracking-wide">
+                <h1 className="font-[impact] text-[2rem] md:text-[4rem] leading-[100%] md:leading-[1.1] text-N8 mb-8 tracking-wide">
                     {post?.title}
                 </h1>
 
                 <div className="flex flex-row justify-between md:justify-start pt-6 border-t border-[#6C6C6C] mb-8 font-montserrat w-full md:gap-20">
                     <div className="flex flex-col gap-1">
-                        <span className="text-[14px] md:text-[20px] text-[#2D2D2D]">Escrito por:</span>
-                        <span className="text-[16px] md:text-[24px] font-bold text-[#680000] leading-none">{post?.authorName}</span>
+                        <span className="text-[0.875rem] md:text-[1.25rem] text-[#2D2D2D]">Escrito por:</span>
+                        <span className="text-[1rem] md:text-[1.5rem] font-bold text-[#680000] leading-none">{post?.authorName}</span>
                     </div>
                     <div className="flex items-center gap-4 md:gap-8">
                         <div className="flex flex-col gap-1 text-left hidden md:flex">
-                            <span className="text-[14px] md:text-[20px] text-[#2D2D2D]">Ultima alteração em:</span>
-                            <span className="text-[16px] md:text-[24px] font-bold text-[#680000] leading-none">{formatDate(post?.publishedAt)}</span>
+                            <span className="text-[0.875rem] md:text-[1.25rem] text-[#2D2D2D]">Ultima alteração em:</span>
+                            <span className="text-[1rem] md:text-[1.5rem] font-bold text-[#680000] leading-none">{formatDate(post?.publishedAt)}</span>
                         </div>
                         <div className="flex flex-col gap-1 text-left md:hidden">
-                            <span className="text-[14px] text-[#2D2D2D]">Alterado em:</span>
-                            <span className="text-[16px] font-bold text-[#680000] leading-none">{formatDate(post?.publishedAt)}</span>
+                            <span className="text-[0.875rem] text-[#2D2D2D]">Alterado em:</span>
+                            <span className="text-[1rem] font-bold text-[#680000] leading-none">{formatDate(post?.publishedAt)}</span>
                         </div>
 
                         <div className="flex items-center gap-4 md:gap-6 ml-auto md:ml-0">
@@ -324,7 +300,7 @@ useEffect(() => {
                                     ) : (
                                         <CirclePlay size={40} className="text-[#680000]" strokeWidth={1.5} />
                                     )}
-                                    <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[16px] font-medium hidden md:inline">
+                                    <span className="font-montserrat text-[#2D2D2D] text-[0.875rem] md:text-[1rem] font-medium hidden md:inline">
                                         {isSpeaking ? "Parar áudio" : post?.audioUrl ? "Ouvir matéria" : "Escutar matéria (Voz AI)"}
                                     </span>
                                 </button>
@@ -334,9 +310,12 @@ useEffect(() => {
                                         ref={canvasRef}
                                         width={120}
                                         height={40}
-                                        className="w-[120px] h-[40px] bg-transparent rounded-sm animate-fade-in"
+                                        className="w-30 h-10 bg-transparent rounded-sm animate-fade-in"
                                     />
                                 )}
+                                <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[18px] font-medium hidden md:inline">
+                                    {isSpeaking ? "Parar de escutar" : "Escutar essa matéria"}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -348,18 +327,18 @@ useEffect(() => {
                
                 <div className="mt-20">
                     <div className="flex flex-col mb-10">
-                        <h2 className="font-[impact] text-[36px] leading-[100%] text-N8">
+                        <h2 className="font-[impact] text-[2.25rem] leading-[100%] text-N8">
                             Postagens <span className="text-R5">relacionadas</span>
                         </h2>
-                        <p className="font-montserrat font-normal text-[16px] md:text-[24px] leading-[24px] tracking-[0.0288em] text-[#2D2D2D] mt-2">
+                        <p className="font-montserrat font-normal text-[1rem] md:text-[1.5rem] leading-[1.5rem] tracking-[0.0288em] text-[#2D2D2D] mt-2">
                             Confira nossas ultimas postagens
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px] md:gap-[48px] w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full">
                         {relatedPosts.map((related) => (
                             <div key={related._id} className="flex flex-col gap-4">
-                                <Link href={`/blog/${related.slug}`} className="group relative flex flex-col justify-end w-full h-[202px] md:h-[256px] rounded-[8px] overflow-hidden shadow-[0px_4px_4px_0px_#08166D40]">
+                                <Link href={`/blog/${related.slug}`} className="group relative flex flex-col justify-end w-full h-50.5 md:h-64 rounded-[0.5rem] overflow-hidden shadow-[0rem_0.25rem_0.25rem_0rem_#08166D40]">
                                     <Image
                                         src={related.imageUrl || "/assets/images/blog/materia2.png"}
                                         alt={related.title}
@@ -368,20 +347,21 @@ useEffect(() => {
                                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#000E31]/90 via-[#000E31]/40 to-transparent"></div>
-                                    <div className="relative z-10 w-full px-[24px] py-[32px] md:p-4 flex flex-col justify-end h-full">
-                                        <div className="flex items-center justify-between gap-[16px] w-full">
-                                            <div className="flex items-center flex-1 h-[72px]">
-                                                <h3 className="font-montserrat font-semibold text-[16px] leading-[24px] text-[#FFFFFF] line-clamp-3">
+
+                                    <div className="relative z-10 w-full px-6 py-8 md:p-4 flex flex-col justify-end h-full">
+                                        <div className="flex items-center justify-between gap-4 w-full">
+                                            <div className="flex items-center flex-1 h-18">
+                                                <h3 className="font-montserrat font-semibold text-[1rem] leading-[1.5rem] text-[#FFFFFF] line-clamp-3">
                                                     {related.title}
                                                 </h3>
                                             </div>
-                                            <div className="hidden md:flex flex-shrink-0 items-center justify-center w-[29px] h-[27px] bg-[#9D361F] border-2 border-[#87240E] rounded-[8px] transition-transform group-hover:scale-110">
-                                                <img src="/assets/icon/arrow-card.svg" alt="Arrow" className="w-[12px] h-[12px]" />
+                                            <div className="hidden md:flex flex-shrink-0 items-center justify-center w-7.25 h-6.75 bg-[#9D361F] border-2 border-[#87240E] rounded-[0.5rem] transition-transform group-hover:scale-110">
+                                                <img src="/assets/icon/arrow-card.svg" alt="Arrow" className="w-3 h-3" />
                                             </div>
                                         </div>
                                     </div>
                                 </Link>
-                                <span className="font-montserrat font-normal text-[14px] leading-none text-[#2D2D2D] md:hidden">
+                                <span className="font-montserrat font-normal text-[0.875rem] leading-none text-[#2D2D2D] md:hidden">
                                     {formatDate(related.publishedAt)}
                                 </span>
                             </div>
