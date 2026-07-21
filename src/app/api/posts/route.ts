@@ -22,59 +22,94 @@ function generateSlug(text: string) {
 function buildReferenceArray(ids: string[] = []) {
   return ids.length > 0
     ? ids.map((id: string) => ({
-      _type: 'reference',
-      _ref: id,
-      _key: Math.random().toString(36).substring(2, 9),
-    }))
+        _type: 'reference',
+        _ref: id,
+        _key: Math.random().toString(36).substring(2, 9),
+      }))
     : [];
 }
 
-function buildPostPayload(body: any) {
-  return {
-    title: body.title,
-    slug: {
-      _type: 'slug',
-      current: body.slug || generateSlug(body.title),
-    },
-    body: body.body,
-    publishedAt: body.publishedAt || new Date().toISOString(),
-    view: 0,
-    shared: 0,
-    authorRaw: body.autorTeste || 'Anônimo',
-    categoryRaw: undefined,
-    categories: buildReferenceArray(body.categoriasIds || []),
-    audioDescricao: body.audioFileId
-      ? {
-        _type: 'file',
-        asset: { _type: 'reference', _ref: body.audioFileId },
-      }
-      : undefined,
-    imagemDaGaleria: body.imagemDocId
-      ? {
-        _type: 'reference',
-        _ref: body.imagemDocId,
-      }
-      : undefined,
-  };
+function getPublishedAt(value?: string) {
+  if (!value) return new Date().toISOString();
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    throw new Error('A data de publicação é inválida.');
+  }
+
+  return date.toISOString();
+}
+
+function getPostStatus(publishedAt: string, requestedStatus?: string) {
+  if (requestedStatus === 'draft') return 'draft';
+  return new Date(publishedAt).getTime() > Date.now() ? 'scheduled' : 'posted';
 }
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    if (!body.title || !body.body) {
-      return NextResponse.json({ error: 'Título e corpo são obrigatórios.' }, { status: 400 });
+    const {
+      title,
+      body: bodyText,
+      autorTeste = 'Anônimo',
+      categoriasIds = [],
+      audioFileId,
+      imagemDocId,
+      slug,
+      publishedAt,
+      status,
+    } = body;
+
+    const isDraft = status === 'draft';
+    if (!isDraft && (!title || !bodyText)) {
+      return NextResponse.json(
+        { error: 'Título e corpo são obrigatórios.' },
+        { status: 400 }
+      );
     }
 
-    const result = await privateSanityClient.create({
+    const publicationDate = getPublishedAt(publishedAt);
+    const postTitle = title?.trim() || 'Rascunho sem título';
+    const postPayload = {
       _type: 'post',
-      ...buildPostPayload(body),
-    });
+      title: postTitle,
+      slug: {
+        _type: 'slug',
+        current: slug || generateSlug(postTitle),
+      },
+      body: bodyText || '',
+      publishedAt: publicationDate,
+      status: getPostStatus(publicationDate, status),
+      view: 0,
+      shared: 0,
+      viewsThisMonth: 0,
+      sharesThisMonth: 0,
+      authorRaw: autorTeste,
+      categories: buildReferenceArray(categoriasIds),
+      audioDescricao: audioFileId
+        ? {
+            _type: 'file',
+            asset: { _type: 'reference', _ref: audioFileId },
+          }
+        : undefined,
+      imagemDaGaleria: imagemDocId
+        ? {
+            _type: 'reference',
+            _ref: imagemDocId,
+          }
+        : undefined,
+    };
+
+    const result = await privateSanityClient.create(postPayload);
 
     return NextResponse.json({ success: true, postId: result._id });
   } catch (error: any) {
     console.error('Erro na rota de criação do post:', error);
-    return NextResponse.json({ error: error.message || 'Falha ao salvar postagem' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Falha ao salvar postagem' },
+      { status: 500 }
+    );
   }
 }
 
@@ -84,25 +119,34 @@ export async function PUT(request: Request) {
     const { postId, ...rest } = body;
 
     if (!postId) {
-      return NextResponse.json({ error: 'O ID do post é obrigatório.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'O ID do post é obrigatório.' },
+        { status: 400 }
+      );
     }
 
-    if (!rest.title || !rest.body) {
-      return NextResponse.json({ error: 'Título e corpo são obrigatórios.' }, { status: 400 });
+    const isDraft = rest.status === 'draft';
+    if (!isDraft && (!rest.title || !rest.body)) {
+      return NextResponse.json(
+        { error: 'Título e corpo são obrigatórios.' },
+        { status: 400 }
+      );
     }
 
     const patch = privateSanityClient.patch(postId);
 
+    const publicationDate = getPublishedAt(rest.publishedAt);
+    const postTitle = rest.title?.trim() || 'Rascunho sem título';
     patch.set({
-      title: rest.title,
+      title: postTitle,
       slug: {
         _type: 'slug',
-        current: rest.slug || generateSlug(rest.title),
+        current: rest.slug || generateSlug(postTitle),
       },
-      body: rest.body,
-      publishedAt: rest.publishedAt || new Date().toISOString(),
+      body: rest.body || '',
+      publishedAt: publicationDate,
+      status: getPostStatus(publicationDate, rest.status),
       authorRaw: rest.autorTeste || 'Anônimo',
-      categoryRaw: undefined,
       categories: buildReferenceArray(rest.categoriasIds || []),
     });
 
@@ -130,10 +174,16 @@ export async function PUT(request: Request) {
 
     await patch.commit();
 
-    return NextResponse.json({ success: true, message: 'Post atualizado com sucesso!' });
+    return NextResponse.json({
+      success: true,
+      message: 'Post atualizado com sucesso!',
+    });
   } catch (error: any) {
     console.error('Erro na rota de atualização do post:', error);
-    return NextResponse.json({ error: error.message || 'Falha ao atualizar postagem' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Falha ao atualizar postagem' },
+      { status: 500 }
+    );
   }
 }
 
@@ -143,15 +193,23 @@ export async function DELETE(request: Request) {
     const postId = searchParams.get('id');
 
     if (!postId) {
-      return NextResponse.json({ error: 'O ID do post é obrigatório.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'O ID do post é obrigatório.' },
+        { status: 400 }
+      );
     }
 
     await privateSanityClient.delete(postId);
 
-    return NextResponse.json({ success: true, message: 'Post deletado com sucesso!' });
+    return NextResponse.json({
+      success: true,
+      message: 'Post deletado com sucesso!',
+    });
   } catch (error: any) {
     console.error('Erro ao deletar post:', error);
-    return NextResponse.json({ error: error.message || 'Erro interno ao processar deleção.' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Erro interno ao processar deleção.' },
+      { status: 500 }
+    );
   }
 }
-

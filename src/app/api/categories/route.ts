@@ -49,3 +49,33 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message || 'Erro ao criar categoria' }, { status: 500 });
   }
 }
+
+export async function PUT(request: Request) {
+  try {
+    const { id, title } = await request.json();
+
+    if (!id || !title?.trim()) {
+      return NextResponse.json(
+        { error: 'O ID e o nome da categoria são obrigatórios.' },
+        { status: 400 }
+      );
+    }
+
+    const updatedCategory = await privateSanityClient
+      .patch(id)
+      .set({ title: title.trim() })
+      .commit();
+
+    return NextResponse.json({
+      success: true,
+      categoryId: updatedCategory._id,
+      title: updatedCategory.title,
+    });
+  } catch (error: any) {
+    console.error('Erro ao atualizar categoria:', error);
+    return NextResponse.json(
+      { error: error.message || 'Erro ao atualizar categoria.' },
+      { status: 500 }
+    );
+  }
+}
