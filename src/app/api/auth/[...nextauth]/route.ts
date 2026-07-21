@@ -1,9 +1,11 @@
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { BlogUser } from "@/src/app/types/user";
 
-export const authOptions = {
+const SESSION_MAX_AGE = 24 * 60 * 60;
+
+export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -39,7 +41,7 @@ export const authOptions = {
     signIn: "/login", 
   },
     callbacks: {
-        async signIn({ user }:{user:BlogUser|any}) {
+        async signIn({ user }) {
             const emailDoAdmin = "roseane.knex@gmail.com";
 
             if (user.email === emailDoAdmin) {
@@ -50,8 +52,13 @@ export const authOptions = {
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
-    section:{
-      estrategi: "jtw" as const,}
+    session: {
+      strategy: "jwt",
+      maxAge: SESSION_MAX_AGE,
+    },
+    jwt: {
+      maxAge: SESSION_MAX_AGE,
+    },
 };
 const handler = NextAuth(authOptions);
 
