@@ -38,7 +38,7 @@ export const ProjectCard = ({ title, description, imageSrc, slug, priority = fal
 
       <div className="w-full flex-1 md:flex-none  p-[24px] flex flex-col justify-between shrink-0 bg-white">
         <div className="flex flex-col gap-[12px] mt-[-12px] mb-[12px]">
-          <h3 className="text-[14px] min-[500px]:text-[15px] md:text-[17px] lg:text-[18px] leading-[22px] min-[500px]:leading-[23px] md:leading-[26px] lg:leading-[28px] font-[540] text-N8 flex items-center gap-[8px] font-bold font-montserrat m-0 p-0">
+          <h3 className="text-[16px] min-[500px]:text-[15px] md:text-[17px] lg:text-[18px] leading-[22px] min-[500px]:leading-[23px] md:leading-[26px] lg:leading-[28px] font-[540] text-N8 flex items-center gap-[8px] font-bold font-montserrat m-0 p-0">
             <span className="w-[6px] h-[4px] group-hover:w-[16px] font-bold group-hover:h-[4px] bg-R5 block shrink-0 transition-all duration-300 rounded-[1px]"></span>
             {title}
           </h3>
