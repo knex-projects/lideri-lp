@@ -70,7 +70,7 @@ export const BlogSection = () => {
                     <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
                         Nosso <span className="text-R5">Blog.</span>
                     </h2>
-                    <p className="mt-4 font-montserrat text-sm text-N5 md:text-lg max-w-2xl">
+                    <p className="font-montserrat text-sm text-N5 md:text-lg max-w-2xl md:text-[16px]">
                         Fique por dentro das principais publicações da Líderi e amplie sua visão sobre negócios e comércio exterior.
                     </p>
                 </div>

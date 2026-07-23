@@ -103,7 +103,7 @@ export const HeroSection = () => {
                     <h1 className="sm:w-[320px] w-[295px] max-w-full font-zodiac text-white font-normal text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-[514px] xl:text-[76px]/[82px]">
                         Nossa paixão é te levar mais longe.
                     </h1>
-                    <p className="w-[281px] sm:w-65 font-montserrat  text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-150 xl:text-[20px]"> 
+                    <p className="w-[281px] sm:w-65 font-montserrat  text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-[538px] xl:h-[44px] xl:text-[18px]"> 
                         Consultoria estratégica em internacionalização e exportação.
                     </p>
                 </div>
