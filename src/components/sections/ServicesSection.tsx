@@ -26,7 +26,7 @@ const ServicesSection = () => {
                             Nossos <span className="text-[#87240E]">serviços</span>
                         </h1>
                     </div>
-                    <p className="max-w-[600px] text-[18px] md:max-w-auto md:text-[19px] lg:text-[20px]">
+                    <p className="max-w-[690px] text-[18px] md:max-w-auto md:text-[19px] lg:text-[28px]">
                         Soluções estratégicas para escalar o seu negócio.
                     </p>
                 </div>
