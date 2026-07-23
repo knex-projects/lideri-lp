@@ -160,7 +160,7 @@ export default function BlogPost() {
                                 ) : (
                                     <CirclePlay size={40} className="text-[#680000]" strokeWidth={1.5} />
                                 )}
-                                <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[16px] font-medium hidden md:inline">
+                                <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[18px] font-medium hidden md:inline">
                                     {isSpeaking ? "Parar de escutar" : "Escutar essa matéria"}
                                 </span>
                             </button>
