@@ -37,7 +37,7 @@ export const BlogSection = () => {
                     <h2 className="font-[impact] text-[36px] text-N8 md:text-[48px]">
                         Nosso <span className="text-R5">Blog.</span>
                     </h2>
-                    <p className="mt-4 font-montserrat text-sm text-N5 md:text-lg max-w-2xl">
+                    <p className="font-montserrat text-sm text-N5 md:text-lg max-w-2xl md:text-[16px]">
                         Fique por dentro das principais publicações da Líderi e amplie sua visão sobre negócios e comércio exterior.
                     </p>
                 </div>
@@ -46,7 +46,6 @@ export const BlogSection = () => {
                     {blogPosts.map((post) => (
                         <div key={post.id} className="flex flex-col w-full max-w-[453.33px]">
                             <Link href={post.link} className="group relative flex flex-col justify-end w-full h-[279px] rounded-[8px] overflow-hidden mb-3">
-                                {/* Background Image */}
                                 <Image
                                     src={post.image}
                                     alt={post.title}
@@ -54,10 +53,8 @@ export const BlogSection = () => {
                                     quality={100}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
-                                {/* Gradient Overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#000E31]/90 via-[#000E31]/40 to-transparent"></div>
                                 
-                                {/* Content */}
                                 <div className="relative z-10 w-full h-full">
                                     <div className="absolute bottom-[32px] md:bottom-[40px] left-[16px] flex flex-col gap-[4px] w-[calc(100%-32px)]">
                                         <h3 className="font-montserrat text-[16px] md:text-[18px] font-bold text-N1 leading-[20px] md:leading-[22px] w-full line-clamp-2 xl:line-clamp-none xl:truncate">
