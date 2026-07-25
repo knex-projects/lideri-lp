@@ -108,7 +108,7 @@ export default function Blog() {
                         <h1 className="font-[impact] text-[24px] md:text-[40px] text-white leading-[100%] md:leading-tight max-w-[1100px]">
                             Além das Fronteiras: Como a Líderi Destrava a Exportação para Empresas Brasileiras
                         </h1>
-                        <Link href="/blog/tarifaco-estadunidense" className="hidden md:flex flex-shrink-0 items-center justify-center w-[52px] 2xl:w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[24px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
+                        <Link href="/blog/tarifaco-estadunidense" className="hidden md:flex flex-shrink-0 items-center justify-center w-[52px] 2xl:w-[150px] h-[52px] bg-white border-2 border-[#87240E] rounded-[8px] font-montserrat font-medium text-[20px] leading-[24px] text-[#87240E] transition-all hover:bg-gray-50 hover:scale-105">
                             <span className="hidden 2xl:inline">Ver mais</span>
                             <ArrowRight className="2xl:hidden" size={30} color="#87240E" />
                         </Link>
@@ -133,7 +133,7 @@ export default function Blog() {
                         <h2 className="font-[impact] text-[36px] md:text-[48px] leading-[100%] text-N8 ml-[5px]">
                             Ultimas <span className="text-R5">postagens</span>
                         </h2>
-                        <p className="font-montserrat font-normal text-[16px] md:text-[24px] leading-[24px] md:leading-[36px] tracking-[0.0288em] text-[#2D2D2D] mt-2 md:whitespace-normal whitespace-nowrap ml-[5px]">
+                        <p className="font-montserrat font-normal text-[16px] md:text-[24px] leading-[24px] md:leading-[36px] tracking-[0.0288em] text-[#2D2D2D] mt-2 md:whitespace-normal whitespace-nowrap ml-[5px] md:w-[411px] md:h-[72px]">
                             Confira nossas ultimas postagens
                         </p>
                     </div>
