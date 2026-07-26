@@ -28,14 +28,14 @@ export const ContactSection = () => {
     }
 
     return (
-        <section className="pb-25 pt-45 px-6.5 overflow-x-hidden md:py-60 md:px-[12.5%]">
+        <section className="pb-25 pt-45 px-6.5 overflow-x-hidden text-N8 md:py-60 md:px-[12.5%]">
             <div>
                 <h1 className="mb-4 font-[impact] text-[36px] text-center md:text-5xl">Para onde podemos te levar?</h1>
                 <p className="font-Montserrat text-sm text-center md:text-[28px]">Vamos entender e encontrar o melhor plano para escalar seu negócio</p>
                 
                 <div className="flex flex-col md:items-center md:mt-15 xl:flex-row xl:gap-30 3xl:gap-[15vw]">
                     <div className="mt-10 mb-15 bg-N3 rounded-lg p-4 w-full max-w-180 sm:mx-0 md:px-8 md:py-12 xl:mb-0 xl:mt-0">
-                        <form ref={ form } onSubmit={ sendEmail } className="flex flex-col gap-6 text-N9">
+                        <form ref={ form } onSubmit={ sendEmail } className="flex flex-col gap-6 text-N8">
                             <div className="grid grid-cols-2 grid-rows-1 gap-x-3">
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="nome" className="font-bold md:text-2xl">Nome</label>
@@ -92,7 +92,7 @@ export const ContactSection = () => {
                                 ></textarea>
                             </div>
 
-                            <div className="flex gap-1 sm:gap-2.5">
+                            <div className="flex gap-1 sm:gap-2.5 max-[412]:grid max-[412]:grid-cols-2">
                                 <div className="flex-1">
                                     <input
                                         type="checkbox"
@@ -103,7 +103,7 @@ export const ContactSection = () => {
                                     />
                                     <label
                                         htmlFor="prospeccao"
-                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] text-N5 transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 md:text-lg"
+                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 peer-checked:hover:text-N1 peer-checked:hover:border-R5 md:text-lg"
                                     >
                                         Prospecção
                                     </label>
@@ -119,7 +119,7 @@ export const ContactSection = () => {
                                     />
                                     <label
                                         htmlFor="analise"
-                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] text-N5 transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 md:text-lg"
+                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 peer-checked:hover:text-N1 peer-checked:hover:border-R5 md:text-lg"
                                     >
                                         Análise
                                     </label>
@@ -135,7 +135,7 @@ export const ContactSection = () => {
                                     />
                                     <label
                                         htmlFor="burocracia"
-                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] text-N5 transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 md:text-lg"
+                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 peer-checked:hover:text-N1 peer-checked:hover:border-R5 md:text-lg"
                                     >
                                         Burocrácia
                                     </label>
@@ -151,14 +151,14 @@ export const ContactSection = () => {
                                     />
                                     <label
                                         htmlFor="outro"
-                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] text-N5 transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 md:text-lg"
+                                        className="block w-full px-2.25 py-1.5 border-[2.5px] border-N8 rounded-full bg-N1 cursor-pointer font-Montserrat text-center text-[10px] transition-all duration-300 peer-checked:bg-R5 peer-checked:text-N1 peer-checked:border-R5 hover:border-R5 hover:text-R5 peer-checked:hover:text-N1 peer-checked:hover:border-R5 md:text-lg"
                                     >
                                         Outro
                                     </label>
                                 </div>
                             </div>
 
-                            <button type="submit" className="py-3 rounded-lg bg-R5 font-Montserrat text-lg font-bold text-N1">Enviar</button>
+                            <button type="submit" className="cursor-pointer py-3 rounded-lg bg-R5 font-Montserrat text-lg font-bold text-N1 transition-all ease-in-out duration-300 hover:bg-R4">Enviar</button>
                         </form>
                     </div>
 
@@ -169,6 +169,7 @@ export const ContactSection = () => {
                                 width={ 46 }
                                 height={ 46 }
                                 alt="Ícone de chat"
+                                className="md:w-[62px]"
                             />
                             <div className="flex flex-col justify-center items-start gap-2">
                                 <h2 className="mb-1 font-[impact] text-[32px]">Converse com nós</h2>
@@ -183,6 +184,7 @@ export const ContactSection = () => {
                                 width={ 46 }
                                 height={ 46 }
                                 alt="Ícone de explore nearby"
+                                className="md:w-[62px]"
                             />
                             <div className="flex flex-col justify-center items-start gap-2">
                                 <h2 className="mb-1 font-[impact] text-[32px]">Visite-nos</h2>
@@ -197,6 +199,7 @@ export const ContactSection = () => {
                                 width={ 46 }
                                 height={ 46 }
                                 alt="Ícone de call log"
+                                className="md:w-[62px]"
                             />
                             <div className="flex flex-col justify-center items-start gap-2">
                                 <h2 className="mb-1 font-[impact] text-[32px]">Contate-nos</h2>

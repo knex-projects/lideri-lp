@@ -13,19 +13,19 @@ const CasesSection = () => {
     return (
         <section id="cases" className="font-montserrat">
             <div className="max-w-[85%] md:max-w-[75%] mx-auto mt-[90px]">
-                <div className="flex flex-col gap-[8px] md:gap-[2px] max-w-[500px] lg:max-w-[800px] h-[190px]">
-                    <p className="text-[16px] md:text-[18px] lg:text-[20px] tracking-[25%] leading-[100%]">
+                <div className="flex flex-col gap-[8px] md:gap-[2px] max-w-[500px] lg:max-w-[800px]">
+                    <p className="text-[16px] text-B8 md:text-[18px] lg:text-[20px] tracking-[25%] leading-[100%]">
                         • Portfolio e Resultados
                     </p>
                     <div className="flex items-center">
                         <div className="w-[32px] h-[32px]  md:w-[48px] lg:w-[64px] md:h-[48px] lg:h-[64px] mr-[16px]">
                             <IconFolder/>
                         </div>
-                        <h1 className="font-impact text-[40px] md:text-[58px] lg:text-[76px] leading-[100%] lg:leading-[82px]">
+                        <h1 className="font-impact text-[40px] text-N9 md:text-[58px] lg:text-[76px] leading-[100%] lg:leading-[82px]">
                             Nossos <span className="text-[#87240E]">cases</span>
                         </h1>
                     </div>
-                    <p className="text-[18px] md:text-[19px] lg:text-[20px] max-w-[80%] md:max-w-auto">
+                    <p className="text-[18px] text-N7 md:text-[19px] lg:text-[24px] max-w-[80%] md:max-w-auto">
                         Inspire-se com as histórias de quem já confiou no nosso trabalho.
                     </p>
                 </div>

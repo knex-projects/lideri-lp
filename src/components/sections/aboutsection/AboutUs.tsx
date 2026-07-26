@@ -17,7 +17,7 @@ export const AboutUs = () => {
                     <div className="hidden w-10 h-3.5 mb-7.5 bg-R5 rounded-sm md:block"></div>
                 </div>
 
-                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 md:w-full order-1  md:order-2 xl:row-span-2  ">
+                <div className="relative shrink-0 w-[clamp(299px,40vw,577px)] h-[clamp(164px,22vw,318px)] mb-2.5 md:w-full order-1 max-[412px]:w-67 md:order-2 xl:row-span-2 xl:w-[clamp(299px,40vw,577px)]">
                     <Image
                         src={ equipe1 }
                         alt="Foto da Equipe da Lideri"
@@ -40,12 +40,12 @@ export const AboutUs = () => {
 
                 <div className="flex flex-col justify-center  w-full xl:pr-[10%] order-3 items-center md:col-span-2  xl:col-span-1">
 
-                    <p className="font-montserrat w-full text-sm text-N5 md:text-xl">A Líderi Jr. Consultoria Internacional é a Empresa Júnior de Relações Internacionais da Universidade Federal da Paraíba. Formada e gerida por estudantes, somos uma consultoria especializada em transformar conhecimento acadêmico em soluções reais para negócios que navegam em um mercado cada vez mais global.</p>
+                    <p className="font-montserrat w-full text-sm text-N7 md:text-xl">A Líderi Jr. Consultoria Internacional é a Empresa Júnior de Relações Internacionais da Universidade Federal da Paraíba. Formada e gerida por estudantes, somos uma consultoria especializada em transformar conhecimento acadêmico em soluções reais para negócios que navegam em um mercado cada vez mais global.</p>
                 </div>
             </div>
 
-            <div className="flex flex-col items-center gap-8 my-12 2xl:flex-row md:mt-37.5 md:mb-50 2xl:items-start">
-                <div className="md:relative md:shrink-0 w-[100vw] md:w-[clamp(416px,40vw,540px)] h-[clamp(280px,22vw,330px)]">
+            <div className="flex flex-col items-center gap-[20%] my-12 2xl:flex-row md:mb-30 lg:mt-37.5 lg:mb-50 2xl:items-start 3xl:gap-[30%]">
+                <div className="md:relative md:shrink-0 w-[100vw] md:w-[clamp(416px,65vw,577px)] h-[clamp(280px,55vw,370px)]">
                     <div className="relative w-full h-full overflow-hidden sm:rounded-lg md:w-full md:h-full">
                         <Image
                             src={ chama1 }
@@ -57,7 +57,7 @@ export const AboutUs = () => {
                         />
                     </div>
 
-                    <div className="hidden md:block md:absolute md:w-[clamp(218px,21.8vw,330px)] md:h-[clamp(140px,14vw,212px)] md:top-full md:left-full md:-translate-x-1/2 md:-translate-y-1/2 rounded-lg overflow-hidden">
+                    <div className="hidden md:block md:absolute md:w-[clamp(218px,30.8vw,330px)] md:h-[clamp(140px,20vw,212px)] md:top-full md:left-full md:-translate-x-1/2 md:-translate-y-1/2 rounded-lg overflow-hidden">
                         <Image
                             src={ chama2 }
                             fill
@@ -69,13 +69,13 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-                <div className="flex jus  md:justify-end w-full md:mt-25 md:flex-1 2xl:mt-0">
+                <div className="flex w-full mt-10 md:mt-40 md:flex-1 2xl:mt-0">
                     <AcordionMenu />
                 </div>
             </div>
 
-            <div className="flex flex-col items-center md:flex-row md:justify-between md:gap-12.5 md:items-start">
-                <div className="relative shrink-0 w-[clamp(298px,30vw,577px)] h-[clamp(303px,30vw,578px)] mb-19 md:mb-0">
+            <div className="flex flex-col items-center md:gap-25 lg:flex-row lg:justify-between lg:gap-12.5 lg:items-start">
+                <div className="relative shrink-0 w-[clamp(298px,45vw,577px)] h-[clamp(303px,45vw,587px)] mb-19 md:mb-0">
                     <Image
                         src={ equipe2 }
                         fill
@@ -99,9 +99,9 @@ export const AboutUs = () => {
                 </div>
                 
                 <div className="w-full max-w-144.25">
-                    <h2 className="font-[impact] text-[36px] text-center sm:text-[40px] md:text-start">Conheça <span className="text-R5">nossa história.</span></h2>
+                    <h2 className="font-[impact] text-[36px] text-center text-N8 sm:text-[40px] md:text-start">Conheça <span className="text-R5">nossa história.</span></h2>
 
-                    <p className="mt-4 mb-8 font-montserrat text-sm text-N5 text-justify sm:text-xl">A Líderi lançou âncora em 07 de dezembro de 2012, inspirada pelo ENERI e pelo desejo de transformar a graduação em experiência real. Nasceu com o nome Mundialize, em um cenário de poucos incentivos, mas encontrou nos primeiros apoiadores o impulso necessário para zarpar. As professoras Xaman e Mojana e os membros da EJA foram fundamentais para consolidar essa iniciativa.</p>
+                    <p className="mt-4 mb-8 font-montserrat text-sm text-N7 text-justify sm:text-xl">A Líderi lançou âncora em 07 de dezembro de 2012, inspirada pelo ENERI e pelo desejo de transformar a graduação em experiência real. Nasceu com o nome Mundialize, em um cenário de poucos incentivos, mas encontrou nos primeiros apoiadores o impulso necessário para zarpar. As professoras Xaman e Mojana e os membros da EJA foram fundamentais para consolidar essa iniciativa.</p>
 
                     <div className="flex flex-col gap-8">
                         <div className="flex items-start gap-2">
@@ -111,7 +111,7 @@ export const AboutUs = () => {
                                 height={ 23.33 }
                                 alt="Ícone do contador"
                             />
-                            <p className="font-montserrat text-sm text-N5 sm:text-lg">Nos primeiros anos, a Líderi atuou em captação de recursos para ONGs, comércio exterior e organização de eventos, consolidando sua identidade institucional.</p>
+                            <p className="font-montserrat text-sm text-N7 sm:text-lg">Nos primeiros anos, a Líderi atuou em captação de recursos para ONGs, comércio exterior e organização de eventos, consolidando sua identidade institucional.</p>
                         </div>
                         <div className="flex items-start gap-2">
                             <Image
@@ -120,7 +120,7 @@ export const AboutUs = () => {
                                 height={ 23.33 }
                                 alt="Ícone do contador"
                             />
-                            <p className="font-montserrat text-sm text-N5 sm:text-lg">Em 2017, a conquista da federação fortaleceu a estrutura da empresa e consolidou sua especialização em tradução e comércio exterior.</p>
+                            <p className="font-montserrat text-sm text-N7 sm:text-lg">Em 2017, a conquista da federação fortaleceu a estrutura da empresa e consolidou sua especialização em tradução e comércio exterior.</p>
                         </div>
                         <div className="flex items-start gap-2">
                             <Image
@@ -129,7 +129,7 @@ export const AboutUs = () => {
                                 height={ 23.33 }
                                 alt="Ícone do contador"
                             />
-                            <p className="font-montserrat text-sm text-N5 sm:text-lg">Durante a pandemia de 2020, a Líderi concentrou suas atividades em comércio exterior e superou um dos períodos mais desafiadores de sua história.</p>
+                            <p className="font-montserrat text-sm text-N7 sm:text-lg">Durante a pandemia de 2020, a Líderi concentrou suas atividades em comércio exterior e superou um dos períodos mais desafiadores de sua história.</p>
                         </div>
                         <div className="flex items-start gap-2">
                             <Image
@@ -138,7 +138,7 @@ export const AboutUs = () => {
                                 height={ 23.33 }
                                 alt="Ícone do contador"
                             />
-                            <p className="font-montserrat text-sm text-N5 sm:text-lg">Após mais de uma década, a Líderi continua conectando academia e mercado por meio da formação de profissionais e da entrega de soluções aos clientes.</p>
+                            <p className="font-montserrat text-sm text-N7 sm:text-lg">Após mais de uma década, a Líderi continua conectando academia e mercado por meio da formação de profissionais e da entrega de soluções aos clientes.</p>
                         </div>
                     </div>
                 </div>

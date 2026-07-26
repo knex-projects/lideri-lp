@@ -64,10 +64,10 @@ export const TeamCarousel = () => {
                         {carouselMembers.map((member, index) => (
                             <div
                                 key={`${member.name}-${index}`}
-                                className="min-w-0 flex-[0_0_42.5%] pl-3 min-[480px]:flex-[0_0_48%] md:flex-[0_0_330px] md:pl-8 xl:flex-[0_0_370px] xl:pl-[40px]"
+                                className="min-w-0 flex-[0_0_42.5%] pl-3 min-[412px]:flex-[0_0_190px] md:flex-[0_0_330px] md:pl-8 xl:flex-[0_0_370px] xl:pl-[40px]"
                             >
                                 <article className="flex h-full flex-col items-center text-center md:h-[368px] md:w-[330px] md:gap-[10px]">
-                                    <div className="relative aspect-square w-full max-w-[140px] overflow-hidden rounded-[18px] bg-R5 sm:max-w-[184px] md:h-[290px] md:w-[312px] md:max-w-none md:rounded-[50px] md:border md:border-transparent md:px-8 md:pt-8 md:pb-[30px]">
+                                    <div className="relative aspect-square w-full max-w-[168px] overflow-hidden rounded-[25px] bg-R5 sm:max-w-[184px] md:h-[290px] md:w-[312px] md:max-w-none md:rounded-[50px] md:border md:border-transparent md:px-8 md:pt-8 md:pb-[30px]">
                                         <Image
                                             src={member.image}
                                             alt={`Foto de ${member.name}`}
