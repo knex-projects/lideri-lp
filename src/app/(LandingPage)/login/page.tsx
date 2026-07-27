@@ -43,7 +43,7 @@ export default function PaginaLogin() {
       email: data.email,
       password: data.password,
       redirect: false,
-      callbackUrl: "/admin",
+      callbackUrl: "/dashboard",
     });
 
     if (result?.error) {
