@@ -17,7 +17,7 @@ export const AcordionMenu = () => {
         <div className="flex flex-col w-full 2xl:max-w-113.25">
             <div className="flex flex-col gap-3 pb-5">
                 <button 
-                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[32px]"
+                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[2rem]"
                     onClick={ () => handleToggle(0) }
                 >
                     <span className={`text-N9 transition-colors duration-300 ${openIndex === 0 ? "text-[#87240E]" : ""}`}>
@@ -51,7 +51,7 @@ export const AcordionMenu = () => {
 
             <div className="flex flex-col gap-3 pb-5">
                 <button 
-                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[32px]"
+                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[2rem]"
                     onClick={ () => handleToggle(1) }
                 >
                     <span className={`text-N9 transition-colors duration-300 ${openIndex === 1 ? "text-[#87240E]" : ""}`}>
@@ -85,7 +85,7 @@ export const AcordionMenu = () => {
             
             <div className="flex flex-col gap-3 pb-5">
                 <button 
-                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[32px]"
+                    className="flex items-center justify-between border-b border-N4 font-zodiak text-[2rem]"
                     onClick={ () => handleToggle(2) }
                 >
                     <span className={`text-N9 transition-colors duration-300 ${openIndex === 2 ? "text-[#87240E]" : ""}`}>

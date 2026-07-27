@@ -12,26 +12,26 @@ function IconFolder() {
 const CasesSection = () => {
     return (
         <section id="cases" className="font-montserrat">
-            <div className="max-w-[85%] md:max-w-[75%] mx-auto mt-[90px]">
-                <div className="flex flex-col gap-[8px] md:gap-[2px] max-w-[500px] lg:max-w-[800px]">
-                    <p className="text-[16px] text-B8 md:text-[18px] lg:text-[20px] tracking-[25%] leading-[100%]">
+            <div className="max-w-[85%] md:max-w-[75%] mx-auto mt-22.5">
+                <div className="flex flex-col gap-2 md:gap-0.5 max-w-125 lg:max-w-200 h-47.5">
+                    <p className="text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] tracking-[25%] leading-[100%]">
                         • Portfolio e Resultados
                     </p>
                     <div className="flex items-center">
-                        <div className="w-[32px] h-[32px]  md:w-[48px] lg:w-[64px] md:h-[48px] lg:h-[64px] mr-[16px]">
+                        <div className="w-8 h-8  md:w-12 lg:w-16 md:h-12 lg:h-16 mr-4">
                             <IconFolder/>
                         </div>
-                        <h1 className="font-impact text-[40px] text-N9 md:text-[58px] lg:text-[76px] leading-[100%] lg:leading-[82px]">
+                        <h1 className="font-impact text-[2.5rem] md:text-[3.625rem] lg:text-[4.75rem] leading-[100%] lg:leading-[5.125rem]">
                             Nossos <span className="text-[#87240E]">cases</span>
                         </h1>
                     </div>
-                    <p className="text-[18px] text-N7 md:text-[19px] lg:text-[24px] max-w-[80%] md:max-w-auto">
+                    <p className="text-[1.125rem] md:text-[1.1875rem] lg:text-[1.25rem] max-w-[80%] md:max-w-auto">
                         Inspire-se com as histórias de quem já confiou no nosso trabalho.
                     </p>
                 </div>
             </div>
            
-            <div className="mx-auto mt-[40px] flex w-[85%] max-w-[85%] flex-wrap justify-center gap-[30px] md:w-[75%]">
+            <div className="mx-auto mt-10 flex w-[85%] max-w-[85%] flex-wrap justify-center gap-7.5 md:w-[75%]">
                 {cases.map((caseItem, index) => (
                     <CaseCard
                         key={index}

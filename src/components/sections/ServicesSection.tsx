@@ -13,36 +13,36 @@ function IconCompass() {
 const ServicesSection = () => {
     return (
         <section id="services" className="font-montserrat">
-            <div className="mx-auto mt-[90px] max-w-[85%] md:max-w-[75%]">
-                <div className="flex h-[190px] max-w-[500px] flex-col gap-[8px] md:gap-[2px] lg:max-w-[800px]">
-                    <p className="text-[16px] leading-[100%] tracking-[25%] md:text-[18px] lg:text-[20px]">
+            <div className="mx-auto mt-22.5 max-w-[85%] md:max-w-[75%]">
+                <div className="flex h-47.5 max-w-125 flex-col gap-2 md:gap-0.5 lg:max-w-200">
+                    <p className="text-[1rem] leading-[100%] tracking-[25%] md:text-[1.125rem] lg:text-[1.25rem]">
                         • Nossas soluções
                     </p>
                     <div className="flex items-center">
-                        <div className="mr-[16px] h-[32px] w-[32px] md:h-[48px] md:w-[48px] lg:h-[64px] lg:w-[64px]">
+                        <div className="mr-4 h-8 w-8 md:h-12 md:w-12 lg:h-16 lg:w-16">
                             <IconCompass />
                         </div>
-                        <h1 className="font-impact text-[40px] leading-[100%] md:text-[58px] lg:text-[76px] lg:leading-[82px]">
+                        <h1 className="font-impact text-[2.5rem] leading-[100%] md:text-[3.625rem] lg:text-[4.75rem] lg:leading-[5.125rem]">
                             Nossos <span className="text-[#87240E]">serviços</span>
                         </h1>
                     </div>
-                    <p className="max-w-[690px] text-[18px] md:max-w-auto md:text-[19px] lg:text-[28px]">
+                    <p className="max-w-150 text-[1.125rem] md:max-w-auto md:text-[1.1875rem] lg:text-[1.25rem]">
                         Soluções estratégicas para escalar o seu negócio.
                     </p>
                 </div>
 
                 <div className="lg:mt-16 flex flex-col gap-10">
                     {serviceGroups.map((group) => (
-                        <div key={group.title} className="mt-[8px]">
-                            <div className="flex flex-col gap-[32px]">
-                                <div className='flex gap-[16px] items-center'>
-                                    <div className='w-[4px] h-[38px] rounded-[8px] bg-[#000E31]'></div>
-                                    <h2 className='font-impact text-[32px] md:text-[40px] lg:text-[48px]'>
+                        <div key={group.title} className="mt-2">
+                            <div className="flex flex-col gap-8">
+                                <div className='flex gap-4 items-center'>
+                                    <div className='w-1 h-9.5 rounded-[0.5rem] bg-[#000E31]'></div>
+                                    <h2 className='font-impact text-[2rem] md:text-[2.5rem] lg:text-[3rem]'>
                                         {group.title.split(' ').slice(0, -1).join(' ')}{' '}
                                         <span className="text-[#87240E]">{group.title.split(' ').pop()}</span>
                                     </h2>
                                 </div>
-                                <hr className='border-[1px] border-[#B1AFAF] w-full'/>
+                                <hr className='border-[0.0625rem] border-[#B1AFAF] w-full'/>
                             </div>
                             <div className="">
                                 {group.services.map((service) => (
