@@ -1,15 +1,13 @@
 'use client';
 
+import type { SidebarCMSProps } from '@/src/types';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, FileText, User, FolderDown, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, User, FolderDown, LogOut, Pencil } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 
-interface SidebarCMSProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+
 
 export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
   const pathname = usePathname();
@@ -21,6 +19,8 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
     { label: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
     { label: 'Postagens', icon: FileText, href: '/posts' },
     { label: 'Mídia', icon: FolderDown, href: '/midias' },
+    { label: 'Novo Post', icon:Pencil , href: '/editor' },
+    
   ];
 
   return (
@@ -28,13 +28,13 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
      
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 lg:hidden top-[98px]" 
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 lg:hidden top-24.5" 
           onClick={onClose}
         />
       )}
 
       <aside className={`
-        fixed top-[98px] left-0 h-[calc(100vh-98px)] w-72 bg-N1 p-6 z-40 flex flex-col justify-between border-r border-gray-800 transition-transform duration-300 ease-in-out
+        fixed top-24.5 left-0 h-[calc(100vh-6.125rem)] w-72 bg-N1 p-6 z-40 flex flex-col justify-between border-r border-gray-800 transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         
         lg:translate-x-0 lg:relative lg:top-auto lg:w-64 lg:py-6 lg:px-8 lg:flex flex-shrink-0
@@ -55,10 +55,13 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
                 className={`flex items-center gap-3 px-3 py-3 rounded-lg font-medium text-xl lg:text-2xl transition-all duration-200 ${
                   isActive
                     ? 'bg-[rgb(135,36,14)] text-white shadow-lg'
-                    : 'text-N8 hover:bg-gray-800 hover:text-white'
-                }`}
+                    : 'text-N8 border hover:border-R5 border-dashed border-white hover:text-white'
+                },${item.label === 'Novo Post' ? 'flex lg:hidden border-2 border-[rgb(135,36,14,1)] text-[rgb(135,36,14)]':''},
+                ${item.label === 'Novo Post' && isEditor?'hidden absolute':''}`
+                
+              }
               >
-                <Icon className="size-[28px] lg:size-[32px] flex-shrink-0" />
+                <Icon className="size-7 lg:size-8 flex-shrink-0" />
                 <span className="text-base">{item.label}</span>
               </Link>
             );
@@ -66,10 +69,10 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
 
           {isEditor && (
             <div className="lg:hidden mt-4 pt-4 border-t border-gray-200 flex flex-col gap-2">
-              <button type="button" onClick={() => window.dispatchEvent(new Event('editor:save-draft'))} className="w-full rounded-lg border border-[#87240E] px-3 py-3 text-left text-sm font-medium text-[#87240E] hover:bg-[#87240E]/5 transition-colors">
+              <button type="button" onClick={() => window.dispatchEvent(new Event('editor:save-draft'))} className=" border-2 border-[#87240E] flex items-center gap-3 px-3 py-3 rounded-lg font-medium text-xl lg:text-2xl transition-all duration-200  text-[#87240E] hover:bg-gray-800 ">
                 Salvar rascunho
               </button>
-              <button type="button" onClick={() => router.push('/dashboard')} className="w-full rounded-lg border border-[#87240E] px-3 py-3 text-left text-sm font-medium text-[#87240E] hover:bg-[#87240E]/5 transition-colors">
+              <button type="button" onClick={() => router.push('/dashboard')} className=" border-2 border-[#87240E] flex items-center gap-3 px-3 py-3 rounded-lg font-medium text-xl lg:text-2xl transition-all duration-200  text-[#87240E] hover:bg-gray-800 ">
                 Sair
               </button>
             </div>
@@ -77,7 +80,7 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
         </nav>
 
     
-        <div className="relative flex lg:flex-col lg:gap-4 lg:border-[1px] lg:rounded-[8px] lg:py-3 lg:px-4 lg:border-N4 lg:w-full">
+        <div className="relative flex lg:flex-col lg:gap-4 lg:border-[0.0625rem] lg:rounded-[0.5rem] lg:py-3 lg:px-4 lg:border-N4 lg:w-full">
           <button
             type="button"
             onClick={() => setIsProfileMenuOpen((isOpen) => !isOpen)}
@@ -85,7 +88,7 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
             aria-expanded={isProfileMenuOpen}
             aria-controls="profile-menu"
           >
-            <div className="w-10 h-10 rounded-full border-[1px] border-N4 bg-N8 flex items-center justify-center text-white font-bold flex-shrink-0">
+            <div className="w-10 h-10 rounded-full border-[0.0625rem] border-N4 bg-N8 flex items-center justify-center text-white font-bold flex-shrink-0">
               <User className="w-5 h-5 text-gray-300" />
             </div>
             <div className="flex flex-col min-w-0">
