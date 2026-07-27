@@ -1,26 +1,22 @@
+import type { Testimonial } from '@/src/types';
 import Image from "next/image";
 import Aspas from "@/public/assets/icon/aspas.svg";
 
-export interface Testimonial {
-  name: string;
-  role: string;
-  quote: string;
-  avatarUrl: string;
-}
+
 
 export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div
       className="
-        flex flex-col w-full sm:w-[340px] lg:min-w-[340px] lg:w-[340px] min-h-[424px]
+        flex flex-col w-full sm:w-85 lg:min-w-85 lg:w-85 min-h-106
         h-auto
         gap-6
-        rounded-[8px]
-        border-[2px] border-[#00000033]
+        rounded-[0.5rem]
+        border-[0.125rem] border-[#00000033]
         p-8
         bg-white
         transition-shadow duration-300
-        hover:shadow-[0px_4px_24px_rgba(0,0,0,0.1)]
+        hover:shadow-[0rem_0.25rem_1.5rem_rgba(0,0,0,0.1)]
       "
     >
       <Image
@@ -28,13 +24,13 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         alt="Aspas"
         width={46}
         height={42.75}
-        className="w-[46px] h-[42.75px] shrink-0"
+        className="w-11.5 h-10.6875 shrink-0"
         style={{ height: "auto" }}
       />
       
       <div className="flex flex-col gap-4">
-        <div className="w-[24px] h-[4px] bg-R5 rounded-full shrink-0" />
-         <p className="font-montserrat font-normal text-[16px] leading-[1.5] tracking-[0] text-N6 w-auto min-[500px]:w-[276px]">
+        <div className="w-6 h-1 bg-R5 rounded-full shrink-0" />
+         <p className="font-montserrat font-normal text-[1rem] leading-[1.5] tracking-[0] text-N6 w-auto min-[31.25rem]:w-69">
           {testimonial.quote}
         </p>
       </div>
@@ -47,15 +43,15 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               src={testimonial.avatarUrl}
               alt={`Foto de ${testimonial.name}`}
               fill
-              sizes="80px"
+              sizes="5rem"
               className="object-cover"
             />
           </div>
           <div className="flex flex-col ">
-            <span className="font-montserrat font-semibold text-[16px] text-N8 leading-tight">
+            <span className="font-montserrat font-semibold text-[1rem] text-N8 leading-tight">
               {testimonial.name}
             </span>
-            <span className="font-montserrat text-[14px] text-N5 leading-tight">
+            <span className="font-montserrat text-[0.875rem] text-N5 leading-tight">
               {testimonial.role}
             </span>
           </div>

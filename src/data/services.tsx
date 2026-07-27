@@ -1,17 +1,9 @@
+import type { ServiceItem, ServiceGroup } from '@/src/types';
 import type { ComponentType, SVGProps } from 'react';
 
-export interface ServiceItem {
-    title: string;
-    description: string;
-    extendedDescription: string;
-    benefits: string[];
-    icon: ComponentType<SVGProps<SVGSVGElement>>;
-}
 
-export interface ServiceGroup {
-    title: string;
-    services: ServiceItem[];
-}
+
+
 
 const IconAnaliseDeProdutos = (props: SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 74 89" fill="none" xmlns="http://www.w3.org/2000/svg">

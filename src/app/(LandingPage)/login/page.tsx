@@ -1,5 +1,6 @@
 'use client';
 
+import type { LoginFormData } from '@/src/types';
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -22,7 +23,7 @@ const loginSchema = z.object({
 });
 
 
-type LoginFormData = z.infer<typeof loginSchema>;
+
 
 export default function PaginaLogin() {
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -53,11 +54,11 @@ export default function PaginaLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-loginImage bg-black bg-cover px-4" >
+    <div className="min-h-screen flex items-center pt-29 justify-center bg-loginImage bg-black bg-cover px-4" >
 
-      <div className="max-w-[740px] min-h-[723px] w-full bg-white flex flex-col justify-between pt-[96px]  pb-[20px] rounded-xl shadow-lg px-10 sm:px-16 border border-gray-100 text-center">
+      <div className="max-w-185 min-h-180.75 w-full bg-white flex flex-col justify-between pt-24  pb-5 rounded-[0.5rem] shadow-lg px-10 sm:px-16 border border-N8 text-center">
         <div className=" flex justify-center items-center ">
-          <div className="invert  relative flex justify-center w-full h-24  sm:w-[280px] sm:h-[108px] ">
+          <div className="invert  relative flex justify-center w-full h-24  sm:w-70 sm:h-27 ">
             <Image
               src={logoLideri1}
               fill
@@ -77,30 +78,30 @@ export default function PaginaLogin() {
 
         <form onSubmit={handleSubmit(handleCredentialsLogin)} className="space-y-4 text-left mb-6">
           <div className=" relative w-full">
-            <label className="text-[24px] font-normal text-gray-700">login</label>
+            <label className="text-[1.5rem] font-normal text-N9">login</label>
             <div className="relative mt-1">
 
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <Mail
-                  className={`h-5 w-5 ${errors.email ? "text-red-500" : "text-gray-400"}`}
+                  className={`h-5 w-5 ${errors.email ? "text-red-500" : "text-N5"}`}
                 />
               </div>
 
               <input
                 type="email"
                 {...register("email")}
-                className={`w-full p-2.5  h-12 pl-10 border rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ${errors.email ? "border-red-500 focus:ring-red-500" : "border-gray-300"
+                className={`w-full p-2.5  h-12 pl-10 border border-N5 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ${errors.email ? "border-red-500 focus:ring-red-500" : "border-N5"
                   }`}
                 placeholder="seu-email@exemplo.com"
               />
             </div>
           </div>
           <div>
-            <label className="text-[24px] font-normal text-gray-700">Senha</label>
+            <label className="text-[1.5rem] font-normal text-N9">Senha</label>
             <input
               type="password"
               {...register("password")}
-              className={`mt-1 w-full h-12 p-2.5 border rounded-lg focus:ring-R5 focus:border-R5 transition ${errors.password ? "border-red-500 focus:ring-red-500" : "border-gray-300"
+              className={`mt-1 w-full h-12 p-2.5 text-N5 border border-N5 rounded-lg focus:ring-R5 focus:border-R5 transition ${errors.password ? "border-red-500 focus:ring-red-500" : "border-N5"
                 }`}
               placeholder="••••••••"
             />
@@ -113,21 +114,21 @@ export default function PaginaLogin() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-12 text-24 md:h-[68px] bg-R5 text-N1 md:text-[24px] font-semibold mt-10 rounded-lg hover:bg-R8 transition "
+            className="w-full h-12 text-24 md:h-17 bg-R5 text-N1 md:text-[1.5rem] font-semibold mt-10 rounded-lg hover:bg-R8 transition "
           >
             {isSubmitting ? "Carregando..." : "Logar"}
           </button>
         </form>
 
         <div className="relative flex  items-center">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="flex-shrink mx-4 text-gray-400 text-sm">ou</span>
-          <div className="flex-grow border-t border-gray-300"></div>
+          <div className="flex-grow border-t border-N5"></div>
+          <span className="flex-shrink mx-4  text-N5 text-md">ou</span>
+          <div className="flex-grow border-t border-N5"></div>
         </div>
 
         <button
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-          className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 font-semibold py-2.5 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition"
+          className="w-full flex items-center justify-center gap-3 bg-white text-N9 font-semibold py-2.5 border border-N5 rounded-lg shadow-sm hover:bg-gray-50 transition"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#EA4335" d="M12 5.04c1.64 0 3.12.56 4.28 1.67l3.2-3.2C17.52 1.58 14.96 1 12 1 7.35 1 3.4 3.65 1.5 7.5l3.6 2.8C6.01 6.84 8.78 5.04 12 5.04z" />

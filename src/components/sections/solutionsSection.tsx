@@ -1,10 +1,7 @@
+import type { SolutionItem } from '@/src/types';
 import type { ComponentType, SVGProps } from "react";
 
-type SolutionItem = {
-    title: string;
-    description: string;
-    Icon: ComponentType<SVGProps<SVGSVGElement>>;
-};
+
 
 function IconPackage(props: SVGProps<SVGSVGElement>) {
     return (
@@ -123,30 +120,30 @@ export default function SolutionsSection() {
             className="w-full bg-transparent"
             aria-labelledby="solutions-section-title"
         >
-            <div className="mx-auto w-full px-[26px] py-[60px] sm:py-[90px] sm:px-[12.5%] xl:min-h-[996px] xl:py-[120px]">
-                <div className="mx-auto flex w-full  flex-col items-start gap-[50px]">
-                    <div className="flex w-full max-w-[557px] flex-col items-start gap-[40px]">
+            <div className="mx-auto w-full px-6.5 py-15 sm:py-22.5 sm:px-[12.5%] xl:min-h-249 xl:py-30">
+                <div className="mx-auto flex w-full  flex-col items-start gap-12.5">
+                    <div className="flex w-full max-w-139.25 flex-col items-start gap-10">
                         <div className="flex w-full flex-col items-center justify-start gap-2 text-start">
                             <h2
                                 id="solutions-section-title"
-                                className="w-full font-zodiak text-[36px] leading-[42px] font-bold text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
+                                className="w-full font-zodiak text-[2.25rem] leading-[2.625rem] font-bold text-N8 sm:text-[2.75rem] sm:leading-[3.25rem] xl:text-[3rem] xl:leading-[3.5rem]"
                             >
                                 Para o seu problema, a Líderi tem a{" "}
                                 <span className="text-R5">solução.</span>
                             </h2>
-                            <p className="w-full max-w-[514px] font-montserrat text-[14px] leading-[20px] text-N5 sm:text-[16px] sm:leading-[22px] xl:max-w-none xl:leading-[normal]">
+                            <p className="w-full max-w-128.5 font-montserrat text-[0.875rem] leading-[1.25rem] text-N5 sm:text-[1rem] sm:leading-[1.375rem] xl:max-w-none xl:leading-[normal]">
                                 {subtitle}
                             </p>
                         </div>
                     </div>
 
-                    <div className="flex w-full flex-col items-center gap-[64px]">
-                        <div className=" grid w-full grid-cols-1  justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8   xl:items-center xl:justify-center xl:gap-[60px]">
+                    <div className="flex w-full flex-col items-center gap-16">
+                        <div className=" grid w-full grid-cols-1  justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8   xl:items-center xl:justify-center xl:gap-15">
                             {solutionItems.map(
                                 ({ title, description, Icon }) => (
                                     <article
                                         key={title}
-                                        className=" flex h-full flex-col hover:ring-[2.5px] inset-0 transition-all duration-300 hover:ring-R5/80 shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] justify-between rounded-[8px] ring-2  ring-[rgba(0,0,0,0.2)] bg-white px-[40px] py-[24px]   lg:max-w-none "
+                                        className=" flex h-full flex-col hover:ring-[0.15625rem] inset-0 transition-all duration-300 hover:ring-R5/80 shadow-[0.125rem_0.125rem_0.5rem_rgba(0,0,0,0.4)] hover:shadow-[0rem_0.0625rem_0.5rem_#87240E] justify-between rounded-[0.5rem] ring-2  ring-[rgba(0,0,0,0.2)] bg-white px-10 py-6   lg:max-w-none "
                                     >
                                         <div className="flex w-full items-stretch flex-col justify-between gap-8 mb-6">
                                             <Icon
@@ -154,10 +151,10 @@ export default function SolutionsSection() {
                                                 aria-hidden="true"
                                             />
                                             <div className="flex flex-col gap-3 leading-normal">
-                                                <h3 className="font-zodiak sm:text-[24px] text-[20px]  font-bold text-N8">
+                                                <h3 className="font-zodiak sm:text-[1.5rem] text-[1.25rem]  font-bold text-N8">
                                                     {title}
                                                 </h3>
-                                                <p className="font-montserrat xl:text-[18px] text-[16px] text-N5">
+                                                <p className="font-montserrat xl:text-[1.125rem] text-[1rem] text-N5">
                                                     {description}
                                                 </p>
                                             </div>
@@ -167,7 +164,7 @@ export default function SolutionsSection() {
                                             <button
                                                 type="button"
                                                 aria-label={`Ver detalhes de ${title}`}
-                                                className="inline-flex h-[52px] w-[71px] items-center justify-center rounded-[8px] ring-2 ring-R5 text-R5 shadow-[0px_1px_8px_0px_#87240e] transition-all duration-200 hover:-translate-y-[1px] hover:bg-R5 hover:text-N1"
+                                                className="inline-flex h-13 w-17.75 items-center justify-center rounded-[0.5rem] ring-2 ring-R5 text-R5 shadow-[0rem_0.0625rem_0.5rem_0rem_#87240e] transition-all duration-200 hover:-translate-y-0.25 hover:bg-R5 hover:text-N1"
                                             >
                                                 <ArrowForwardIcon />
                                             </button>
@@ -179,9 +176,9 @@ export default function SolutionsSection() {
 
                         <button
                             type="button"
-                            className="hidden h-[52px] items-center gap-2 rounded-[8px] bg-R5 px-6 py-3 font-medium text-N1 transition-all duration-200 hover:-translate-y-[1px] hover:bg-R6"
+                            className="hidden h-13 items-center gap-2 rounded-[0.5rem] bg-R5 px-6 py-3 font-medium text-N1 transition-all duration-200 hover:-translate-y-0.25 hover:bg-R6"
                         >
-                            <span className="font-montserrat text-[16px] leading-6">
+                            <span className="font-montserrat text-[1rem] leading-6">
                                 Ver todos os serviços
                             </span>
                             <ArrowOutwardIcon className="text-N1" />

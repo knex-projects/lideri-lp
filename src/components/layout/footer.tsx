@@ -6,7 +6,7 @@ export function Footer() {
         <section className="w-full flex flex-col min-h-212.75 sm:min-h-137.75 pb-8 px-6.5 pt-25 justify-between bg-R5 text-N3 md:px-[12.5%]">
             <div className="mx-auto flex w-full flex-col">
                 <div className="flex max-sm:flex-col flex-wrap justify-between">
-                    <div className="flex items-start text-N3 max-[1161px]:w-full py-8 sm:py-10 sm:justify-center xl:justify-start">
+                    <div className="flex items-start text-N3 max-[72.5625rem]:w-full py-8 sm:py-10 sm:justify-center xl:justify-start">
                         <div className="flex flex-col gap-6">
                             <Image
                                 src="/logo/lideriLogo.svg"
@@ -15,15 +15,15 @@ export function Footer() {
                                 height={91}
                                 className="h-auto w-auto"
                             />
-                            <p className="max-sm:w-[256px] max-[1161px]:w-full w-58 font-montserrat text-xs text-N3 md:text-sm">Consultoria especializada em soluções estratégicas  para impulsionar o crescimento da sua organização</p>
-                            <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
+                            <p className="max-sm:w-64 max-[72.5625rem]:w-full w-58 font-montserrat text-xs text-N3 md:text-sm">Consultoria especializada em soluções estratégicas  para impulsionar o crescimento da sua organização</p>
+                            <div className="w-12 h-1 rounded-[0.625rem] bg-[#87240E]"></div>
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-5.5 sm:gap-8 pr-6.5 py-10 text-N3">
                         <div className="flex flex-col gap-3">
                             <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Endereço</h3>
-                            <div className="w-12 h-1 rounded-[10px] bg-[#87240E]"></div>
+                            <div className="w-12 h-1 rounded-[0.625rem] bg-[#87240E]"></div>
                         </div>
 
                         <div className="flex flex-col gap-5">
@@ -62,7 +62,7 @@ export function Footer() {
                         <div className="flex flex-col gap-8  py-10 justify-self-start">
                             <div className="flex flex-col gap-3">
                                 <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Contatos
-                                      <div className="w-12 h-1 rounded-[10px] bg-[#87240E] mt-3"></div>
+                                      <div className="w-12 h-1 rounded-[0.625rem] bg-[#87240E] mt-3"></div>
                                 </h3>
                                
                             </div>
@@ -90,7 +90,7 @@ export function Footer() {
                         
                         <div className="flex flex-col gap-5.5 sm:gap-8  py-10 2xl:justify-self-end">
                             <h3 className="text-xl font-montserrat font-bold sm:text-2xl">Redes sociais
-                                 <div className="w-12 h-1 rounded-[10px] bg-[#87240E] mt-3"></div>
+                                 <div className="w-12 h-1 rounded-[0.625rem] bg-[#87240E] mt-3"></div>
                             </h3>
                            
 
@@ -118,7 +118,7 @@ export function Footer() {
                     </div>
                 </div>
             </div>
-            <p className="mt-10 text-center font-montserrat text-[14px] leading-[1.6] sm:text-start">
+            <p className="mt-10 text-center font-montserrat text-[0.875rem] leading-[1.6] sm:text-start">
                 © 2026 Líderi Jr. Consultoria. Todos os direitos reservados.
             </p>
         </section>

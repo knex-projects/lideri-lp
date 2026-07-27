@@ -1,26 +1,14 @@
 'use client';
+import type { ImageUploadProps, UltimaMidia } from '@/src/types';
 import React, { useState, useEffect, useRef } from 'react';
-import { createClient } from '@sanity/client';
+import { api } from '@/src/services/api';
+import { cms } from '@/src/services/cms';
 import toast from 'react-hot-toast';
 
 
-const readClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2026-07-09',
-  useCdn: false,
-});
 
-interface ImageUploadProps {
-  onImageSelect: (docId: string, url: string) => void;
-  initialPreviewUrl?: string | null;
-}
 
-interface UltimaMidia {
-  _id: string;
-  url: string;
-  tituloImagem: string;
-}
+
 
 export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }: ImageUploadProps) {
   const [imageLoading, setImageLoading] = useState(false);
@@ -32,12 +20,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
   
   const carregarUltimosPreviews = async () => {
     try {
-      const query = `*[_type == "galeria"] | order(_createdAt desc)[0..1] {
-        _id,
-        tituloImagem,
-        "url": arquivo.asset->url
-      }`;
-      const resultado = await readClient.fetch(query);
+      const resultado = await cms.getGallery(2);
       setUltimasImagens(resultado || []);
     } catch (error) {
       console.error("Erro ao carregar miniaturas da galeria:", error);
@@ -66,20 +49,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
       const localUrl = URL.createObjectURL(arquivo);
       setImagePreviewUrl(localUrl);
 
-      const formData = new FormData();
-      formData.append('file', arquivo);
-      formData.append('titulo', arquivo.name.split('.')[0]);
-
-      const resposta = await fetch('/api/upload/image', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const dados = await resposta.json();
-
-      if (!resposta.ok) {
-        throw new Error(dados.error || 'Erro desconhecido no servidor.');
-      }
+      const dados = await api.uploadImage(arquivo);
 
       onImageSelect(dados.docId, localUrl);
       toast.success('Imagem adicionada à galeria com sucesso!', { id: toastId });
@@ -115,15 +85,15 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
           type="button"
           onClick={() => imageInputRef.current?.click()}
           disabled={imageLoading}
-          className="w-full max-w-[117px] h-[66px] bg-[#F0F0F0] border-2 border-dashed border-[#5E1504] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden relative group disabled:opacity-50 flex-shrink-0"
+          className="w-full max-w-29.25 h-16.5 bg-[#F0F0F0] border-2 border-dashed border-[#5E1504] rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden relative group disabled:opacity-50 flex-shrink-0"
         >
           {imageLoading ? (
-            <span className="text-[10px] text-gray-500 animate-pulse">Subindo...</span>
+            <span className="text-[0.625rem] text-gray-500 animate-pulse">Subindo...</span>
           ) : imagePreviewUrl ? (
             <>
               <img src={imagePreviewUrl} alt="Preview do post" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-[10px] text-white font-medium">Alterar</span>
+                <span className="text-[0.625rem] text-white font-medium">Alterar</span>
               </div>
             </>
           ) : (
@@ -140,7 +110,7 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
           return (
             <div 
               key={index}
-              className="w-full max-w-[117px] h-[66px] bg-gray-100 border border-gray-300 rounded-md overflow-hidden relative group"
+              className="w-full max-w-29.25 h-16.5 bg-gray-100 border border-gray-300 rounded-md overflow-hidden relative group"
             >
               {imagemExistente ? (
                 <>
@@ -156,14 +126,14 @@ export default function ImageUpload({ onImageSelect, initialPreviewUrl = null }:
                       setImagePreviewUrl(imagemExistente.url);
                       onImageSelect(imagemExistente._id, imagemExistente.url);
                     }}
-                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[10px] text-white font-medium px-1 text-center"
+                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[0.625rem] text-white font-medium px-1 text-center"
                   >
                     Usar esta
                   </button>
                 </>
               ) : (
                  
-                <div className="w-full h-full bg-gray-100 flex items-center justify-center text-[9px] text-gray-400">
+                <div className="w-full h-full bg-gray-100 flex items-center justify-center text-[0.5625rem] text-gray-400">
                   Vazio
                 </div>
               )}

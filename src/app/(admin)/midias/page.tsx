@@ -1,17 +1,16 @@
 'use client';
+import type { GalleryImage } from '@/src/types';
 import React, { useState, useEffect, useRef } from 'react';
-import { client as sanityClient } from '@/src/sanity/lib/client';
+import { api } from '@/src/services/api';
+import { cms } from '@/src/services/cms';
 import { Upload, Loader2, Trash2, AlertTriangle, X } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { LoadingScreen } from '@/src/components/layout/loading';
 
-interface ImagemGaleria {
-  _id: string;
-  tituloImagem: string;
-  url: string;
-}
+
 
 export default function GaleriaMidiaResponsiva() {
-  const [imagens, setImagens] = useState<ImagemGaleria[]>([]);
+  const [imagens, setImagens] = useState<GalleryImage[]>([]);
   const [uploading, setUploading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [loadingLista, setLoadingLista] = useState(true);
@@ -23,12 +22,8 @@ export default function GaleriaMidiaResponsiva() {
 
   const carregarMidias = async () => {
     try {
-      const query = `*[_type == "galeria"] | order(_createdAt desc) {
-        _id,
-        tituloImagem,
-        "url": arquivo.asset->url
-      }`;
-      const resultado = await sanityClient.fetch(query);
+      
+      const resultado = await cms.getGallery();
       setImagens(resultado || []);
     } catch (error) {
       console.error("Erro ao rodar GROQ:", error);
@@ -51,20 +46,7 @@ export default function GaleriaMidiaResponsiva() {
     try {
       setUploading(true);
 
-      const formData = new FormData();
-      formData.append('file', arquivo);
-      formData.append('titulo', arquivo.name.split('.')[0]);
-
-      const resposta = await fetch('/api/upload/image', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const dados = await resposta.json();
-
-      if (!resposta.ok) {
-        throw new Error(dados.error || 'Erro desconhecido no servidor.');
-      }
+      await api.uploadImage(arquivo);
 
       toast.success('Mídia salva com sucesso!', { id: toastUploadId });
       carregarMidias();
@@ -95,22 +77,18 @@ export default function GaleriaMidiaResponsiva() {
     try {
       setDeletingId(docId);
 
-      const resposta = await fetch(`/api/upload/image?id=${docId}`, {
-        method: 'DELETE',
-      });
-
-      const dados = await resposta.json();
-
-      if (!resposta.ok) {
-        if (resposta.status === 409 || dados.error?.includes('references')) {
+      try {
+        await api.deleteImage(docId);
+      } catch (error: any) {
+        if (error.message?.includes('references')) {
           toast.error(
             'Não foi possível apagar! Esta imagem está vinculada a uma publicação ativa do blog.',
             {
               id: toastDeleteId,
               duration: 5000,
               style: {
-                border: '1px solid #87240E',
-                padding: '12px',
+                border: '0.0625rem solid #87240E',
+                padding: '0.75rem',
                 color: '#87240E',
                 fontFamily: 'Montserrat, sans-serif'
               }
@@ -118,7 +96,7 @@ export default function GaleriaMidiaResponsiva() {
           );
           return;
         }
-        throw new Error(dados.error || 'Erro ao tentar deletar.');
+        throw error;
       }
 
       toast.success('Imagem removida da galeria!', { id: toastDeleteId });
@@ -131,11 +109,16 @@ export default function GaleriaMidiaResponsiva() {
     }
   };
 
+ 
+  if (loadingLista) {
+      return <LoadingScreen />;
+    }
+
   return (
     <div className="min-h-screen w-full bg-[#F0F0F0] px-4 py-10 md:px-8 md:py-10 antialiased font-['Montserrat'] text-black">
 
       { }
-      <div className="max-w-[1444px] mx-auto flex flex-col gap-8">
+      <div className="max-w-361 mx-auto flex flex-col gap-8">
 
         { }
         <input
@@ -154,7 +137,7 @@ export default function GaleriaMidiaResponsiva() {
             type="button"
             disabled={uploading}
             onClick={() => fileInputRef.current?.click()}
-            className="w-full h-[198px] border-2 border-dashed border-[#5E1504] rounded-lg bg-white flex flex-col items-center justify-center gap-4 transition-all hover:bg-[#87240E]/5 group disabled:opacity-50"
+            className="w-full h-49.5 border-2 border-dashed border-[#5E1504] rounded-lg bg-white flex flex-col items-center justify-center gap-4 transition-all hover:bg-[#87240E]/5 group disabled:opacity-50"
           >
             {uploading ? (
               <Loader2 className="w-12 h-12 text-[#87240E] animate-spin" />
@@ -172,14 +155,14 @@ export default function GaleriaMidiaResponsiva() {
 
           { }
           {loadingLista ? (
-            <div className="h-[198px] bg-[#04194D]/10 rounded-lg animate-pulse flex items-center justify-center text-sm font-medium">
+            <div className="h-49.5 bg-[#04194D]/10 rounded-lg animate-pulse flex items-center justify-center text-sm font-medium">
               Sincronizando banco...
             </div>
           ) : (
             imagens.map((img) => (
               <div
                 key={img._id}
-                className="w-full h-[198px] bg-[#04194D] border border-[#6C6C6C] rounded-lg overflow-hidden relative shadow-md group"
+                className="w-full h-49.5 bg-[#04194D] border border-[#6C6C6C] rounded-lg overflow-hidden relative shadow-md group"
               >
                 <img
                   src={img.url}
@@ -188,7 +171,7 @@ export default function GaleriaMidiaResponsiva() {
                 />
 
                 { }
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/40 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex   items-center justify-center">
                   <button
                     type="button"
                     disabled={deletingId === img._id}
@@ -230,7 +213,7 @@ export default function GaleriaMidiaResponsiva() {
           />
 
           { }
-          <div className="relative bg-white w-full max-w-[440px] rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
+          <div className="relative bg-white w-full max-w-110 rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
 
             { }
             <div className="flex justify-between items-center">

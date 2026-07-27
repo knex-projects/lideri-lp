@@ -1,4 +1,5 @@
 'use client';
+import type { RichTextEditorProps } from '@/src/types';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
@@ -6,7 +7,7 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill-new'), {
     ssr: false,
     loading: () => (
-        <div className="w-[368px] h-[300px] bg-gray-50 border border-[rgb(108,108,108)] rounded-[8px] animate-pulse flex items-center justify-center text-sm text-gray-400">
+        <div className="w-92 h-75 bg-gray-50 border border-[rgb(108,108,108)] rounded-[0.5rem] animate-pulse flex items-center justify-center text-sm text-gray-400">
             Carregando editor...
         </div>
     )
@@ -14,10 +15,7 @@ const ReactQuill = dynamic(() => import('react-quill-new'), {
 
 import 'react-quill-new/dist/quill.snow.css';
 
-interface RichTextEditorProps {
-    content: string;
-    onChange: (html: string) => void;
-}
+
 
 export default function RichTextEditor({ content, onChange }: RichTextEditorProps) {
     const [quillReady, setQuillReady] = useState(false);
@@ -65,7 +63,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
     
     if (!quillReady) {
         return (
-            <div className="w-[368px] h-[300px] bg-gray-50 border border-[rgb(108,108,108)] rounded-[8px] animate-pulse flex items-center justify-center text-sm text-gray-400">
+            <div className="w-92 h-75 bg-gray-50 border border-[rgb(108,108,108)] rounded-[0.5rem] animate-pulse flex items-center justify-center text-sm text-gray-400">
                 Configurando editor...
             </div>
         );
@@ -82,17 +80,17 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
                     modules={modules}
                     formats={formats}
                     placeholder="Comece a escrever o corpo do seu post..."
-                    className="bg-white rounded-[8px] w-full text-black"
+                    className="bg-white rounded-[0.5rem] w-full text-black"
                 />
             </div>
 
             <style jsx global>{`
         .quill-wrapper .ql-toolbar.ql-snow {
-          border: 1px solid rgb(108, 108, 108) !important;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
+          border: 0.0625rem solid rgb(108, 108, 108) !important;
+          border-top-left-radius: 0.5rem;
+          border-top-right-radius: 0.5rem;
           background-color: rgb(249, 250, 251);
-          padding: 8px !important;
+          padding: 0.5rem !important;
           display: flex !important;
           flex-wrap: wrap !important;
           width: 100% !important;
@@ -114,15 +112,15 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         }
         
         .quill-wrapper .ql-container.ql-snow {
-          border: 1px solid rgb(108, 108, 108) !important;
+          border: 0.0625rem solid rgb(108, 108, 108) !important;
           border-top: none !important;
-          border-bottom-left-radius: 8px;
-          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
           min-height: 90vh;
           max-height: 90vh;
           overflow-y: auto;
           font-family: ui-sans-serif, system-ui, sans-serif;
-          font-size: 16px;
+          font-size: 1rem;
           width: 100% !important;
         }
 
@@ -143,20 +141,20 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         }
 
         
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="0.875rem"]::before { content: '14px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1rem"]::before { content: '16px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1.5rem"]::before { content: '24px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="2rem"]::before { content: '32px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="3rem"]::before { content: '48px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="4rem"]::before { content: '64px' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="0.875rem"]::before { content: '0.875rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1rem"]::before { content: '1rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="1.5rem"]::before { content: '1.5rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="2rem"]::before { content: '2rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="3rem"]::before { content: '3rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-label[data-value="4rem"]::before { content: '4rem' !important; }
 
         
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="0.875rem"]::before { content: '14px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="1rem"]::before { content: '16px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="1.5rem"]::before { content: '24px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="2rem"]::before { content: '32px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="3rem"]::before { content: '48px' !important; }
-        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="4rem"]::before { content: '64px' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="0.875rem"]::before { content: '0.875rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="1rem"]::before { content: '1rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="1.5rem"]::before { content: '1.5rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="2rem"]::before { content: '2rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="3rem"]::before { content: '3rem' !important; }
+        .quill-wrapper .ql-snow .ql-picker.ql-size .ql-picker-options .ql-picker-item[data-value="4rem"]::before { content: '4rem' !important; }
 
        
         .quill-wrapper .ql-snow.ql-toolbar button:hover,
@@ -215,19 +213,19 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         .quill-wrapper .ql-snow .ql-color-picker .ql-picker-options {
         opacity: 0 !important;
         stroke: rgb(135, 36, 14) !important;
-        transform: translateY(10px) !important;
+        transform: translateY(0.625rem) !important;
         transition: opacity 0.2s ease, transform 0.2s ease !important;
         pointer-events: none !important; 
         
         
         flex-wrap: wrap !important;
-        gap: 6px !important;
-        padding: 8px !important;
-        max-width: 140px !important;
+        gap: 0.375rem !important;
+        padding: 0.5rem !important;
+        max-width: 8.75rem !important;
         background-color: white !important;
-        border-radius: 6px !important;
-        border: 1px solid rgb(108, 108, 108) !important;
-        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        border-radius: 0.375rem !important;
+        border: 0.0625rem solid rgb(108, 108, 108) !important;
+        box-shadow: 0 0.625rem 0.9375rem -0.1875rem rgb(0 0 0 / 0.1), 0 0.25rem 0.375rem -0.25rem rgb(0 0 0 / 0.1);
         }
 
         
@@ -240,10 +238,10 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
 
         
         .quill-wrapper .ql-snow .ql-color-picker .ql-picker-item {
-        width: 20px !important;
-        height: 20px !important;
-        border-radius: 4px !important;
-        border: 1px solid #e5e7eb !important;
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        border-radius: 0.25rem !important;
+        border: 0.0625rem solid #e5e7eb !important;
         cursor: pointer !important;
         transition: transform 0.1s ease !important; 
         }

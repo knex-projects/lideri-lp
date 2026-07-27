@@ -1,3 +1,4 @@
+import type { Metric } from '@/src/types';
 import { NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 
@@ -9,7 +10,7 @@ const privateSanityClient = createClient({
   useCdn: false,
 });
 
-type Metric = 'view' | 'share';
+
 
 function getMonthKey(date = new Date()) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;

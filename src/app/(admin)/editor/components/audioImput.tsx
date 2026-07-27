@@ -1,13 +1,10 @@
 'use client';
+import type { AudioPlayerUploadProps } from '@/src/types';
 import React, { useState, useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { api } from '@/src/services/api';
 
-interface AudioPlayerUploadProps {
-  audioAssetRef: string | null;
-  onAudioUploaded: (assetId: string) => void;
-  audioLoading: boolean;
-  setAudioLoading: (loading: boolean) => void;
-}
+
 
 export default function AudioPlayerUpload({
   audioAssetRef,
@@ -45,16 +42,7 @@ export default function AudioPlayerUpload({
       const localUrl = URL.createObjectURL(arquivo);
       setAudioUrl(localUrl);
 
-      const formData = new FormData();
-      formData.append('file', arquivo);
-
-      const resposta = await fetch('/api/upload/audio', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const dados = await resposta.json();
-      if (!resposta.ok) throw new Error(dados.error || 'Erro no upload');
+      const dados = await api.uploadAudio(arquivo);
 
       onAudioUploaded(dados.assetId);
       toast.success('Áudio enviado com sucesso!', { id: toastId });
@@ -208,7 +196,7 @@ export default function AudioPlayerUpload({
             />
           </div>
 
-          <div className="text-xs font-mono text-[#6C6C6C] shrink-0 min-w-[75px] text-right">
+          <div className="text-xs font-mono text-[#6C6C6C] shrink-0 min-w-18.75 text-right">
             {formatTime(currentTime)} / {formatTime(duration)}
           </div>
 

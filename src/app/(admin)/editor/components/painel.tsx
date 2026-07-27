@@ -1,34 +1,11 @@
 'use client';
 
+import type { PainelProps } from '@/src/types';
 import CategoryInput from './categoryImput';
 import ImageUpload from './uploadImageCard';
 import AudioPlayerUpload from './audioImput';
 
-interface PainelProps {
-  autoria: string;
-  title: string;
-  categoriasIds: string[];
-  imagePreviewUrl: string | null;
-  audioAssetRef: string | null;
-  audioLoading: boolean;
-  imageLoading: boolean;
-  loading: boolean;
-  isEditing: boolean;
-  postStatus: 'posted' | 'scheduled' | 'draft';
-  scheduledAt: string;
-  onAutoriaChange: (value: string) => void;
-  onTitleChange: (value: string) => void;
-  onCategoriasChange: (ids: string[]) => void;
-  onImageSelect: (documentId: string, url: string) => void;
-  onAudioUploaded: (assetRef: string | null) => void;
-  setAudioLoading: (loading: boolean) => void;
-  onScheduledAtChange: (value: string) => void;
-  onPublish: () => void;
-  onSchedule: () => void;
-  onCancel: () => void;
-  onClose?: () => void;
-  popup?: boolean;
-}
+
 
 export default function Painel({
   autoria,
@@ -58,7 +35,7 @@ export default function Painel({
   const isBusy = loading || audioLoading || imageLoading;
 
   return (
-    <div className="relative w-full max-w-[416px] h-full  bg-white border border-[#2D2D2D] rounded-lg p-6 flex flex-col gap-6 shadow-sm">
+    <div className="relative w-full  h-full  bg-white border border-[#2D2D2D] rounded-lg p-6 flex flex-col gap-6 shadow-sm">
       {popup && (
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Detalhes da publicação</h2>
@@ -127,7 +104,7 @@ export default function Painel({
             type="button"
             onClick={onPublish}
             disabled={isBusy}
-            className="flex-1 min-w-30 h-12 bg-R5 rounded-[8px] text-N1 font-medium text-sm hover:text-black transition-colors disabled:opacity-50"
+            className="flex-1 min-w-30 h-12 bg-R5 rounded-[0.5rem] text-N1 font-medium text-sm hover:text-black transition-colors disabled:opacity-50"
           >
             {loading ? 'Enviando...' : 'Publicar agora'}
           </button>

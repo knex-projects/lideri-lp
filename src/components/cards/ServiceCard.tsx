@@ -1,14 +1,9 @@
 "use client";
+import type { ServiceCardProps } from '@/src/types';
 import { ComponentType, SVGProps } from 'react';
 import { useState } from 'react';
 
-export interface ServiceCardProps {
-    title: string;
-    description: string;
-    expandedDescription: string;
-    benefits: string[];
-    icon: ComponentType<SVGProps<SVGSVGElement>>;
-}
+
 
 function IconArrowDown() {
     return (
@@ -40,7 +35,7 @@ export const ServiceCard = ({
     }
 
     return (
-        <article className="py-[24px]">
+        <article className="py-6">
             <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -48,32 +43,32 @@ export const ServiceCard = ({
                             <Icon/>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-[20px] md:text-[26px] lg:text-[28px] font-bold leading-tight">
+                            <h3 className="text-[1.25rem] md:text-[1.625rem] lg:text-[1.75rem] font-bold leading-tight">
                                 {title.split(' ').slice(0, -1).join(' ')}{' '}
                                 <span className="text-[#87240E]">{title.split(' ').pop()}</span>
                             </h3>
-                            <p className="text-[14px] md:text-[17px] lg:text-[20px] text-[#333]">{description}</p>
+                            <p className="text-[0.875rem] md:text-[1.0625rem] lg:text-[1.125rem] text-[#333]">{description}</p>
                         </div>
                     </div>
-                    <button className='lg:hidden ml-[16px] min-w-[24px] md:min-w-[32px] min-h-[24px] md:min-h-[32px] max-w-[24px] md:max-w-[32px] max-h-[24px] md:max-h-[32px]'
+                    <button className='lg:hidden ml-4 min-w-6 md:min-w-8 min-h-6 md:min-h-8 max-w-6 md:max-w-8 max-h-6 md:max-h-8'
                         onClick={toggleExpand}>
                         {isExpanded ? <IconArrowDown/> : <IconArrowUp/>}
                     </button>
-                    <button className='hidden lg:block min-w-[148px] h-[52px] bg-[#87240E] px-[24px] py-[12px] text-[16px] text-white rounded-[8px] ml-[18px] border-[2px] border-[#87240E] hover:bg-white hover:text-[#87240E] transition-colors duration-300'
+                    <button className='hidden lg:block min-w-37 h-13 bg-[#87240E] px-6 py-3 text-[1rem] text-white rounded-[0.5rem] ml-4.5 border-[0.125rem] border-[#87240E] hover:bg-white hover:text-[#87240E] transition-colors duration-300'
                         onClick={toggleExpand}>
                         {isExpanded ? "Ver menos" : "Ver mais"}
                     </button>
                 </div>
-                <hr className="w-full mx-auto border-[1px] border-[#680000]"/>
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-0' : 'max-h-0 opacity-0'}`}>
-                    <p className="w-full text-[14px] md:text-[17px] lg:text-[18px] text-justify leading-7 text-[#444]">
+                <hr className="w-full mx-auto border-[0.0625rem] border-[#680000]"/>
+                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-250 opacity-100 mt-0' : 'max-h-0 opacity-0'}`}>
+                    <p className="w-full text-[0.875rem] md:text-[1.0625rem] lg:text-[1.125rem] text-justify leading-7 text-[#444]">
                         {expandedDescription}
                     </p>
                     <div className="mt-6">
-                        <h3 className="text-[20px] md:text-[28px] text-[24px] font-bold leading-tight">
+                        <h3 className="text-[1.25rem] md:text-[1.375rem] text-[1.5rem] font-bold leading-tight">
                             Como esse serviço pode <span className="text-[#87240E]">beneficiar</span> sua empresa?
                         </h3>
-                        <ul className="mt-4 list-disc space-y-2 pl-6 text-[14px] md:text-[17px] lg:text-[18px]  text-[#444]">
+                        <ul className="mt-4 list-disc space-y-2 pl-6 text-[0.875rem] md:text-[1.0625rem] lg:text-[1.125rem]  text-[#444]">
                             {benefits.map((benefit) => (
                                 <li key={benefit}>{benefit}</li>
                             ))}

@@ -1,14 +1,9 @@
+import type { ProjectCardProps } from '@/src/types';
 import React, { SVGProps } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
-export interface ProjectCardProps {
-  title: string;
-  description: string;
-  imageSrc: string | StaticImageData;
-  slug: string;
-  priority?: boolean;
-}
+
 
 function IconLink(props: SVGProps<SVGSVGElement>) {
     return (
@@ -20,15 +15,15 @@ function IconLink(props: SVGProps<SVGSVGElement>) {
 
 export const ProjectCard = ({ title, description, imageSrc, slug, priority = false }: ProjectCardProps) => {
   return (
-    <div className="group relative flex flex-col w-full max-w-[360px] min-[500px]:min-w-[400px] min-[500px]:max-w-[400px] min-[500px]:w-[400px] md:min-w-[400px] md:max-w-[400px] md:w-[400px] lg:min-w-[440px] lg:max-w-[440px] lg:w-[440px] min-h-[520px]   rounded-[8px] shadow-[2px_2px_8px_rgba(0,0,0,0.4)] hover:shadow-[0px_1px_8px_#87240E] transition-shadow duration-300 overflow-hidden shrink-0 bg-transparent cursor-pointer mb-4">
-      <div className="absolute inset-0 border-[2px] border-[#00000033] group-hover:border-[2.5px] group-hover:border-[#87240Ecc] transition-all duration-300 rounded-[8px] pointer-events-none z-10"></div>
+    <div className="group relative flex flex-col w-full max-w-90 min-[31.25rem]:min-w-100 min-[31.25rem]:max-w-100 min-[31.25rem]:w-100 md:min-w-100 md:max-w-100 md:w-100 lg:min-w-110 lg:max-w-110 lg:w-110 min-h-130   rounded-[0.5rem] shadow-[0.125rem_0.125rem_0.5rem_rgba(0,0,0,0.4)] hover:shadow-[0rem_0.0625rem_0.5rem_#87240E] transition-shadow duration-300 overflow-hidden shrink-0 bg-transparent cursor-pointer mb-4">
+      <div className="absolute inset-0 border-[0.125rem] border-[#00000033] group-hover:border-[0.15625rem] group-hover:border-[#87240Ecc] transition-all duration-300 rounded-[0.5rem] pointer-events-none z-10"></div>
 
-      <div className="relative w-full h-[350px] shrink-0 overflow-hidden bg-black/10">
+      <div className="relative w-full h-87.5 shrink-0 overflow-hidden bg-black/10">
         <Image
           src={imageSrc}
           alt={title}
           fill
-          sizes="(max-width: 500px) 100vw, (max-width: 768px) 300px, (max-width: 1024px) 400px, 440px"
+          sizes="(max-width: 31.25rem) 100vw, (max-width: 48rem) 18.75rem, (max-width: 64rem) 25rem, 27.5rem"
           className="object-cover object-top"
           priority={priority}
           loading={priority ? "eager" : "lazy"}
@@ -36,19 +31,19 @@ export const ProjectCard = ({ title, description, imageSrc, slug, priority = fal
         <div className="absolute inset-0 bg-[#00000073]"></div>
       </div>
 
-      <div className="w-full flex-1 md:flex-none  p-[24px] flex flex-col justify-between shrink-0 bg-white">
-        <div className="flex flex-col gap-[12px] mt-[-12px] mb-[12px]">
-          <h3 className="text-[16px] min-[500px]:text-[15px] md:text-[17px] lg:text-[18px] leading-[22px] min-[500px]:leading-[23px] md:leading-[26px] lg:leading-[28px] font-[540] text-N8 flex items-center gap-[8px] font-bold font-montserrat m-0 p-0">
-            <span className="w-[6px] h-[4px] group-hover:w-[16px] font-bold group-hover:h-[4px] bg-R5 block shrink-0 transition-all duration-300 rounded-[1px]"></span>
+      <div className="w-full flex-1 md:flex-none  p-6 flex flex-col justify-between shrink-0 bg-white">
+        <div className="flex flex-col gap-3 -mt-3 mb-3">
+          <h3 className="text-[0.875rem] min-[31.25rem]:text-[0.9375rem] md:text-[1.0625rem] lg:text-[1.125rem] leading-[1.375rem] min-[31.25rem]:leading-[1.4375rem] md:leading-[1.625rem] lg:leading-[1.75rem] font-[540] text-N8 flex items-center gap-2 font-bold font-montserrat m-0 p-0">
+            <span className="w-1.5 h-1 group-hover:w-4 font-bold group-hover:h-1 bg-R5 block shrink-0 transition-all duration-300 rounded-[0.0625rem]"></span>
             {title}
           </h3>
-          <p className="text-N5 text-[16px] leading-[20px] m-0 p-0 line-clamp-none min-[500px]:line-clamp-3 md:line-clamp-3 font-montserrat">
+          <p className="text-N5 text-[0.875rem] leading-[1.25rem] m-0 p-0 line-clamp-none min-[31.25rem]:line-clamp-3 md:line-clamp-3 font-montserrat">
             {description}
           </p>
         </div>
 
-          <Link href={`/cases/${slug}`} className="mt-auto flex justify-end items-center gap-[8px] text-R5 text-[14px] min-[500px]:text-[15px] md:text-[17px] lg:text-[16px] leading-[22px] min-[500px]:leading-[23px] md:leading-[26px] lg:leading-[28px]">
-              Saiba mais <div className="ml-[8px] h-[12px] w-[12px]"><IconLink/></div>
+          <Link href={`/cases/${slug}`} className="mt-auto flex justify-end items-center gap-2 text-R5 text-[0.875rem] min-[31.25rem]:text-[0.9375rem] md:text-[1.0625rem] lg:text-[1.125rem] leading-[1.375rem] min-[31.25rem]:leading-[1.4375rem] md:leading-[1.625rem] lg:leading-[1.75rem]">
+              Saiba mais <div className="ml-2 h-3 w-3"><IconLink/></div>
           </Link>
       </div>
     </div>

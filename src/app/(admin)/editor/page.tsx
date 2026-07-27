@@ -1,38 +1,20 @@
 'use client';
+import type { SanitySpan, SanityBlock, SanityBlockContent, PostStatus } from '@/src/types';
 import React, { useState, useRef, useEffect } from 'react';
-import { createClient } from '@sanity/client';
+import { api } from '@/src/services/api';
+import { cms } from '@/src/services/cms';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import RichTextEditor from './components/textEditor';
 import Painel from './components/painel';
 import toast from 'react-hot-toast';
 
-const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ID_DE_BACKUP',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2026-07-09',
-  useCdn: false,
-});
 
 
 
 
-interface SanitySpan {
-  _type: 'span';
-  _key: string;
-  text: string;
-  marks: string[];
-}
 
-interface SanityBlock {
-  _type: 'block';
-  _key: string;
-  style: 'normal' | 'h1' | 'h2' | 'h3' | 'blockquote';
-  markDefs: any[];
-  children: SanitySpan[];
-}
 
-type SanityBlockContent = SanityBlock[];
-type PostStatus = 'posted' | 'scheduled' | 'draft';
+
 
 
 export default function EditorPostagem() {
@@ -117,12 +99,7 @@ export default function EditorPostagem() {
 
   const carregarImagensDaGaleria = async () => {
     try {
-      const query = `*[_type == "galeria"] | order(_createdAt desc) {
-      _id,
-      tituloImagem,
-      "url": arquivo.asset->url
-    }`;
-      const resultado = await sanityClient.fetch(query);
+      const resultado = await cms.getGallery();
       setListaGaleria(resultado);
     } catch (error) {
       console.error("Erro ao carregar galeria no editor:", error);
@@ -151,19 +128,7 @@ export default function EditorPostagem() {
     const carregarPostParaEdicao = async () => {
       try {
         setLoading(true);
-        const query = `*[_type == "post" && _id == $postId][0]{
-          _id,
-          title,
-          "slug": slug.current,
-          body,
-          "autoria": coalesce(authorRaw, "Anônimo"),
-          "categoriasIds": categories[]->_id,
-          "audioFileId": coalesce(audioDescricao.asset->_id, null),
-          "imagemDocId": coalesce(imagemDaGaleria._ref, null),
-          publishedAt,
-          "status": coalesce(status, "posted")
-        }`;
-        const post = await sanityClient.fetch(query, { postId });
+        const post = await cms.getPostForEditor(postId);
 
         if (!post) {
           throw new Error('Post não encontrado.');
@@ -241,15 +206,7 @@ export default function EditorPostagem() {
         status: mode === 'draft' ? 'draft' : (mode === 'keep' ? postStatus : undefined),
       };
 
-      const resposta = await fetch('/api/posts', {
-        method: editingPostId ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(postPayload),
-      });
-
-      const dados = await resposta.json();
-
-      if (!resposta.ok) throw new Error(dados.error || 'Falha ao salvar postagem');
+      const dados = await api.savePost(postPayload, Boolean(editingPostId));
 
       if (editingPostId) {
         toast.success(isDraft ? 'Rascunho salvo com sucesso!' : 'Publicação atualizada com sucesso!', { id: toastId });
@@ -288,7 +245,7 @@ export default function EditorPostagem() {
   return (
     <div className="min-h-screen w-full bg-white text-black font-['Montserrat'] antialiased">
       <main className="w-full h-full flex flex-col lg:flex-row-reverse">
-        <aside className="hidden 2xl:flex w-full h-full lg:w-[480px] bg-[#F0F0F0] border-l border-[#2D2D2D] p-8 flex-col items-center">
+        <aside className="hidden 2xl:flex w-full h-full lg:w-120 bg-[#F0F0F0] border-l border-[#2D2D2D] p-8 flex-col items-center">
           <Painel
             autoria={autoria}
             title={title}
@@ -336,7 +293,7 @@ export default function EditorPostagem() {
 
         {isPanelOpen && (
           <div className="2xl:hidden fixed inset-0 z-50  overflow-y-auto flex justify-end bg-black/45" role="dialog" aria-modal="true" aria-label="Detalhes da publicação">
-            <div className="w-full max-w-[480px] h-[115vh] overflow-y-auto bg-[#F0F0F0] p-5 sm:p-8 flex justify-center">
+            <div className="w-full max-w-120 h-[115vh] overflow-y-auto bg-[#F0F0F0] p-5 sm:p-8 flex justify-center">
               <Painel
                 autoria={autoria}
                 title={title}
