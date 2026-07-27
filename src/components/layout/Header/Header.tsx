@@ -20,7 +20,7 @@ export const Header = () => {
     
     useEffect(() => {
         const handleResize = () => {
-            const desktop = window.innerWidth >= 768
+            const desktop = window.innerWidth >= 850
             setIsDesktop(desktop)
             if (desktop) {
                 setIsOpen(false)
@@ -35,16 +35,19 @@ export const Header = () => {
 
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = "unset";
+            document.body.style.overflow = "hidden";
         
         } else {
-            document.body.style.overflow = ""
+            document.body.style.overflow = "unset"; 
         }
+        return () => {
+      document.body.style.overflow = "unset";
+    };
     }, [isOpen])
 
     return (
         <header className="absolute top-0 z-50 h-29 md:h-22.5 w-full">
-            <div className={ `flex justify-between items-center w-full h-full p-6.5 md:py-3.25 xl:px-[12.5%]  ${ isGlass ? (isInternalBlog ? "backdrop-blur-sm" : "backdrop-blur-[50px]") : "bg-[#0D1122]" }` }>
+            <div className={ `flex justify-between items-center max-[53.125rem]:bg-[#0D1122] w-full h-full p-6.5 md:py-3.25 xl:px-[12.5%]  ${ isGlass ? (isInternalBlog ? "backdrop-blur-sm" : "backdrop-blur-[3.125rem]") : "bg-[#0D1122]" }` }>
                 <div  className="relative w-36 h-13.75 md:w-46.5 md:h-18">
                     <Image
                     src={lideriIcon}
@@ -57,7 +60,7 @@ export const Header = () => {
                 
 
                 <button
-                    className="flex justify-center items-center w-27.5 h-10.75 px-3 py-2 rounded-lg border border-N1 font-montserrat text-N1 text-lg font-normal md:hidden"
+                    className="flex justify-center items-center w-27.5 h-10.75 px-3 py-2 rounded-lg border border-N1 font-montserrat text-N1 text-lg font-normal min-[53.125rem]:hidden"
                     onClick={() => {
                         setIsOpen(!isOpen)
                     }}
@@ -103,7 +106,7 @@ export const Header = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4 }}
                             ref={menuRef}
-                            className="flex justify-center absolute top-29 left-0 bg-B9/55 backdrop-blur-[50px] w-full h-dvh md:top-0 md:h-22.5 md:px-6.5 md:py-3.25 md:flex md:flex-row md:justify-end md:bg-R1/5 md:backdrop-blur-none xl:px-[12.5%]"
+                            className="flex justify-center absolute top-29 left-0 bg-B9/55 backdrop-blur-[3.125rem] touch-none   w-full h-dvh md:top-0 md:h-22.5 md:px-6.5 md:py-3.25 md:flex md:flex-row md:justify-end md:bg-R1/5 md:backdrop-blur-none xl:px-[12.5%]"
                         >
                             <ul className="flex flex-col max-md:pt-32 items-center w-[90%] font-montserrat font-normal text-N1 text-lg md:text-xl md:flex-row md:gap-4 md:w-auto lg:gap-10 ">
                                 <li className="order-1 w-full border-y border-N5 md:border-none md:order-1">
