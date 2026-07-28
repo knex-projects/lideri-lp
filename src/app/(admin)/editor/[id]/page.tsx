@@ -1,7 +1,18 @@
-'use client';
+import { Suspense } from 'react';
+import { EditorForm } from '../components/editorForm';
+import { LoadingScreen } from '@/src/components/layout/loading';
 
-import EditorPostagem from '../page';
+interface Props {
+  params: {
+    id: string;
+  };
+}
 
-export default function EditorByIdPage() {
-    return <EditorPostagem />;
+export default async function EditPostPage({ params }: Props) {
+    const { id } = await params;
+  return (
+    <Suspense fallback={<LoadingScreen />}>
+      <EditorForm postId={id} />
+    </Suspense>
+  );
 }
