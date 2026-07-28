@@ -12,6 +12,10 @@ export interface BlogPost {
     categories: string[];
 }
 
+export interface EditorFormProps {
+  postId?: string; // Se vier preenchido, é EDIÇÃO. Se não, é CRIAÇÃO.
+}
+
 export type CasePageProps = {
   params: {
     slug: string;
