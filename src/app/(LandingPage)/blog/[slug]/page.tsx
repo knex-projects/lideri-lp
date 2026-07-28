@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import { api } from "@/src/services/api";
 import { cms } from "@/src/services/cms";
 import { LoadingScreen } from "@/src/components/layout/loading";
+import toast from 'react-hot-toast';
 
 
 
@@ -201,15 +202,16 @@ useEffect(() => {
                 });
                 trackMetric('share');
             } catch (err) {
-                console.error("Erro ao compartilhar", err);
+                toast.error("Erro ao compartilhar");
             }
         } else {
             try {
                 await navigator.clipboard.writeText(window.location.href);
                 trackMetric('share');
-                alert("Link copiado para a área de transferência!");
+                toast("Link copiado para a área de transferência!");
             } catch (err) {
                 console.error("Erro ao copiar o link", err);
+                toast.error("Erro ao copiar o link");
             }
         }
     };
@@ -313,9 +315,7 @@ useEffect(() => {
                                         className="w-30 h-10 bg-transparent rounded-sm animate-fade-in"
                                     />
                                 )}
-                                <span className="font-montserrat text-[#2D2D2D] text-[14px] md:text-[18px] font-medium hidden md:inline">
-                                    {isSpeaking ? "Parar de escutar" : "Escutar essa matéria"}
-                                </span>
+                                
                             </div>
                         </div>
                     </div>
