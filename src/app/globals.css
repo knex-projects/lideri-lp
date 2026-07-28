@@ -71,6 +71,9 @@ body {
 }
 
 @layer utilities {
+  .bg-loginImage {
+    background-image: url('/assets/images/loginBG.webp');
+  }
   .font-montserrat {
     font-family: var(--font-montserrat);
   }
@@ -85,7 +88,6 @@ body {
   }
 }
 
-/* Smooth scrolling for in-page anchors */
 html {
   scroll-behavior: smooth;
 }
@@ -140,4 +142,31 @@ html {
 
 .animate-opacity-top-bottom {
   animation: opacity-top-bottom 1s ease-in forwards;
+}
+
+       
+
+.blog-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.blog-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+.blog-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.blog-content iframe, 
+.blog-content video {
+  max-width: 100%;
 }

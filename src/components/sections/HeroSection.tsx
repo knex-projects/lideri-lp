@@ -6,7 +6,7 @@ import { EmblaCarouselType } from "embla-carousel"
 import { motion, useInView } from "framer-motion"
 import { useCallback, useEffect, useState, useRef } from "react"
 import Fade from "embla-carousel-fade"
-import Image from "next/image" // Ajuste conforme seu uso de imagens
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
@@ -42,7 +42,7 @@ export const HeroSection = () => {
             watchDrag: false,
             active: false,
             breakpoints: {
-                '(max-width: 767px)': { active: true }
+                '(max-width: 47.9375rem)': { active: true }
             }
         },
         [Autoplay({ delay: 4000 }), Fade()],
@@ -97,18 +97,18 @@ export const HeroSection = () => {
             id="heroSection"
             className="relative bg-white mb-5"
         >
-            <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 md:px-[12.5%] sm:pt-[237px] sm:gap-10">
+            <div className="absolute z-10 flex flex-col gap-8 items-start w-full px-6.5 pt-62.5 md:px-[12.5%] sm:pt-59.25 sm:gap-10">
                 <div className="flex flex-col gap-4 sm:gap-5">
                     <div className="bg-R5 w-9 h-3 rounded-sm md:w-10 md:h-3.5"></div>
-                    <h1 className="sm:w-[320px] w-[295px] max-w-full font-zodiac text-white font-normal text-[40px] md:w-100 md:text-[50px]/[62px] xl:w-[514px] xl:text-[76px]/[82px]">
+                    <h1 className="sm:w-80 w-73.75 max-w-full font-zodiac text-white font-normal text-[2.5rem] md:w-100 md:text-[3.125rem]/[3.875rem] xl:w-128.5 xl:text-[4.75rem]/[5.125rem]">
                         Nossa paixão é te levar mais longe.
                     </h1>
-                    <p className="w-[281px] sm:w-65 font-montserrat  text-sm text-N4 md:w-87.5 md:text-[17px] xl:w-[538px] xl:h-[44px] xl:text-[18px]"> 
+                    <p className="w-70.25 sm:w-65 font-montserrat  text-sm text-N4 md:w-87.5 md:text-[1.0625rem] xl:w-150 xl:text-[1.25rem]"> 
                         Consultoria estratégica em internacionalização e exportação.
                     </p>
                 </div>
                 <Link href = "/contato">
-                <div className="bg-R5 px-3 md:px-6 h-[52px] rounded-[8px] font-montserrat flex text-[14px] md:text-[16px] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
+                <div className="bg-R5 px-3 md:px-6 h-13 rounded-[0.5rem] font-montserrat flex text-[0.875rem] md:text-[1rem] text-N1 items-center justify-center gap-2 font-medium hover:bg-R8 transition-all">
                     Entre em contato
                     <ArrowUpRight color="#FFFFFF" size={20}/>
                 </div>
@@ -116,8 +116,8 @@ export const HeroSection = () => {
                 
             </div>
 
-            <div className="relative w-full min-h-165 max-h-[1014px]">
-                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-[800px] max-h-[924px] object-cover object-[87%_center] sm:brightness-100">
+            <div className="relative w-full min-h-165 max-h-253.5">
+                <video preload="auto" autoPlay loop muted className="relative z-0 w-full min-h-200 max-h-231 object-cover object-[87%_center] sm:brightness-100">
                     <source src="videos/navio.mp4" type="video/mp4" />
                     Your Browser does not support the video.
                 </video>
@@ -130,32 +130,32 @@ export const HeroSection = () => {
                         <div className="embla__containter flex items-center gap-5 xl:gap-10">
                             
                             
-                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(232px,20vw,329px)] h-[clamp(120px,16vw,160px)] bg-R5 rounded-lg px-2.5 py-5 shadow-[2px_2px_8px_0px_#000,inset_0px_-2px_10px_0px_#C55A42,inset_2px_3px_10px_0px_#9D361F]">
+                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(14.5rem,20vw,20.5625rem)] h-[clamp(7.5rem,16vw,10rem)] bg-R5 rounded-lg px-2.5 py-5 shadow-[0.125rem_0.125rem_0.5rem_0rem_#000,inset_0rem_-0.125rem_0.625rem_0rem_#C55A42,inset_0.125rem_0.1875rem_0.625rem_0rem_#9D361F]">
                                 
                                 
-                                    <h2 className="flex embla__viewport flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[32px] leading-6 xl:text-5xl">
+                                    <h2 className="flex embla__viewport flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[2rem] leading-6 xl:text-5xl">
                                         <div>+<CounterNumber to={10} /></div>
-                                        <span className="text-[12px] md:text-sm xl:text-base font-normal"> Projetos executados</span>
+                                        <span className="text-[0.75rem] md:text-sm xl:text-base font-normal"> Projetos executados</span>
                                     </h2>
                                 
                             </div>
 
                            
-                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(232px,20vw,329px)] h-[clamp(120px,18vw,180px)] bg-R5 rounded-lg px-2.5 py-5 shadow-[2px_2px_8px_0px_#000,inset_0px_-2px_10px_0px_#C55A42,inset_2px_3px_10px_0px_#9D361F]">
+                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(14.5rem,20vw,20.5625rem)] h-[clamp(7.5rem,18vw,11.25rem)] bg-R5 rounded-lg px-2.5 py-5 shadow-[0.125rem_0.125rem_0.5rem_0rem_#000,inset_0rem_-0.125rem_0.625rem_0rem_#C55A42,inset_0.125rem_0.1875rem_0.625rem_0rem_#9D361F]">
                                
-                                    <h2 className="flex flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[32px] leading-6 xl:text-5xl">
+                                    <h2 className="flex flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[2rem] leading-6 xl:text-5xl">
                                         <div>+<CounterNumber to={100} /></div>
-                                        <span className="text-[12px] md:text-sm xl:text-base font-normal"> Soluções vendidas</span>
+                                        <span className="text-[0.75rem] md:text-sm xl:text-base font-normal"> Soluções vendidas</span>
                                     </h2>
                                                          
                             </div>
 
                             
-                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(232px,20vw,329px)] h-[clamp(120px,16vw,160px)] bg-R5 rounded-lg px-2.5 py-5 shadow-[2px_2px_8px_0px_#000,inset_0px_-2px_10px_0px_#C55A42,inset_2px_3px_10px_0px_#9D361F]">
+                            <div className="embla__slide flex justify-center shrink-0 items-center w-[clamp(14.5rem,20vw,20.5625rem)] h-[clamp(7.5rem,16vw,10rem)] bg-R5 rounded-lg px-2.5 py-5 shadow-[0.125rem_0.125rem_0.5rem_0rem_#000,inset_0rem_-0.125rem_0.625rem_0rem_#C55A42,inset_0.125rem_0.1875rem_0.625rem_0rem_#9D361F]">
                                 
-                                    <h2 className="flex flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[32px] leading-6 xl:text-5xl">
+                                    <h2 className="flex flex-col gap-2.5 justify-center items-center font-montserrat font-medium text-[2rem] leading-6 xl:text-5xl">
                                         <div>+<CounterNumber to={25} /></div>
-                                        <span className="text-[12px] md:text-sm xl:text-base font-normal"> Locais prospectados em 2025</span>
+                                        <span className="text-[0.75rem] md:text-sm xl:text-base font-normal"> Locais prospectados em 2025</span>
                                     </h2>
                                 
                             </div>

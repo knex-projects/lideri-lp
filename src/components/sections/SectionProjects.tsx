@@ -53,31 +53,31 @@ export const SectionProjects = () => {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section id="projetos" className="2xl:pb-16 pb-10 flex flex-col pt-24 md:pt-36  gap-[16px] md:gap-8 lg:gap-[44px] font-sans w-full  mx-auto md:px-[12.5%] px-[26px]">
+    <section id="projetos" className="2xl:pb-16 pb-10 flex flex-col pt-24 md:pt-36  gap-4 md:gap-8 lg:gap-11 font-sans w-full  mx-auto md:px-[12.5%] px-6.5">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 w-full   lg:px-0">
         <div className="flex flex-col max-w-2xl">
-          <div className="flex flex-col w-full sm:pt-[104px] lg:w-[557px] h-auto lg:h-[192px] gap-[8px]">
-            <h2 className="w-full lg:w-[518px] text-[28px] min-[360px]:text-[36px] md:text-[42px] lg:text-[48px] font-[540] leading-[36px] min-[360px]:leading-[44px] md:leading-[50px] lg:leading-[56px] tracking-normal text-N8 font-zodiak font-normal">
+          <div className="flex flex-col w-full sm:pt-26 lg:w-139.25 h-auto lg:h-48 gap-2">
+            <h2 className="w-full lg:w-129.5 text-[1.75rem] min-[22.5rem]:text-[2.25rem] md:text-[2.625rem] lg:text-[3rem] font-[540] leading-[2.25rem] min-[22.5rem]:leading-[2.75rem] md:leading-[3.125rem] lg:leading-[3.5rem] tracking-normal text-N8 font-zodiak font-normal">
               Conheça nosso portfólio <br /> de <span className="text-R5">projetos.</span>
             </h2>
-            <p className="text-[14px] lg:text-[16px] font-[400] leading-none tracking-normal text-N5 font-montserrat">
+            <p className="text-[0.875rem] lg:text-[1rem] font-[400] leading-none tracking-normal text-N5 font-montserrat">
               Conheça alguns dos projetos que desenvolvemos para conectar empresas
               ao mercado internacional com estratégia, segurança e eficiência.
             </p>
           </div>
         </div>
         <Link href="/cases/" className="mt-auto flex justify-end">
-          <button className="flex w-[240px] items-center justify-center h-[46px] rounded-[8px] border-2 border-R5 bg-R5 px-[20px] text-white shadow-[0px_1px_8px_#87240E] transition-colors duration-300 hover:bg-white hover:text-R5">
-            Explorar resultados <div className="ml-[8px] h-[12px] w-[12px]"><IconLink/></div>
+          <button className="flex w-60 items-center justify-center h-11.5 rounded-[0.5rem] border-2 border-R5 bg-R5 px-5 text-white shadow-[0rem_0.0625rem_0.5rem_#87240E] transition-colors duration-300 hover:bg-white hover:text-R5">
+            Explorar resultados <div className="ml-2 h-3 w-3"><IconLink/></div>
           </button>
         </Link>
       </div>
 
       <div className="overflow-hidden pt-16" ref={emblaRef}>
-        <div className="flex ml-0 min-[500px]:ml-[-20px] md:ml-[-36px] lg:ml-[-64px]">
+        <div className="flex ml-0 min-[31.25rem]:-ml-5 md:-ml-9 lg:-ml-16">
           {projects.map((project, index) => (
             <div
-              className="flex-[0_0_100%] min-[500px]:flex-[0_0_auto] min-w-0 pl-0 min-[500px]:pl-[20px] md:pl-[36px] lg:pl-[64px]"
+              className="flex-[0_0_100%] min-[31.25rem]:flex-[0_0_auto] min-w-0 pl-0 min-[31.25rem]:pl-5 md:pl-9 lg:pl-16"
               key={index}
             >
               <ProjectCard
@@ -92,19 +92,19 @@ export const SectionProjects = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-[12px] mt-4 lg:hidden">
+      <div className="flex justify-center items-center gap-3 mt-4 lg:hidden">
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
-            className={`w-[8px] h-[8px] rounded-full transition-colors duration-300 ${index === selectedIndex ? "bg-R5" : "bg-R1"
+            className={`w-2 h-2 rounded-full transition-colors duration-300 ${index === selectedIndex ? "bg-R5" : "bg-R1"
               }`}
             onClick={() => emblaApi?.scrollTo(index)}
           />
         ))}
       </div>
 
-      <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-[4px]">
-        <button onClick={scrollPrev} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+      <div className="hidden lg:flex justify-center items-center gap-4 lg:-mt-1">
+        <button onClick={scrollPrev} className="flex items-center justify-center w-9 h-9 bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
             width="12"
             height="20"
@@ -118,7 +118,7 @@ export const SectionProjects = () => {
             <path d="M10 18l-8-8 8-8" />
           </svg>
         </button>
-        <button onClick={scrollNext} className="flex items-center justify-center w-[36px] h-[36px] bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
+        <button onClick={scrollNext} className="flex items-center justify-center w-9 h-9 bg-R5 text-white rounded-full hover:bg-R6 transition-colors">
           <svg
             width="12"
             height="20"

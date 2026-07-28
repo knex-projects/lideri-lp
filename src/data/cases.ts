@@ -5,7 +5,6 @@ import {
     icecreamImg,
     lacemakerImg,
 } from "@/public/assets";
-//Slug deve ser sempre em minúsculo e com hífen no lugar de espaços, ex: "internacionalizacao-de-sorvetes"
 const cases = [
     {
         slug: "internacionalizacao-de-sorvetes",
