@@ -63,9 +63,9 @@ export default function Posts() {
     };
 
     const postTipo = {
-        posted: 'postado',
-        scheduled:  'Publicados',
-        draft: 'rascunho',
+        posted: 'Postado',
+        scheduled:  'Agendado',
+        draft: 'Rascunho',
     } as const
 
     const postTipos = Object.keys(postTipo) as (keyof typeof postTipo)[];
@@ -132,12 +132,12 @@ export default function Posts() {
             { }
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4 sm:flex-row sm:justify-between md:px-8 md:py-4 md:bg-N1 md:border md:border-B9 md:rounded-2xl">
                 { }
-                <div className="relative xl:hidden max-w-35.5">
+                <div className="relative flex justify-between  max-w-40">
                     <select
                         name="categoria"
                         value={categoriaAtiva}
                         onChange={(e) => alterarCategoria(e.target.value)}
-                        className="appearance-none truncate px-4 py-3 pr-8 border border-N5 rounded-lg font-montserrat text-N8 bg-white"
+                        className="appearance-none truncate w-full px-4 py-3 pr-8 border border-N5 rounded-lg font-montserrat text-N8 bg-white"
                     >
                         <option value="Todos">Todos</option>
                         {categorias.map((cat) => (
@@ -149,7 +149,7 @@ export default function Posts() {
                     <ChevronDown className="pointer-events-none absolute right-3 inset-y-1/2 -translate-y-1/2" />
                 </div>
 
-                <div className="relative max-w-40">
+                <div className="relative xl:hidden flex justify-between max-w-40">
                     <select
                         name="tipo"
                         value={tipoAtivo}
