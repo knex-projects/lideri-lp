@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import next from "next";
 
 const protectedPrefixes = ["/dashboard", "/editor", "/posts", "/midias"];
 
@@ -22,6 +23,7 @@ export async function proxy(request: NextRequest) {
 
   if (!isProtectedRoute) {
     return NextResponse.next();
+    
   }
 
   const token = await getToken({
@@ -31,8 +33,9 @@ export async function proxy(request: NextRequest) {
 
   if (!token) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", `${pathname}${search}`);
+    loginUrl.searchParams.set("callbackUrl", `${request.url}${pathname}${search}`);
     return NextResponse.redirect(loginUrl);
+    
   }
 
   return NextResponse.next();
