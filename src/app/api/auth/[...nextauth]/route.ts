@@ -42,9 +42,9 @@ export const authOptions: NextAuthOptions = {
   },
     callbacks: {
         async signIn({ user }) {
-            const emailDoAdmin = "roseane.knex@gmail.com";
+             const emailCorreto = process.env.ADMIN_EMAIL;
 
-            if (user.email === emailDoAdmin) {
+            if (user.email === emailCorreto) {
                 return true; 
             }
 
