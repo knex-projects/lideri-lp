@@ -14,7 +14,7 @@ export function EditorForm({ postId }: EditorFormProps) {
 
     const [autoria, setAutoria] = useState('');
     const [title, setTitle] = useState('');
-    const [editorHtml, setEditorHtml] = useState('<p>Comece a escrever o seu post...</p>');
+    const [editorHtml, setEditorHtml] = useState('');
     const [loading, setLoading] = useState(false);
     
     
@@ -217,6 +217,7 @@ export function EditorForm({ postId }: EditorFormProps) {
             toast.error(`Erro ao salvar publicação: ${error.message}`, { id: toastId });
         } finally {
             setLoading(false);
+            router.push('/posts')
         }
     };
 
