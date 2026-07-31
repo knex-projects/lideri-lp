@@ -3,6 +3,7 @@
 import type { PostCardProps } from '@/src/types';
 import React from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
+import Link from 'next/link';
 
 
 
@@ -19,7 +20,7 @@ const statusStyles = {
   draft: 'bg-gray-200 text-gray-700',
 };
 
-export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, status = 'posted', onDelete, onEdit, isDeleting = false }: PostCardProps) {
+export default function PostCardCMS({ titulo, categoria, autor, data,slug, imageSrc, status = 'posted', onDelete, onEdit, isDeleting = false }: PostCardProps) {
   return (
     <div className="group relative
       w-full h-auto h-2.5 lg:min-h-20 bg-white border-b border-gray-100 max-lg:pr-14 last:border-0 last:pb-0
@@ -29,7 +30,7 @@ export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, 
 
       <div className="flex items-center gap-2 lg:gap-6 w-full lg:max-w-197.25">
 
-
+        <Link className="w-full max-w-35.5" href={slug ? `/blog/${slug}` : "/blog"}>
         {imageSrc ? (
           <img
             src={imageSrc}
@@ -42,6 +43,8 @@ export default function PostCardCMS({ titulo, categoria, autor, data, imageSrc, 
             Sem imagem
           </div>
         )}
+        </Link>
+        
 
 
 
