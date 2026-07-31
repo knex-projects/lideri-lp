@@ -37,7 +37,7 @@ export const cms = {
     "imagemDocId": coalesce(imagemDaGaleria._ref, null), publishedAt, "status": coalesce(status, "posted")
   }`, { postId }, { useCdn: false }),
   getAdminPosts: () => client.fetch(`*[_type == "post"] | order(_createdAt desc){
-    "_id": _id, "titulo": title, "categoria": coalesce(categoryRaw, categories[0]->title, categoria->title, "Geral"),
+    "_id": _id, "titulo": title,"slug":slug.current, "categoria": coalesce(categoryRaw, categories[0]->title, categoria->title, "Geral"),
     "autor": coalesce(authorRaw, author->name, "Anônimo"), "data": _createdAt,
     "status": coalesce(status, "posted"), "imageSrc": coalesce(imagemDaGaleria->arquivo.asset->url, mainImage.asset->url, null)
   }`, {}, { useCdn: false }),

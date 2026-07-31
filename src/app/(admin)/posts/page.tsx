@@ -223,6 +223,7 @@ export default function Posts() {
                             { }
                             <div className="flex-1">
                                 <PostCardCMS
+                                    slug={post.slug}
                                     titulo={post.titulo}
                                     categoria={post.categoria || "Geral"}
                                     autor={post.autor || "Anônimo"}

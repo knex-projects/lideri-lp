@@ -34,6 +34,7 @@ export interface AdminPost {
   autor?: string;
   data: string;
   imageSrc?: string;
+  slug: string;
   status: 'posted' | 'scheduled' | 'draft';
 }
 
@@ -185,6 +186,7 @@ export interface PostCardProps {
   autor: string;
   data: string;
   imageSrc: string;
+  slug:string;
   status?: 'posted' | 'scheduled' | 'draft';
   onDelete?: () => void;
   onEdit?: () => void;
