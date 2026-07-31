@@ -10,11 +10,16 @@ import { usePathname, useRouter } from "next/navigation";
 
 
 
+
 export function Header({ isOpen, setIsOpen }: HeaderProps) {
     const [isDesktop, setIsDesktop] = useState(false)
     const pathname = usePathname();
     const router = useRouter();
     const isEditor = pathname.startsWith("/editor");
+
+const voltarMenu = async () => {
+    router.push("/");
+  };
 
     useEffect(() => {
         const handleResize = () => {
@@ -40,7 +45,8 @@ export function Header({ isOpen, setIsOpen }: HeaderProps) {
 
     return (
         <section className="w-full h-24.5 bg-[rgb(13,17,34)] flex items-center justify-center lg:justify-between px-8 py-3.25 relative z-50">
-            <div className="relative w-36 h-13.75 md:w-46.5 md:h-18">
+            
+                <div onClick={voltarMenu} className="relative w-36 h-13.75 md:w-46.5 md:h-18">
                 <Image
                     src={lideriIcon}
                     alt="Lideri logo"
@@ -48,6 +54,8 @@ export function Header({ isOpen, setIsOpen }: HeaderProps) {
                     fill
                 />
             </div>
+            
+            
             
            
             <button

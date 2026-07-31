@@ -178,6 +178,7 @@ export default function Dashboard() {
             {postsRecentes && postsRecentes.length > 0 ? (
               postsRecentes.map((post: AdminPost) => (
                 <PostCardCMS
+                  slug={post.slug}                
                   key={post._id}
                   titulo={post.titulo}
                   categoria={post.categoria || "Geral"}

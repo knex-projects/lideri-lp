@@ -35,7 +35,7 @@ export default function Painel({
   const isBusy = loading || audioLoading || imageLoading;
 
   return (
-    <div className="relative w-full  h-full  bg-white border border-[#2D2D2D] rounded-lg p-6 flex flex-col gap-6 shadow-sm">
+    <div className="relative w-full  h-fit  bg-white border border-[#2D2D2D] rounded-lg p-6 flex flex-col gap-6 shadow-sm">
       {popup && (
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Detalhes da publicação</h2>
