@@ -112,12 +112,12 @@ export default function SidebarCMS({ isOpen, onClose }: SidebarCMSProps) {
           {isProfileMenuOpen && (
             <>
               <div
-                className="fixed w-[99vw] h-[120%] inset-0 z-10"
+                className="fixed inset-0 z-10 w-[99vw] h-[130vh] bg-transparent"
                 onClick={() => setIsProfileMenuOpen(false)}
               />
               <div
                 id="profile-menu"
-                className="absolute -top-full  left-0 z-0  w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg lg:-top-full mb-2"
+                className="absolute  left-0 z-20 w-full rounded-lg border border-gray-200 bg-white p-2 shadow-lg -top-full -mt-7 lg:mt-0 pointer-events-auto"
               >
                 <button
                   type="button"
