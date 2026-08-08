@@ -44,7 +44,7 @@ export const AboutUs = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col items-center gap-8 my-12 2xl:flex-row md:mt-37.5 md:mb-50 2xl:items-start">
+            <div className="flex flex-col justify-between gap-x-72 items-center w-full 2xl:flex-row md:mt-37.5 md:mb-50 2xl:items-start">
                 <div className="md:relative md:shrink-0 w-[100vw] md:w-[clamp(26rem,40vw,33.75rem)] h-[clamp(17.5rem,22vw,20.625rem)]">
                     <div className="relative w-full h-full overflow-hidden sm:rounded-lg md:w-full md:h-full">
                         <Image

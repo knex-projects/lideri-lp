@@ -25,7 +25,7 @@ const testimonials: Testimonial[] = [
     role: "Tachão de Ubatuba",
     quote:
       "A consultoria de negócios internacionais da Lideri forneceu dados estratégicos e bem estruturados, contribuindo para uma tomada de decisão mais segura. O trabalho destacou-se pela qualidade, profissionalismo e comprometimento da equipe. Recomendo!",
-    avatarUrl: "/assets/images/testimonials/pedro_costa.webp",
+    avatarUrl: "/assets/images/testimonials/pedro_costa.jpg",
   },
 ];
 
