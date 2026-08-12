@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "../components/layout/Header/Header";
 import { Footer } from "../components/layout/footer";
 import { Providers } from "./provider";
+import { Toaster } from "react-hot-toast";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
@@ -32,6 +33,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );
