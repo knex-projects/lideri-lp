@@ -3,6 +3,7 @@ import type { CategoryInputProps, AdminCategory } from '@/src/types';
 import React, { useState, useEffect, useRef } from 'react';
 import { api } from '@/src/services/api';
 import { cms } from '@/src/services/cms';
+import { AlertTriangle, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function CategoryInput({ categoriasSelecionadas, onChangeCategorias }: CategoryInputProps) {
@@ -10,6 +11,8 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
   const [todasCategorias, setTodasCategorias] = useState<AdminCategory[]>([]);
   const [novaCategoriaTexto, setNovaCategoriaTexto] = useState('');
   const [criandoCategoria, setCriandoCategoria] = useState(false);
+  const [isModalAberto, setIsModalAberto] = useState(false);
+  const [categoriaParaDeletar, setCategoriaParaDeletar] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,7 +66,16 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
   const handleDeletarCategoria = async (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
 
-    if (!confirm('Tem certeza de que deseja deletar permanentemente esta categoria?')) return;
+    setCategoriaParaDeletar(id);
+    setIsModalAberto(true);
+  };
+
+  const confirmarDelecao = async () => {
+    if (!categoriaParaDeletar) return;
+
+    const id = categoriaParaDeletar;
+    setIsModalAberto(false);
+    setCategoriaParaDeletar(null);
 
     const toastId = toast.loading('Excluindo categoria...');
     try {
@@ -71,7 +83,6 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
 
       setTodasCategorias((prev) => prev.filter((cat) => cat._id !== id));
 
-      // Se a categoria deletada for a atualmente selecionada, reseta para vazio
       if (categoriasSelecionadas.includes(id)) {
         onChangeCategorias([]);
       }
@@ -134,7 +145,7 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
 
           <div className="flex flex-col gap-1 max-h-40 overflow-y-auto pr-1">
 
-            {/* Opção Geral / Padrão */}
+         
             <button
               type="button"
               onClick={handleSelecionarGeral}
@@ -147,7 +158,7 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
             </button>
 
             {todasCategorias.map((cat) => {
-              // Verifica se esta é a única categoria selecionada
+           
               const estaAtivo = categoriasSelecionadas.includes(cat._id);
               return (
                 <div
@@ -205,6 +216,68 @@ export default function CategoryInput({ categoriasSelecionadas, onChangeCategori
 
         </div>
       )}
+
+      {isModalAberto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsModalAberto(false)}
+          />
+
+          <div className="relative bg-white w-full max-w-110 rounded-lg p-6 shadow-2xl z-10 border border-gray-200 animate-[scaleUp_0.2s_ease-out] flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2 text-[#87240E]">
+                <AlertTriangle className="w-6 h-6" />
+                <h3 className="font-semibold text-lg">Atenção!</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsModalAberto(false)}
+                className="p-1 hover:bg-gray-100 rounded-full text-gray-500 hover:text-black transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p className="text-gray-800 font-medium text-base">Deseja mesmo excluir esta categoria?</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Esta ação é definitiva e removerá a categoria permanentemente.
+              </p>
+            </div>
+
+            <div className="flex gap-3 justify-end mt-2">
+              <button
+                type="button"
+                onClick={() => setIsModalAberto(false)}
+                className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={confirmarDelecao}
+                className="px-4 py-2.5 bg-[#87240E] hover:bg-[#87240E]/90 text-white text-sm font-semibold rounded-lg shadow-sm hover:shadow transition-all"
+              >
+                Sim, excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes scaleUp {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
