@@ -1,6 +1,7 @@
 "use client"
 
 import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 
 const teamMembers = [
@@ -8,6 +9,11 @@ const teamMembers = [
         name: "Gerciane Mauricio",
         role: "Diretora de Projetos",
         image: "/assets/images/team/gerciane_mauricio.webp",
+    },
+    {
+        name: "Anna Paula",
+        role: "Gerente de Projetos",
+        image: "/assets/images/team/anna_paula.webp",
     },
     {
         name: "Ana Clara",
@@ -23,16 +29,6 @@ const teamMembers = [
         name: "José Adenilson",
         role: "Consultor de Projetos",
         image: "/assets/images/team/jose_adenilson.webp",
-    },
-       {
-        name: "Anna Paula",
-        role: "Gerente de Projetos",
-        image: "/assets/images/team/anna_paula.webp",
-    },
-    {
-        name: "Luma Peroba",
-        role: "Consultora de Gente e Gestão",
-        image: "/assets/images/team/1.webp",
     },
     {
         name: "Gabriel Leite",
@@ -50,9 +46,20 @@ const teamMembers = [
         image: "/assets/images/team/4.webp",
     },
     {
-        name: "Evelin Mwanyika",
-        role: "Consultora de Marketing",
-        image: "/assets/images/team/5.webp",
+        name: "Manuella Alcantara",
+        role: "Consultora de Projetos",
+        image: "/assets/images/team/manu.jpeg",
+    },
+    {
+        name: "Thais Menezes",
+        role: "Consultora de Projetos",
+        image: "/assets/images/team/Thais.webp",
+    },
+    // Comercial
+    {
+        name: "Iane Felipe",
+        role: "Gerente de Comercial ",
+        image: "/assets/images/team/12.jpeg",
     },
     {
         name: "Ana Luísa Boas",
@@ -65,24 +72,34 @@ const teamMembers = [
         image: "/assets/images/team/7.webp",
     },
     {
-        name: "Laura Batista",
-        role: "Consultora de Marketing",
-        image: "/assets/images/team/8.webp",
-    },
-    {
-        name: "Laury Santos",
-        role: "Consultor de Gente e Gestão",
-        image: "/assets/images/team/9.webp",
-    },
-    {
         name: "Raquel Rochalo",
         role: "Consultora de Comercial",
         image: "/assets/images/team/10.webp",
     },
     {
-        name: "Sarah Pessoa",
-        role: "Consultora de Gente e Gestão",
-        image: "/assets/images/team/11.webp",
+        name: "João Lucas Alves",
+        role: "Consultor de Comercial",
+        image: "/assets/images/team/João Lucas.webp",
+    },
+    {
+        name: "Gabryela Vitória ",
+        role: "Consultora de Comercial",
+        image: "/assets/images/team/Gabryela.webp",
+    },
+    {
+        name: "Evelin Mwanyika",
+        role: "Consultora de Marketing",
+        image: "/assets/images/team/5.webp",
+    },
+    {
+        name: "Laura Batista",
+        role: "Consultora de Marketing",
+        image: "/assets/images/team/8.webp",
+    },
+    {
+        name: "Ana Clara Lelis",
+        role: "Consultora de Marketing",
+        image: "/assets/images/team/Nana.webp",
     },
     {
         name: "Aline Simioli",
@@ -90,21 +107,56 @@ const teamMembers = [
         image: "/assets/images/team/13.jpeg",
     },
     {
-        name: "Iane Felipe",
-        role: "Gerente de Comercial ",
-        image: "/assets/images/team/12.jpeg",
+        name: "Luma Peroba",
+        role: "Consultora de Gente e Gestão",
+        image: "/assets/images/team/1.webp",
+    },
+    {
+        name: "Laury Santos",
+        role: "Consultor de Gente e Gestão",
+        image: "/assets/images/team/9.webp",
+    },
+    {
+        name: "Sarah Pessoa",
+        role: "Consultora de Gente e Gestão",
+        image: "/assets/images/team/11.webp",
+    },
+    {
+        name: "Mariana Tanouss",
+        role: "Consultora de Gente e Gestão",
+        image: "/assets/images/team/Mariana.jpg",
+    },
+    {
+        name: "Lucas Alexandre",
+        role: "Consultor de Gente e Gestão",
+        image: "/assets/images/team/Lucas Alexandre.webp",
+    },
+    {
+        name: "Matheus Ayres",
+        role: "Consultor de Gente e Gestão",
+        image: "/assets/images/team/matheus.jpeg",
     },
 ]
 
 const carouselMembers = [...teamMembers, ...teamMembers]
 
 export const TeamCarousel = () => {
-    const [emblaRef] = useEmblaCarousel({
-        align: "start",
-        loop: true,
-        skipSnaps: false,
-        watchDrag: true,
-    })
+    const [emblaRef] = useEmblaCarousel(
+        {
+            align: "start",
+            loop: true,
+            skipSnaps: false,
+            watchDrag: true,
+        },
+        [
+            Autoplay({
+                delay: 3000,
+                stopOnMouseEnter: true,
+                stopOnInteraction: false,
+                playOnInit: true,
+            }),
+        ]
+    )
 
     return (
         <section className="mt-24 md:mt-32">
