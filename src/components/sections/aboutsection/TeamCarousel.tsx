@@ -15,11 +15,6 @@ const teamMembers = [
         image: "/assets/images/team/ana_clara.webp",
     },
     {
-        name: "Anna Paula",
-        role: "Consultora de Projetos",
-        image: "/assets/images/team/anna_paula.webp",
-    },
-    {
         name: "Guilherme Cucco",
         role: "Consultor de Projetos",
         image: "/assets/images/team/gui_cucco.webp",
@@ -29,10 +24,75 @@ const teamMembers = [
         role: "Consultor de Projetos",
         image: "/assets/images/team/jose_adenilson.webp",
     },
+       {
+        name: "Anna Paula",
+        role: "Gerente de Projetos",
+        image: "/assets/images/team/anna_paula.webp",
+    },
     {
-        name: "Letícia França",
-        role: "Presidenta",
-        image: "/assets/images/team/leticia_franca_presidenta.webp",
+        name: "Luma Peroba",
+        role: "Consultora de Gente e Gestão",
+        image: "/assets/images/team/1.webp",
+    },
+    {
+        name: "Gabriel Leite",
+        role: "Consultor de Projetos",
+        image: "/assets/images/team/2.webp",
+    },
+    {
+        name: "Anna Luiza ",
+        role: "Consultora de Projetos",
+        image: "/assets/images/team/3.webp",
+    },
+    {
+        name: "Heitor Gomes",
+        role: "Consultor de Projetos",
+        image: "/assets/images/team/4.webp",
+    },
+    {
+        name: "Evelin Mwanyika",
+        role: "Consultora de Marketing",
+        image: "/assets/images/team/5.webp",
+    },
+    {
+        name: "Ana Luísa Boas",
+        role: "Consultora de Comercial",
+        image: "/assets/images/team/6.webp",
+    },
+    {
+        name: "Carlos Tanajura",
+        role: "Consultor de Comercial",
+        image: "/assets/images/team/7.webp",
+    },
+    {
+        name: "Laura Batista",
+        role: "Consultora de Marketing",
+        image: "/assets/images/team/8.webp",
+    },
+    {
+        name: "Laury Santos",
+        role: "Consultor de Gente e Gestão",
+        image: "/assets/images/team/9.webp",
+    },
+    {
+        name: "Raquel Rochalo",
+        role: "Consultora de Comercial",
+        image: "/assets/images/team/10.webp",
+    },
+    {
+        name: "Sarah Pessoa",
+        role: "Consultora de Gente e Gestão",
+        image: "/assets/images/team/11.webp",
+    },
+    {
+        name: "Aline Simioli",
+        role: "Vice Presidente de Gente e Gestão",
+        image: "/assets/images/team/13.jpeg",
+    },
+    {
+        name: "Iane Felipe",
+        role: "Gerente de Comercial ",
+        image: "/assets/images/team/12.jpeg",
     },
 ]
 
@@ -84,7 +144,7 @@ export const TeamCarousel = () => {
                                         <h3 className="font-montserrat text-[1rem] font-bold leading-tight text-N8 md:text-[1.75rem]">
                                             {member.name}
                                         </h3>
-                                        <p className="font-montserrat text-[0.625rem] font-medium text-R5 md:text-[1.25rem]">
+                                        <p className="font-montserrat text-[0.625rem] font-medium text-R5 md:text-[1.15rem]">
                                             {member.role}
                                         </p>
                                     </div>
