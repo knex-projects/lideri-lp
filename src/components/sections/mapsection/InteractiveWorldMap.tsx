@@ -81,6 +81,26 @@ const fixedHighlightCountries = new Set([
     "Australia",
     "China",
     "Netherlands",
+    "Alagoas",
+    "Bahia",
+    "Ceará",
+    "Espírito Santo",
+    "Goiás",
+    "Maranhão",
+    "Minas Gerais",
+    "Mato Grosso do Sul",
+    "Mato Grosso",
+    "Paraíba",
+    "Pernambuco",
+    "Piauí",
+    "Paraná",
+    "Rio de Janeiro",
+    "Rio Grande do Norte",
+    "Rio Grande do Sul",
+    "Santa Catarina",
+    "Sergipe",
+    "São Paulo",
+    "Distrito Federal",
 ]);
 
 const secondaryHighlightCountries = new Set([
@@ -138,15 +158,15 @@ export default function InteractiveWorldMap() {
         <div className="relative w-full overflow-hidden rounded-[1.5rem] bg-N1  shadow-sm shadow-slate-200/50 ">
             <div className="relative">
                 <div className=" absolute bottom-10 flex "> 
-                  <div className="bg-R5 size-5 mr-2 shadow-[0px_1px_2px_#87240E]"/>
+                  <div className="bg-R5 size-5 mr-2 shadow-[0rem_0.0625rem_0.125rem_#87240E]"/>
                     <p>Prospectados</p>  
                 </div>
                 <div className=" absolute bottom-18  flex">
-                 <div className="bg-[#ED8068] size-5 mr-2 shadow-[0px_1px_2px_#87240E]"/> <p className="col-span-2">Estudados </p>  
+                 <div className="bg-[#ED8068] size-5 mr-2 shadow-[0rem_0.0625rem_0.125rem_#87240E]"/> <p className="col-span-2">Estudados </p>  
                  </div>
                 <ComposableMap
                     projectionConfig={{ scale: 160 }}
-                    className="mx-auto h-[500px] w-full max-w-screen-2xl "
+                    className="mx-auto h-125 w-full max-w-screen-2xl "
                 >
                     <defs>
                         <pattern
@@ -226,12 +246,11 @@ export default function InteractiveWorldMap() {
                             }
                         </Geographies>
 
-                        {/* Brazilian states overlay (renders on top of countries) */}
                         <Geographies geography={brazilStatesGeoUrl}>
                             {({ geographies }) =>
                                 geographies.map((geo) => {
                                     const stateName = geo.properties?.name ?? "Estado Desconhecido";
-                                    const isStateHovered = hoveredState === stateName;
+                                    const isFixedHighlightedState = fixedHighlightCountries.has(stateName);
 
                                     return (
                                         <Geography
@@ -242,10 +261,10 @@ export default function InteractiveWorldMap() {
                                             aria-label={`Estado: ${stateName}`}
                                             data-tooltip-id="world-tooltip"
                                             data-tooltip-content={stateName}
-                                            className={`transition-colors duration-150 ease-linear focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-50 ${isStateHovered ? 'fill-[#1E3A8A]' : 'fill-[#93C5FD]'} stroke-slate-300`}
+                                            className={`transition-colors duration-150 ease-linear focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-50 ${isFixedHighlightedState ? 'fill-[#87240E]' : 'fill-slate-100'} stroke-slate-300`}
                                             style={{
                                                 default: {
-                                                    fill: isStateHovered ? '#1E3A8A' : 'url(#dot-grid)',
+                                                    fill: isFixedHighlightedState ? '#87240E' : 'url(#dot-grid)',
                                                     stroke: '#e2e8f0',
                                                     strokeWidth: 0.4,
                                                     outline: 'none',

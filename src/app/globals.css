@@ -13,7 +13,12 @@
   --background: #ffffff;
   --foreground: #171717;
   --font-sans: var(--font-montserrat);
+  --font-impact: "Impact", Arial, sans-serif;
   --font-snas: var(--font-Impact);
+}
+
+@theme {
+  --breakpoint-3xl: 121rem;
 }
 
 @theme inline {
@@ -46,9 +51,9 @@
   --color-B9: #00081B;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-zodiac: "Impact", Arial, sans-serif;
+  --font-zodiac: var(--font-impact);
   --font-poppins: var(--font-poppins);
-  --font-zodiak: 'Impact', Arial, sans-serif;
+  --font-zodiak: var(--font-impact);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -66,8 +71,15 @@ body {
 }
 
 @layer utilities {
+  .bg-loginImage {
+    background-image: url('/assets/images/loginBG.webp');
+  }
   .font-montserrat {
     font-family: var(--font-montserrat);
+  }
+
+  .font-impact {
+    font-family: var(--font-impact);
   }
 
   .font-zodiak,
@@ -76,7 +88,6 @@ body {
   }
 }
 
-/* Smooth scrolling for in-page anchors */
 html {
   scroll-behavior: smooth;
 }
@@ -131,4 +142,31 @@ html {
 
 .animate-opacity-top-bottom {
   animation: opacity-top-bottom 1s ease-in forwards;
+}
+
+       
+
+.blog-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.blog-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+.blog-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.blog-content iframe, 
+.blog-content video {
+  max-width: 100%;
 }

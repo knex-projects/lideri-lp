@@ -1,45 +1,40 @@
+import type { Partner } from '@/src/types';
 import Image from "next/image";
 
-type Partner = {
-    name: string;
-    src: string;
-    width: number;
-    height: number;
-    className?: string;
-};
+
 
 const partners: Partner[] = [
     {
         name: "PB Júnior",
-        src: "/assets/images/partners/pb-junior.svg",
+        src: "/assets/images/partners/pb-junior.webp",
         width: 207,
         height: 105,
         className: "order-1",
     },
     {
         name: "UFPB",
-        src: "/assets/images/partners/ufpb.svg",
+        src: "/assets/images/partners/ufpb.webp",
         width: 85,
         height: 127,
         className: "order-3 sm:order-2",
     },
     {
         name: "Brasil Júnior",
-        src: "/assets/images/partners/brasil-junior.svg",
+        src: "/assets/images/partners/brasil-junior.webp",
         width: 207,
         height: 77,
         className: "order-2 sm:order-3",
     },
     {
         name: "Proex Comex UFPB",
-        src: "/assets/images/partners/proex-comex.svg",
+        src: "/assets/images/partners/proex-comex.webp",
         width: 114,
         height: 127,
         className: "order-4",
     },
     {
         name: "ESRI",
-        src: "/assets/images/partners/esri.svg",
+        src: "/assets/images/partners/esri.webp",
         width: 101,
         height: 146,
         className: "order-5",
@@ -49,13 +44,13 @@ const partners: Partner[] = [
 export default function PartnersSection() {
     return (
         <section
-            className="w-full bg-transparent py-[60px] sm:py-14 "
+            className="w-full bg-transparent py-15 sm:py-14 "
             aria-labelledby="partners-section-title"
         >
-            <div className="mx-auto flex w-full flex-col items-center gap-[60px]">
+            <div className="mx-auto flex w-full flex-col items-center gap-15">
                 <h2
                     id="partners-section-title"
-                    className="w-full px-[26px] md:px-[12.5%] text-left font-zodiak text-[36px] leading-[42px] font-normal text-N8 sm:text-[44px] sm:leading-[52px] xl:text-[48px] xl:leading-[56px]"
+                    className="w-full px-6.5 md:px-[12.5%] text-left font-zodiak text-[2.25rem] leading-[2.625rem] font-normal text-N8 sm:text-[2.75rem] sm:leading-[3.25rem] xl:text-[3rem] xl:leading-[3.5rem]"
                 >
                     Nossos <span className="text-R5">parceiros.</span>
                 </h2>
@@ -63,7 +58,7 @@ export default function PartnersSection() {
                 <div className="flex w-full flex-col items-stretch">
                     <div className="h-px w-full  " />
 
-                    <div className="flex max-sm:flex-col sm:flex-wrap items-center justify-center gap-x-10 gap-y-10 px-[26px] py-[40px] sm:gap-x-[60px] sm:px-[12.5%] sm:py-[60px] xl:gap-x-[86px]">
+                    <div className="flex max-sm:flex-col sm:flex-wrap items-center justify-center gap-x-10 gap-y-10 px-6.5 py-10 sm:gap-x-15 sm:px-[12.5%] sm:py-15 xl:gap-x-21.5">
                         {partners.map((partner) => (
                             <div
                                 key={partner.name}
